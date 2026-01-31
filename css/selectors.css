@@ -239,13 +239,13 @@
     -webkit-text-stroke: 3px var(--black);
     paint-order: stroke fill;
     transition: all 0.2s ease;
-    cursor: pointer;
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto !important;
     line-height: 100%;
 }
 
 .selection-btn {
     transition: transform 0.2s ease;
-    cursor: pointer;
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto !important;
 }
 
 .selection-btn:hover {
@@ -297,7 +297,7 @@
 .carat-bar-container {
     position: relative;
     width: 100%;
-    cursor: pointer;
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto !important;
 }
 
 .carat-bar-img {
@@ -314,7 +314,7 @@
     background: #F2E772;
     border: 2px solid #000;
     border-radius: 50%;
-    cursor: grab;
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto !important;
     transform: translateX(-50%);
     z-index: 10;
     transition: transform 0.1s ease;
@@ -325,7 +325,7 @@
 }
 
 .carat-handle:active {
-    cursor: grabbing;
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto !important;
 }
 
 .carat-handle-label {
@@ -437,7 +437,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: pointer;
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto !important;
     transition: transform 0.2s ease;
     padding: 0 10px;
     border-radius: 10px;
@@ -533,7 +533,7 @@
     opacity: 0;
     transition: opacity 0.2s ease;
     border-radius: 15px;
-    cursor: pointer;
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto !important;
 }
 
 .music-card-image:hover .music-play-overlay {

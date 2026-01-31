@@ -30,6 +30,13 @@
 - Stone names configured in `STONE_NAMES` array in `js/config.js`
 - Navigate with arrows, click to select
 - Selected stone appears on ring in display area
+- User manually navigates to source section after selection
+
+### Source Selection (Carousel)
+- Lab: `assets/rings/lab.png`, [From $1,000], adds 5 points
+- Natural: `assets/rings/natural.png`, [From $4,000], adds 10 points
+- Natural has "Premium" label
+- **Source must be selected before carat** - carat prices depend on source
 - User manually navigates to carat section after selection
 
 ### Carat Slider (Custom)
@@ -37,17 +44,14 @@
 - Range: 0.5 ct to 4.0 ct (step 0.1)
 - Draggable yellow circle handle (constrained to 4-96% of bar width)
 - Labels: "0.50 ct" on left, "4.00 ct" on right (always 2 decimal places)
-- Price labels under carat values: "[$500]" on left, "[$6000]" on right
+- **Dynamic pricing based on selected source:**
+  - Lab: [$1,000] on left, [$5,000] on right
+  - Natural: [$4,000] on left, [$30,000] on right
 - Floating label above handle shows current carat value dynamically
 - Premium tag above the max value
 - Slider scales the stone in display area (1.5x at 0.5ct, scaling with 0.7x per carat)
-- User manually navigates to source section after selection
-
-### Source Selection (Carousel)
-- Lab: `assets/rings/lab.png`, [From $1,000], adds 5 points
-- Natural: `assets/rings/natural.png`, [From $4,000], adds 10 points
-- Natural has "Premium" label
 - User manually navigates to packaging section after selection
+- **Cart item combines stone + carat + source** (displayed as "0.50 ct · Lab" or "1.25 ct · Natural")
 
 ### Packaging Selection (Carousel)
 - 7 packaging options (`assets/packing/p1.png` - `p7.png`)

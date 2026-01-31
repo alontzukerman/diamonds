@@ -115,3 +115,15 @@
 | Cart Sidepanel | 999 |
 | About Overlay | 1000 |
 | Flying Cart Item | 10000 |
+| Custom Cursor | 99999 |
+
+---
+
+## Custom Cursor
+
+The site uses a custom cursor image (`assets/ui/cursor.png`) that follows the mouse. The system cursor is hidden using JavaScript injection in `cursor.js`:
+
+- Injects a `<style>` tag with `cursor: none !important` for all elements
+- Sets `cursor: none` directly on `body` and `html` via JavaScript
+- On every mouse move, forces `cursor: none` on the element currently under the mouse
+- Custom cursor image positioned at mouse coordinates with CSS transform offset
