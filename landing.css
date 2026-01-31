@@ -2,6 +2,40 @@
    LANDING PAGE STYLES
    ======================================== */
 
+/* ========================================
+   FIXED ASPECT RATIO SCENE CONTAINER
+   Maintains 2100:1160 ratio regardless of viewport
+   ======================================== */
+
+.landing-scene {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    aspect-ratio: 2100 / 1160;
+    
+    /* Fill viewport while maintaining aspect ratio */
+    width: 100vw;
+    height: calc(100vw * (1160 / 2100));
+    max-height: 100vh;
+    max-width: calc(100vh * (2100 / 1160));
+    
+    z-index: 2;
+    
+    /* Enable container queries for child elements */
+    container-type: size;
+    container-name: landing;
+}
+
+/* Landing Content Wrapper - now relative to scene */
+.landing-content-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 /* GIF Assets */
 .gif-assets {
     position: absolute;
@@ -27,9 +61,11 @@
     position: absolute;
     left: 11%;
     top: 35%;
-    transform: translateY(-50%) translateY(100px) rotate(-31deg) scale(0.5);
+    /* 100px / 1160px * 100 = 8.62cqh for the translateY offset */
+    transform: translateY(-50%) translateY(8.62cqh) rotate(-31deg) scale(0.5);
     z-index: 12;
-    width: auto;
+    /* Use container-relative sizing */
+    width: 32cqw;
     height: auto;
 }
 
@@ -39,6 +75,9 @@
     left: 75%;
     transform: translate(-50%, -50%) scale(1.2);
     z-index: 3;
+    /* Use container-relative sizing */
+    width: 40cqw;
+    height: auto;
 }
 
 .gif-cupid {
@@ -47,22 +86,19 @@
     right: 16%;
     transform: scale(0.9);
     z-index: 3;
-}
-
-/* Landing Content Wrapper */
-.landing-content-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
+    /* Use container-relative sizing */
+    width: 10cqw;
+    height: auto;
 }
 
 /* Landing Content */
 .landing-content {
-    position: relative;
-    z-index: 3;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    z-index: 3;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -82,7 +118,7 @@
 .title-word {
     display: block;
     color: #FF0000;
-    -webkit-text-stroke: 3px #000000;
+    -webkit-text-stroke: 0.14cqw #000000;
 }
 
 .title-diamonds,
@@ -90,8 +126,9 @@
     font-family: 'Narkiss Block Condensed TRIAL', serif;
     font-weight: 500;
     font-style: normal;
-    font-size: 450px;
-    line-height: 300px;
+    /* 450px / 2100px * 100 = 21.43cqw */
+    font-size: 21.43cqw;
+    line-height: 0.667em;
     letter-spacing: -0.035em;
 }
 
@@ -99,8 +136,9 @@
     font-family: 'sloop-script-three', serif;
     font-weight: 700;
     font-style: normal;
-    font-size: 350px;
-    line-height: 100px;
+    /* 350px / 2100px * 100 = 16.67cqw */
+    font-size: 16.67cqw;
+    line-height: 0.286em;
     letter-spacing: 0;
     position: absolute;
     left: 50%;
@@ -113,15 +151,16 @@
     font-family: 'sloop-script-three', serif;
     font-weight: 700;
     font-style: normal;
-    font-size: 170px;
-    line-height: 100px;
-    letter-spacing: -5px;
+    /* 170px / 2100px * 100 = 8.1cqw */
+    font-size: 8.1cqw;
+    line-height: 0.59em;
+    letter-spacing: -0.03em;
     text-align: center;
     color: #F2E772;
-    -webkit-text-stroke: 1.5px #000000;
+    -webkit-text-stroke: 0.07cqw #000000;
     position: relative;
     z-index: 11;
-    transform: translateY(-50px);
+    transform: translateY(-4.1cqh);
     white-space: nowrap;
 }
 
@@ -129,22 +168,27 @@
 .start-btn {
     --yellow: #e9df76;
     --black: #000;
-    --stroke: 14px;
-    --outline: 3px;
+    /* 14px / 2100px * 100 = 0.67cqw */
+    --stroke: 0.67cqw;
+    /* 3px / 2100px * 100 = 0.14cqw */
+    --outline: 0.14cqw;
 
     text-decoration: none;
     font-family: 'Narkiss Block Condensed TRIAL', sans-serif;
     display: inline-flex;
     align-items: center;
-    gap: 22px;
-    padding: 0px 26px 0px 30px;
+    /* 22px / 2100px * 100 = 1.05cqw */
+    gap: 1.05cqw;
+    /* padding: 0 26px 0 30px → 0 1.24cqw 0 1.43cqw */
+    padding: 0 1.24cqw 0 1.43cqw;
     border-radius: 9999px;
     background: transparent;
     border: var(--stroke) solid var(--yellow);
     box-shadow:
         0 0 0 var(--outline) var(--black),
         inset 0 0 0 var(--outline) var(--black);
-    transform: translateY(25px);
+    /* 25px / 1160px * 100 = 2.16cqh */
+    transform: translateY(2.16cqh);
 }
 
 .start-btn:hover {
@@ -157,31 +201,35 @@
 }
 
 @keyframes bounce {
-    0%, 100% { transform: translateY(25px); }
-    50% { transform: translateY(15px); }
+    0%, 100% { transform: translateY(2.16cqh); }
+    50% { transform: translateY(1.29cqh); }
 }
 
 @keyframes squish {
-    0%, 100% { transform: translateY(25px) scale(1); }
-    50% { transform: translateY(25px) scale(0.95); }
+    0%, 100% { transform: translateY(2.16cqh) scale(1); }
+    50% { transform: translateY(2.16cqh) scale(0.95); }
 }
 
 .start-btn__label {
     font-family: 'Narkiss Block Condensed TRIAL', sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 64px;
-    line-height: 80px;
+    /* 64px / 2100px * 100 = 3.05cqw */
+    font-size: 3.05cqw;
+    line-height: 1.25em;
     letter-spacing: 0.02em;
     text-align: center;
     color: var(--yellow);
-    -webkit-text-stroke: 7px var(--black);
+    /* 7px / 2100px * 100 = 0.33cqw */
+    -webkit-text-stroke: 0.33cqw var(--black);
     paint-order: stroke fill;
 }
 
 .start-btn__arrow {
-    width: 135px;
-    height: 33px;
+    /* 135px / 2100px * 100 = 6.43cqw */
+    width: 6.43cqw;
+    /* 33px / 1160px * 100 = 2.84cqh */
+    height: 2.84cqh;
 }
 
 .start-btn__arrow line,

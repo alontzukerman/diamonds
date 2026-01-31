@@ -132,7 +132,6 @@ body {
 }
 
 .navbar-right {
-    height: 80px;
     display: flex;
     align-items: center;
     gap: 50px;
@@ -164,6 +163,7 @@ body {
     font-size: 25px;
     color: #282323;
     text-decoration: none;
+    line-height: 100%;
     transition: transform 0.2s ease;
 }
 
@@ -202,8 +202,6 @@ body {
 
 .navbar-logo {
     display: block;
-    height: auto;
-    width: 390px;
 }
 
 
