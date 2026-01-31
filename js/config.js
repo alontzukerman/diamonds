@@ -6,8 +6,8 @@
 const TOTAL_STEPS = 6;
 const STEP_HEADER_HEIGHT = 60;
 const TRANSITION_DURATION = 350;
-const LOVE_METER_MAX_HEIGHT = 700;
-const LOVE_METER_BASE_POSITION = 180;
+const LOVE_METER_MAX_HEIGHT = 730;
+const LOVE_METER_BASE_POSITION = 140;
 
 // Steps configuration
 const STEPS_CONFIG = {
@@ -43,21 +43,28 @@ const STEPS_CONFIG = {
     }
 };
 
-// Love meter point values
-const POINTS_CONFIG = {
-    ring: {
-        material: { gold: 15, silver: 10, 'rose-gold': 12, 'white-gold': 15 }
-    },
-    diamond: {
-        stone: 5,
-        caratPerUnit: 5,
-        source: { lab: 5, natural: 10 },
-        packaging: 3
-    }
-};
+// ========================================
+// LOVE METER CONFIGURATION
+// Heart position based on cart total price
+// ========================================
 
-const START_POINTS = 90;
-const MAX_LOVE_POINTS = 150;
+const LOVE_METER_CONFIG = {
+    minPrice: 0,        // Price at bottom of meter (0%)
+    maxPrice: 32239,    // Price at top of meter (100%)
+    minScale: 1.0,      // Heart scale at 0%
+    maxScale: 1.4,      // Heart scale at 100%
+    
+    // Checkpoints: trigger popover messages at specific positions
+    // bottom = LOVE_METER_BASE_POSITION + offset
+    // image: path to SVG image
+    checkpoints: [
+        { offset: 110, bottom: 250, image: 'assets/texts/pop-t1.svg' },
+        { offset: 265, bottom: 405, image: 'assets/texts/pop-t2.svg' },
+        { offset: 420, bottom: 560, image: 'assets/texts/pop-t3.svg' },
+        { offset: 575, bottom: 715, image: 'assets/texts/pop-t4.svg' },
+        { offset: 725, bottom: 865, image: 'assets/texts/pop-t5.svg' }
+    ]
+};
 
 // Location data (15 locations) - name, image filename, premium status, and price
 const LOCATIONS = [

@@ -1,49 +1,169 @@
 // ========================================
 // LOVE METER
-// Note: Requires config.js and state.js to be loaded first
+// Heart position based on cart total price
+// Note: Requires config.js, state.js, and cart.js to be loaded first
 // ========================================
 
-function calculateLovePoints() {
-    let points = START_POINTS;
-    
-    // Ring points
-    const material = state.selections.ring.material;
-    if (material && POINTS_CONFIG.ring.material[material]) {
-        points += POINTS_CONFIG.ring.material[material];
+// Track which checkpoints have been triggered (to avoid repeating)
+let triggeredCheckpoints = new Set();
+
+/**
+ * Calculate love level as percentage based on cart total
+ * @returns {number} Percentage from 0-100
+ */
+function calculateLoveLevel() {
+    if (typeof Cart === 'undefined' || !Cart.getTotal) {
+        return 0;
     }
     
-    // Diamond points
-    if (state.selections.diamond.stone) {
-        points += POINTS_CONFIG.diamond.stone;
-    }
+    const currentPrice = Cart.getTotal();
+    const minPrice = LOVE_METER_CONFIG.minPrice;
+    const maxPrice = LOVE_METER_CONFIG.maxPrice;
     
-    if (state.selections.diamond.carat > 0.5) {
-        points += Math.floor(state.selections.diamond.carat * POINTS_CONFIG.diamond.caratPerUnit);
-    }
+    // Calculate percentage within price range
+    const priceRange = maxPrice - minPrice;
+    if (priceRange <= 0) return 0;
     
-    const source = state.selections.diamond.source;
-    if (source && POINTS_CONFIG.diamond.source[source]) {
-        points += POINTS_CONFIG.diamond.source[source];
-    }
+    const percentage = ((currentPrice - minPrice) / priceRange) * 100;
     
-    if (state.selections.diamond.packaging) {
-        points += POINTS_CONFIG.diamond.packaging;
-    }
-    
-    return points;
+    // Clamp between 0 and 100
+    return Math.max(0, Math.min(100, percentage));
 }
 
+/**
+ * Update love meter heart position, scale, and price display
+ */
 function updateLoveMeter() {
-    state.lovePoints = calculateLovePoints();
+    // Store previous position for checkpoint detection
+    const previousPosition = state.loveMeterPosition || LOVE_METER_BASE_POSITION;
     
-    const additionalPoints = state.lovePoints - START_POINTS;
-    const maxAdditionalPoints = MAX_LOVE_POINTS - START_POINTS;
+    // Calculate love level based on cart total
+    state.loveLevel = calculateLoveLevel();
     
-    state.loveLevel = Math.min((additionalPoints / maxAdditionalPoints) * 100, 100);
-    
+    // Update heart position and scale
     const loveMeterHeart = document.getElementById('love-meter-heart');
     if (loveMeterHeart) {
+        // Position
         const heartPosition = (state.loveLevel / 100) * LOVE_METER_MAX_HEIGHT + LOVE_METER_BASE_POSITION;
         loveMeterHeart.style.bottom = `${heartPosition}px`;
+        
+        // Store current position for next comparison
+        state.loveMeterPosition = heartPosition;
+        
+        // Check for checkpoint crossings (only when going UP)
+        checkCheckpoints(previousPosition, heartPosition);
+        
+        // Scale: interpolate between minScale and maxScale based on love level
+        const minScale = LOVE_METER_CONFIG.minScale || 1.0;
+        const maxScale = LOVE_METER_CONFIG.maxScale || 1.4;
+        const scale = minScale + (state.loveLevel / 100) * (maxScale - minScale);
+        
+        const heartIcon = loveMeterHeart.querySelector('.love-meter-heart-icon');
+        if (heartIcon) {
+            heartIcon.style.transform = `scale(${scale})`;
+        }
     }
+    
+    // Update price display
+    updateLoveMeterPrice();
+}
+
+/**
+ * Check if any checkpoints were crossed and trigger popover
+ */
+function checkCheckpoints(previousPosition, currentPosition) {
+    const checkpoints = LOVE_METER_CONFIG.checkpoints || [];
+    
+    checkpoints.forEach((checkpoint, index) => {
+        const checkpointPosition = checkpoint.bottom;
+        
+        // Trigger if we crossed this checkpoint going UP and haven't triggered it yet
+        if (previousPosition < checkpointPosition && 
+            currentPosition >= checkpointPosition && 
+            !triggeredCheckpoints.has(index)) {
+            
+            triggeredCheckpoints.add(index);
+            showCheckpointPopover(checkpoint.image);
+        }
+        
+        // Reset checkpoint if we go back below it
+        if (currentPosition < checkpointPosition && triggeredCheckpoints.has(index)) {
+            triggeredCheckpoints.delete(index);
+        }
+    });
+}
+
+/**
+ * Show a popover image in the center of the screen
+ */
+function showCheckpointPopover(imagePath) {
+    // Remove any existing popover
+    const existingPopover = document.querySelector('.love-meter-popover');
+    if (existingPopover) {
+        existingPopover.remove();
+    }
+    
+    // Create popover element with image
+    const popover = document.createElement('div');
+    popover.className = 'love-meter-popover';
+    
+    const img = document.createElement('img');
+    img.src = imagePath;
+    img.alt = '';
+    img.className = 'love-meter-popover-image';
+    popover.appendChild(img);
+    
+    // Append to configurator-center for proper alignment
+    const center = document.querySelector('.configurator-center') || document.body;
+    center.appendChild(popover);
+    
+    // Trigger animation after element is in DOM
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            popover.classList.add('show');
+        });
+    });
+    
+    // Fade out and remove after delay
+    setTimeout(() => {
+        popover.classList.remove('show');
+        popover.classList.add('hide');
+        
+        // Remove from DOM after animation completes
+        setTimeout(() => {
+            popover.remove();
+        }, 250);
+    }, 1000);
+}
+
+/**
+ * Update the price display next to the heart
+ */
+function updateLoveMeterPrice() {
+    const priceElement = document.getElementById('love-meter-price');
+    if (priceElement && typeof Cart !== 'undefined' && Cart.getTotal) {
+        const totalPrice = Cart.getTotal();
+        priceElement.textContent = `[${Cart.formatPrice(totalPrice)}]`;
+    }
+}
+
+/**
+ * Initialize price display element in DOM
+ */
+function initLoveMeterPrice() {
+    const heartContainer = document.getElementById('love-meter-heart');
+    if (heartContainer && !document.getElementById('love-meter-price')) {
+        const priceElement = document.createElement('span');
+        priceElement.id = 'love-meter-price';
+        priceElement.className = 'love-meter-price';
+        priceElement.textContent = '[$0]';
+        heartContainer.insertBefore(priceElement, heartContainer.firstChild);
+    }
+}
+
+/**
+ * Reset checkpoint tracking (e.g., when starting fresh)
+ */
+function resetCheckpoints() {
+    triggeredCheckpoints.clear();
 }

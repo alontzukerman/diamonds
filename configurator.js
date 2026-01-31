@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
             ],
             onSelect: (value, sourceElement) => {
                 state.selections.ring.material = value;
-                updateLoveMeter();
                 updateDisplay();
                 updateRingCartItem(sourceElement);
             }
@@ -53,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
             })),
             onSelect: (value, sourceElement) => {
                 state.selections.diamond.stone = value;
-                updateLoveMeter();
                 updateStoneDisplay();
                 updateStoneCartItem(sourceElement);
             }
@@ -82,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             onSelect: (value, sourceElement) => {
                 state.selections.diamond.carat = parseFloat(value);
-                updateLoveMeter();
                 updateStoneDisplay();
                 updateStoneCartItem(sourceElement);
             }
@@ -95,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
             ],
             onSelect: (value, sourceElement) => {
                 state.selections.diamond.source = value;
-                updateLoveMeter();
                 
                 // Update the stone cart item (source is now part of the stone item, not separate)
                 updateStoneCartItem(sourceElement);
@@ -116,7 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
             })),
             onSelect: (value, sourceElement) => {
                 state.selections.diamond.packaging = value;
-                updateLoveMeter();
                 updatePackagingDisplay();
                 
                 const pkgIndex = parseInt(value) - 1;
@@ -135,7 +130,6 @@ document.addEventListener('DOMContentLoaded', function() {
             items: LOCATIONS.map(loc => loc.name),
             onSelect: (value, sourceElement) => {
                 state.selections.location = value;
-                updateLoveMeter();
                 updateLocationBackground(value);
                 
                 const location = LOCATIONS.find(loc => loc.name === value);
@@ -161,7 +155,6 @@ document.addEventListener('DOMContentLoaded', function() {
             })),
             onSelect: (value, sourceElement) => {
                 state.selections.setup.signs = value;
-                updateLoveMeter();
                 updateSignDisplay();
                 
                 const signIndex = parseInt(value) - 1;
@@ -201,7 +194,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     state.selections.setup.flowers = state.selections.setup.flowers.filter(f => f !== value);
                     Cart.removeItem(`flowers-${value}`);
                 }
-                updateLoveMeter();
                 updateFlowersDisplay();
             }
         },
@@ -215,7 +207,6 @@ document.addEventListener('DOMContentLoaded', function() {
             })),
             onSelect: (value, sourceElement) => {
                 state.selections.setup.balloons = value;
-                updateLoveMeter();
                 updateBalloonsDisplay();
                 
                 const balloonIndex = parseInt(value) - 1;
@@ -255,7 +246,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     state.selections.setup.extras = state.selections.setup.extras.filter(e => e !== value);
                     Cart.removeItem(`extras-${value}`);
                 }
-                updateLoveMeter();
                 updateExtrasDisplay();
             }
         },
@@ -270,7 +260,6 @@ document.addEventListener('DOMContentLoaded', function() {
             })),
             onSelect: (value, sourceElement) => {
                 state.selections.music = value;
-                updateLoveMeter();
                 
                 const trackIndex = parseInt(value) - 1;
                 const track = MUSIC[trackIndex];
@@ -289,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
             items: [], // To be defined
             onSelect: (value, sourceElement) => {
                 state.selections.deadline = value;
-                updateLoveMeter();
+                // Note: Deadline has no price, so love meter won't change
             }
         }
     };
@@ -470,6 +459,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // INITIALIZATION
     // ========================================
     
+    initLoveMeterPrice();  // Initialize price display element
     updateLoveMeter();
     updateProgressBar();
     syncProgressBarHeights();

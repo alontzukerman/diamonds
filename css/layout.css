@@ -24,6 +24,7 @@
    ======================================== */
 
 .configurator-center {
+    position: relative;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -55,6 +56,7 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    overflow: visible;
 }
 
 .love-meter-container {
@@ -63,23 +65,76 @@
     align-items: center;
     height: 100%;
     position: relative;
+    overflow: visible;
 }
 
 .love-meter-arrow {
     height: 100%;
     position: absolute;
-    left: -40px;
+    left: -10px;
 }
 
 .love-meter-heart {
     position: absolute;
-    bottom: 180px;
-    left: 12px;
+    bottom: 140px;
+    left: 21px;
     transform: translateX(-50%);
     transition: bottom 0.5s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow: visible;
+}
+
+.love-meter-price {
+    position: absolute;
+    right: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Narkiss Yair TRIAL', monospace;
+    font-size: 25px;
+    font-weight: 400;
+    color: #282323;
+    white-space: nowrap;
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.95));
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 70%);
 }
 
 .love-meter-heart-icon {
     width: 54px;
     height: auto;
+    transition: transform 0.5s ease;
+    transform-origin: center center;
+}
+
+/* ========================================
+   LOVE METER CHECKPOINT POPOVER
+   ======================================== */
+
+.love-meter-popover {
+    position: absolute;
+    top: 370px;  /* Same as display-ring-container */
+    left: 50%;
+    transform: translateX(-50%) scale(0.3);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease-out, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.love-meter-popover-image {
+    max-width: 80vw;
+    max-height: 50vh;
+    height: auto;
+}
+
+.love-meter-popover.show {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+.love-meter-popover.hide {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.3);
+    transition: opacity 0.25s ease-in, transform 0.25s ease-in;
 }

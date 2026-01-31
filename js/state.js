@@ -29,8 +29,7 @@ const state = {
         music: null,
         deadline: null
     },
-    lovePoints: START_POINTS,
-    loveLevel: 0,
+    loveLevel: 0,  // Percentage (0-100) based on cart total
     carouselIndices: {} // Track carousel position for each section
 };
 

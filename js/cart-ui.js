@@ -150,6 +150,11 @@ function renderCartItems(items, total) {
     if (cartTotalPrice) {
         cartTotalPrice.textContent = Cart.formatPrice(total);
     }
+    
+    // Sync love meter with cart total (position + price)
+    if (typeof updateLoveMeter === 'function') {
+        updateLoveMeter();
+    }
 }
 
 // Flying animation to cart
