@@ -251,3 +251,129 @@
     opacity: 0.6;
     padding: 40px 0;
 }
+
+/* ========================================
+   CHECKOUT BUTTON
+   ======================================== */
+
+.cart-checkout-btn {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #FFD2F6;
+    background: #FF0000;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+.cart-checkout-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+/* ========================================
+   CHECKOUT SHARE MODAL
+   ======================================== */
+
+.checkout-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkout-modal-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.checkout-modal {
+    background: #FFD2F6;
+    border: 2px solid #FF0000;
+    border-radius: 20px;
+    padding: 30px;
+    width: 400px;
+    max-width: 90vw;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.checkout-modal-overlay.open .checkout-modal {
+    transform: scale(1);
+}
+
+.checkout-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.checkout-modal-close:hover {
+    transform: scale(1.1);
+}
+
+.checkout-modal-close img {
+    width: 24px;
+    height: 24px;
+}
+
+.checkout-modal-title {
+    font-family: 'Narkiss Block TRIAL', sans-serif;
+    font-weight: 400;
+    font-size: 32px;
+    color: #FF0000;
+    margin: 0 0 20px 0;
+}
+
+.checkout-modal-link-box {
+    display: flex;
+    gap: 10px;
+}
+
+.checkout-modal-link {
+    flex: 1;
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-size: 14px;
+    color: #FF0000;
+    background: white;
+    border: 1px solid #FF0000;
+    border-radius: 10px;
+    padding: 12px 15px;
+    outline: none;
+}
+
+.checkout-modal-copy {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #FFD2F6;
+    background: #FF0000;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.checkout-modal-copy:hover {
+    opacity: 0.9;
+}

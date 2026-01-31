@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========================================
     const SELECTORS_CONFIG = {
         material: {
-            type: 'carousel',
+            type: 'flex-carousel',
             items: [
                 { id: 'gold', label: 'Gold', price: '[From $400]', image: ASSETS.rings.gold, premium: true },
                 { id: 'silver', label: 'Silver', price: '[From $80]', image: ASSETS.rings.silver, premium: false },
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         stone: {
-            type: 'carousel',
+            type: 'flex-carousel',
             items: STONE_NAMES.map((name, i) => ({
                 id: String(i + 1),
                 label: name,

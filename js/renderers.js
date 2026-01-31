@@ -36,6 +36,9 @@ function showSelector(sectionName, SELECTORS_CONFIG) {
         case 'carousel':
             renderCarousel(sectionName, config, SELECTORS_CONFIG);
             break;
+        case 'flex-carousel':
+            renderFlexCarousel(sectionName, config, SELECTORS_CONFIG);
+            break;
         case 'music-carousel':
             renderMusicCarousel(sectionName, config, SELECTORS_CONFIG);
             break;
@@ -208,6 +211,104 @@ function animateCarousel(sectionName, config, prevIndex, direction) {
         prevItem.style.display = 'none';
         prevItem.classList.remove('slide-out-left', 'slide-out-right');
     }, 200);
+}
+
+// ========================================
+// FLEX CAROUSEL RENDERER (all items visible)
+// ========================================
+
+function renderFlexCarousel(sectionName, config, SELECTORS_CONFIG) {
+    const container = document.createElement('div');
+    container.className = 'flex-carousel';
+    container.id = `${sectionName}-flex-carousel`;
+    
+    // Render all items visible
+    config.items.forEach((item) => {
+        const itemEl = createFlexCarouselItem(item, sectionName, config, SELECTORS_CONFIG);
+        container.appendChild(itemEl);
+    });
+    
+    selectionContainer.appendChild(container);
+}
+
+function createFlexCarouselItem(item, sectionName, config, SELECTORS_CONFIG) {
+    const itemEl = document.createElement('div');
+    itemEl.className = 'flex-carousel-item';
+    itemEl.setAttribute(`data-${sectionName}`, item.id);
+    
+    // Check if this item is currently selected
+    const isSelected = getSelectionValue(sectionName) === item.id;
+    if (isSelected) {
+        itemEl.classList.add('selected');
+    }
+    
+    // Image with section-specific class
+    const img = document.createElement('img');
+    img.src = item.image;
+    img.alt = item.label;
+    img.className = `flex-carousel-image flex-carousel-image-${sectionName}-${item.id}`;
+    itemEl.appendChild(img);
+    
+    // Info container
+    const info = document.createElement('div');
+    info.className = 'flex-carousel-info';
+    
+    // Label
+    const label = document.createElement('span');
+    label.className = 'flex-carousel-label';
+    label.textContent = item.label;
+    info.appendChild(label);
+    
+    // Price (if exists)
+    if (item.price) {
+        const price = document.createElement('span');
+        price.className = 'flex-carousel-price';
+        price.textContent = item.price;
+        info.appendChild(price);
+    }
+    
+    itemEl.appendChild(info);
+    
+    // Premium label (if exists)
+    if (item.premium) {
+        const premium = document.createElement('div');
+        premium.className = 'flex-carousel-premium';
+        const premiumImg = document.createElement('img');
+        premiumImg.src = ASSETS.icons.premium;
+        premiumImg.alt = 'Premium';
+        premium.appendChild(premiumImg);
+        itemEl.appendChild(premium);
+    }
+    
+    // Click to select
+    itemEl.addEventListener('click', () => {
+        selectFlexCarouselItem(sectionName, item.id, config, SELECTORS_CONFIG);
+    });
+    
+    return itemEl;
+}
+
+function selectFlexCarouselItem(sectionName, value, config, SELECTORS_CONFIG) {
+    const container = document.getElementById(`${sectionName}-flex-carousel`);
+    let selectedElement = null;
+    
+    if (container) {
+        container.querySelectorAll('.flex-carousel-item').forEach(item => {
+            const isSelected = item.getAttribute(`data-${sectionName}`) === value;
+            item.classList.toggle('selected', isSelected);
+            if (isSelected) {
+                selectedElement = item;
+            }
+        });
+    }
+    
+    // Call the onSelect handler
+    if (config.onSelect) {
+        config.onSelect(value, selectedElement);
+    }
+    
+    // Check if current step is now complete
+    checkStepCompletion(state.currentStep);
 }
 
 // ========================================
@@ -721,6 +822,9 @@ function renderMultiSelect(sectionName, config) {
             if (config.onSelect) {
                 config.onSelect(item.id, !isCurrentlySelected, itemEl);
             }
+            
+            // Check if current step is now complete
+            checkStepCompletion(state.currentStep);
         });
         
         container.appendChild(itemEl);

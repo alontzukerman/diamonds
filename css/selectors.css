@@ -211,6 +211,132 @@
 }
 
 /* ========================================
+   FLEX CAROUSEL SELECTOR (all items visible)
+   ======================================== */
+
+.flex-carousel {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 30px;
+}
+
+.flex-carousel-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    transition: transform 0.2s ease;
+    position: relative;
+    min-height: 195px;
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto !important;
+}
+
+.flex-carousel-item:hover {
+    transform: scale(1.05);
+}
+
+/* Regular state - white glow on all images */
+.flex-carousel-image {
+    height: 110px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.95));
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 8px;
+}
+
+/* Selected state - yellow glow */
+.flex-carousel-item.selected .flex-carousel-image {
+    filter: drop-shadow(0 0 12px rgba(242, 231, 114, 0.95));
+    background: radial-gradient(ellipse at center, rgba(242, 231, 114, 0.9) 0%, rgba(242, 231, 114, 0) 70%);
+}
+
+.flex-carousel-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Regular state - white glow on text */
+.flex-carousel-label,
+.flex-carousel-price {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 100%;
+    color: #282323;
+    white-space: nowrap;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 10px #fff,
+        0 0 15px #fff,
+        0 0 15px #fff,
+        0 0 20px #fff,
+        0 0 20px #fff,
+        0 0 30px #fff,
+        0 0 30px #fff,
+        0 0 40px #fff,
+        0 0 40px #fff,
+        0 0 60px #fff,
+        0 0 80px #fff,
+        0 0 100px #fff,
+        0 0 120px #fff;
+}
+
+.flex-carousel-premium {
+    position: absolute;
+    top: 10px;
+    right: 28px;
+}
+
+
+.flex-carousel-premium img {
+    width: 30px;
+    height: auto;
+}
+
+/* Material-specific flex carousel styles */
+.flex-carousel-item[data-material="silver"] .flex-carousel-premium {
+    display: none;
+}
+
+.flex-carousel-item[data-material="white-gold"] .flex-carousel-premium {
+    right: 42px;
+}
+
+/* Stone-specific flex carousel styles */
+#stone-flex-carousel {
+    gap: 15px;
+}
+
+#stone-flex-carousel .flex-carousel-item {
+    min-height: auto;
+}
+
+#stone-flex-carousel .flex-carousel-info {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+#stone-flex-carousel .flex-carousel-item:hover .flex-carousel-info {
+    opacity: 1;
+}
+
+/* ========================================
    BUTTONS SELECTOR
    ======================================== */
 

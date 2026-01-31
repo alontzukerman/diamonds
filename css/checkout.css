@@ -1,0 +1,277 @@
+/* ========================================
+   CHECKOUT PAGE - Receipt Style
+   ======================================== */
+
+.checkout-main {
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* ========================================
+   RECEIPT CARD
+   ======================================== */
+
+.receipt {
+    width: 100%;
+    max-width: 420px;
+    background: #FFFEF8;
+    padding: 40px 35px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Torn edge effect at top */
+.receipt::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 0;
+    right: 0;
+    height: 16px;
+    background: linear-gradient(135deg, #FFFEF8 25%, transparent 25%),
+                linear-gradient(225deg, #FFFEF8 25%, transparent 25%);
+    background-size: 16px 16px;
+    background-position: 0 0;
+}
+
+/* Torn edge effect at bottom */
+.receipt::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    height: 16px;
+    background: linear-gradient(315deg, #FFFEF8 25%, transparent 25%),
+                linear-gradient(45deg, #FFFEF8 25%, transparent 25%);
+    background-size: 16px 16px;
+    background-position: 0 0;
+}
+
+/* ========================================
+   RECEIPT TITLE
+   ======================================== */
+
+.receipt-title {
+    font-family: 'edwardian-script-itc', cursive;
+    font-weight: 400;
+    font-size: 72px;
+    color: #FF0000;
+    margin: 0 0 30px 0;
+    text-align: center;
+    line-height: 1;
+}
+
+/* ========================================
+   ORDER INFO
+   ======================================== */
+
+.receipt-info {
+    margin-bottom: 15px;
+}
+
+.receipt-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.receipt-info-label {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: #000;
+}
+
+.receipt-info-value {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: #000;
+}
+
+/* ========================================
+   DIVIDER
+   ======================================== */
+
+.receipt-divider {
+    border: none;
+    border-top: 2px dashed #FF0000;
+    margin: 8px 0;
+}
+
+/* ========================================
+   ITEMS LIST
+   ======================================== */
+
+.receipt-items {
+    margin: 20px 0;
+}
+
+.receipt-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+}
+
+.receipt-item-name {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: #000;
+}
+
+.receipt-item-price {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: #000;
+    text-align: right;
+}
+
+/* First item shows $ symbol */
+.receipt-item:first-child .receipt-item-price::before {
+    content: '$ ';
+}
+
+/* ========================================
+   TOTAL
+   ======================================== */
+
+.receipt-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 25px 0;
+}
+
+.receipt-total-label {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+}
+
+.receipt-total-price {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FF0000;
+}
+
+/* ========================================
+   COUNTDOWN TIMER
+   ======================================== */
+
+.receipt-countdown {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.receipt-countdown-numbers {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 5px;
+}
+
+.countdown-value {
+    font-family: 'edwardian-script-itc', cursive;
+    font-size: 56px;
+    color: #FF0000;
+    line-height: 1;
+}
+
+.countdown-separator {
+    font-family: 'edwardian-script-itc', cursive;
+    font-size: 56px;
+    color: #FF0000;
+    line-height: 1;
+}
+
+.receipt-countdown-labels {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5px;
+    padding: 0 20px;
+}
+
+.countdown-label {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    color: #000;
+    text-align: center;
+    flex: 1;
+}
+
+/* ========================================
+   PAY BUTTON
+   ======================================== */
+
+.receipt-pay-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 8px 35px;
+    font-family: 'edwardian-script-itc', cursive;
+    font-size: 24px;
+    color: #FF0000;
+    background: transparent;
+    border: 2px solid #FF0000;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.receipt-pay-btn:hover {
+    background: #FF0000;
+    color: #FFFEF8;
+}
+
+/* ========================================
+   BARCODE
+   ======================================== */
+
+.receipt-barcode {
+    margin-top: 25px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.barcode-bar {
+    background: #000;
+    height: 100%;
+}
+
+/* ========================================
+   DIAMOND DECORATION
+   ======================================== */
+
+.receipt-diamond-decor {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 100px;
+    height: auto;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+
+.receipt-items:empty::after {
+    content: 'No items';
+    display: block;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: #999;
+    padding: 20px 0;
+}

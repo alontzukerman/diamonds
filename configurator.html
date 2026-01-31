@@ -297,12 +297,27 @@
         </div>
     </main>
 
+    <!-- Checkout Share Modal -->
+    <div class="checkout-modal-overlay" id="checkout-modal-overlay">
+        <div class="checkout-modal">
+            <button class="checkout-modal-close" id="checkout-modal-close">
+                <img src="assets/icons/cart-x.svg" alt="Close">
+            </button>
+            <h3 class="checkout-modal-title">Share Your Cart</h3>
+            <div class="checkout-modal-link-box">
+                <input type="text" class="checkout-modal-link" id="checkout-modal-link" readonly>
+                <button class="checkout-modal-copy" id="checkout-modal-copy">Copy</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Cart Sidepanel -->
     <div class="cart-overlay" id="cart-overlay"></div>
     <aside class="cart-sidepanel" id="cart-sidepanel">
         <!-- Cart Header -->
         <div class="cart-header">
             <h2 class="cart-title">Cart</h2>
+            <button class="cart-checkout-btn" id="cart-checkout-btn">Checkout</button>
             <button class="cart-close-btn" id="cart-close-btn">
                 <img src="assets/icons/cart-x.svg" alt="Close" class="cart-close-icon">
             </button>
@@ -367,6 +382,7 @@
     <script src="js/display.js"></script>
     <script src="js/cart-helpers.js"></script>
     <script src="js/cart-ui.js"></script>
+    <script src="js/checkout.js"></script>
     <script src="js/renderers.js"></script>
     <script src="configurator.js"></script>
 </body>
