@@ -103,6 +103,30 @@
 
 ---
 
+## Responsive Scaling (Landing Page)
+
+The landing page uses a **fixed aspect ratio container** (2100:1160) to maintain consistent layout across all screen sizes:
+
+### How It Works
+- `.landing-scene` container maintains exact 2100:1160 aspect ratio
+- Scales to fill viewport while preserving proportions
+- Uses CSS Container Queries (`container-type: size`)
+- All child elements use container-relative units (`cqw`, `cqh`)
+
+### Container Query Units
+| Unit | Meaning | Example |
+|------|---------|---------|
+| `cqw` | % of container width | `21.43cqw` = 450px at 2100px width |
+| `cqh` | % of container height | `8.62cqh` = 100px at 1160px height |
+
+### Conversion Formula
+```
+cqw value = (pixel value / 2100) × 100
+cqh value = (pixel value / 1160) × 100
+```
+
+---
+
 ## Z-Index Layers
 
 | Element | Z-index |
