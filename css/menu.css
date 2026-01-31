@@ -1,0 +1,183 @@
+/* ========================================
+   ACCORDION MENU
+   ======================================== */
+
+.configurator-menu {
+    width: 250px;
+    height: auto;
+    max-height: 80vh;
+    background: #F2E772;
+    overflow-y: auto;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+/* Disabled menu step styles */
+.menu-step.disabled {
+    background: #F5EFB0;
+    pointer-events: none;
+}
+
+.menu-step.disabled .menu-step-header {
+    cursor: not-allowed;
+    background: #F5EFB0;
+}
+
+.menu-step.disabled .menu-step-header > * {
+    opacity: 0.5;
+}
+
+/* Menu Step */
+
+.menu-step-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: var(--step-header-height);
+    padding: 0 15px 0 18px;
+    transition: background 0.2s ease;
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+}
+
+.menu-step:first-child .menu-step-header {
+    border-top: 2px solid #000;
+}
+
+.menu-step.expanded .menu-step-header {
+    border-bottom: 2px solid #000;
+}
+
+.menu-step-header:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.menu-step-number {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    color: #000;
+    margin-right: 10px;
+}
+
+/* Active step number styling */
+.menu-step.expanded .menu-step-number,
+.menu-step:not(.disabled):hover .menu-step-number {
+    font-family: 'sloop-script-two', serif;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 100%;
+}
+
+.menu-step-title {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    color: #000;
+    flex: 1;
+}
+
+.menu-step-icon {
+    width: 21px;
+    height: 21px;
+    transition: transform 0.3s ease;
+}
+
+.menu-step.expanded .menu-step-icon {
+    transform: rotate(45deg);
+}
+
+/* Menu Step Content (Accordion Body) */
+.menu-step-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
+}
+
+.menu-step.expanded .menu-step-content {
+    max-height: 1000px;
+    transition: max-height 0.3s ease-in, padding 0.3s ease-in;
+    border-bottom: 2px solid #000;
+}
+
+/* Menu Sections */
+.menu-section {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    transition: background 0.2s ease;
+}
+
+.menu-section:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.menu-section-divider {
+    width: 100%;
+    height: 1px;
+    background: #282323;
+}
+
+/* Section Header (clickable to expand/collapse) */
+.menu-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: var(--step-header-height);
+}
+
+.menu-section-title {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    color: #282323;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-section-title.clickable {
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.menu-section-title.clickable:hover {
+    color: #555;
+}
+
+.menu-section-title::before {
+    content: '';
+    width: 26px;
+    height: 1px;
+    background: #000;
+    flex-shrink: 0;
+}
+
+/* Section Content (collapsible) */
+.menu-section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0;
+}
+
+.menu-section.expanded .menu-section-content {
+    max-height: 500px;
+    padding: 0 0 17px;
+    margin-top: -4px;
+}
+
+.menu-description {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 109%;
+    color: #282323;
+}

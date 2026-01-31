@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diamonds are Forever - Configurator</title>
+    <!-- Adobe Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/kjt7qae.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="configurator.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="index.html" class="navbar-logo-container">
+                <img src="assets/ui/navbar-logo.svg" alt="Diamonds are Forever" class="navbar-logo">
+            </a>
+        </div>
+        
+        <div class="navbar-right">
+            <a href="gallery.html" class="navbar-link">Index</a>
+            <a href="#" class="navbar-link" id="about-trigger">About</a>
+            <a href="#" class="navbar-link navbar-cart"><img src="assets/icons/cart.svg" alt="Cart"></a>
+        </div>
+    </nav>
+
+    <!-- Configurator Page -->
+    <main>
+        <div class="page-background"></div>
+        
+        <div class="configurator-layout">
+            <!-- LEFT SIDE: Accordion Menu with Progress Bar -->
+            <div class="configurator-menu-wrapper">
+                <!-- Progress Bar -->
+                <div class="progress-bar" id="progress-bar">
+                    <!-- Single continuous line behind all circles -->
+                    <div class="progress-bar-line" id="progress-bar-line"></div>
+                    
+                    <div class="progress-step active" data-progress-step="1">
+                        <div class="progress-header">
+                            <div class="progress-circle">
+                                <img src="assets/icons/dot.svg" alt="Active" class="progress-dot-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-step locked" data-progress-step="2">
+                        <div class="progress-header">
+                            <div class="progress-circle">
+                                <img src="assets/icons/lock.svg" alt="Locked" class="progress-lock-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-step locked" data-progress-step="3">
+                        <div class="progress-header">
+                            <div class="progress-circle">
+                                <img src="assets/icons/lock.svg" alt="Locked" class="progress-lock-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-step locked" data-progress-step="4">
+                        <div class="progress-header">
+                            <div class="progress-circle">
+                                <img src="assets/icons/lock.svg" alt="Locked" class="progress-lock-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-step locked" data-progress-step="5">
+                        <div class="progress-header">
+                            <div class="progress-circle">
+                                <img src="assets/icons/lock.svg" alt="Locked" class="progress-lock-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-step locked" data-progress-step="6">
+                        <div class="progress-header">
+                            <div class="progress-circle">
+                                <img src="assets/icons/lock.svg" alt="Locked" class="progress-lock-icon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Accordion Menu -->
+                <aside class="configurator-menu" id="configurator-menu">
+                    <!-- Step 1: The Ring -->
+                    <div class="menu-step" data-step="1">
+                        <div class="menu-step-header" data-step-toggle="1">
+                            <span class="menu-step-number">[01]</span>
+                            <span class="menu-step-title">Ring</span>
+                            <img src="assets/icons/plus.svg" alt="" class="menu-step-icon" aria-hidden="true">
+                        </div>
+                        <div class="menu-step-content" id="step-content-1">
+                            <!-- Material Section -->
+                            <div class="menu-section" data-section="material">
+                                <div class="menu-section-header">
+                                    <span class="menu-section-title clickable">Material</span>
+                                </div>
+                                <div class="menu-section-content">
+                                    <p class="menu-description">Gold is more valuable than silver due to its greater rarity, resistance to corrosion, and unique physical properties.<br>Its wide industrial use, and status as a financial safe haven consistently keep its value higher.</p>
+                                </div>
+                            </div>
+                            <div class="menu-section-divider"></div>
+                            <!-- Size Section -->
+                            <div class="menu-section" data-section="size">
+                                <div class="menu-section-header">
+                                    <span class="menu-section-title clickable">Ring Size</span>
+                                </div>
+                                <div class="menu-section-content">
+                                    <p class="menu-description">If you're unsure, size 51 is the most common for women's engagement rings.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: The Diamond -->
+                    <div class="menu-step disabled" data-step="2">
+                        <div class="menu-step-header" data-step-toggle="2">
+                            <span class="menu-step-number">[02]</span>
+                            <span class="menu-step-title">Diamond</span>
+                            <img src="assets/icons/plus.svg" alt="" class="menu-step-icon" aria-hidden="true">
+                        </div>
+                        <div class="menu-step-content" id="step-content-2">
+                            <!-- Stone Section -->
+                            <div class="menu-section" data-section="stone">
+                                <div class="menu-section-header">
+                                    <span class="menu-section-title clickable">Stone</span>
+                                </div>
+                                <div class="menu-section-content">
+                                    <p class="menu-description">The stone shape refers to the geometric form of the cut and directly affects the stone’s appearance, light reflection, and visual proportions. Different shapes emphasize different qualities, such as brilliance, symmetry, or surface area. The choice of shape is primarily an aesthetic decision and does not indicate the stone’s quality or origin.</p>
+                                </div>
+                            </div>
+                            <div class="menu-section-divider"></div>
+                            <!-- Carat Section -->
+                            <div class="menu-section" data-section="carat">
+                                <div class="menu-section-header">
+                                    <span class="menu-section-title clickable">Carat</span>
+                                </div>
+                                <div class="menu-section-content">
+                                    <p class="menu-description">Carat refers to the weight of the diamond. Larger diamonds are rarer and more valuable.</p>
+                                </div>
+                            </div>
+                            <div class="menu-section-divider"></div>
+                            <!-- Source Section -->
+                            <div class="menu-section" data-section="source">
+                                <div class="menu-section-header">
+                                    <span class="menu-section-title clickable">Source</span>
+                                </div>
+                                <div class="menu-section-content">
+                                    <p class="menu-description">A natural diamond is considered more valuable than Lab because it's rare, limited, and tied to a long tradition of status and symbolism.</p>
+                                </div>
+                            </div>
+                            <div class="menu-section-divider"></div>
+                            <!-- Packaging Section -->
+                            <div class="menu-section" data-section="packaging">
+                                <div class="menu-section-header">
+                                    <span class="menu-section-title clickable">Packaging</span>
+                                </div>
+                                <div class="menu-section-content">
+                                    <p class="menu-description">refers to the physical container used to present the ring. Options vary by material, form factor, surface finish, and opening mechanism. Packaging selection does not affect the ring’s specifications or value and is intended solely for presentation and handling.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Location -->
+                    <div class="menu-step disabled" data-step="3">
+                        <div class="menu-step-header" data-step-toggle="3">
+                            <span class="menu-step-number">[03]</span>
+                            <span class="menu-step-title">Location</span>
+                            <img src="assets/icons/plus.svg" alt="" class="menu-step-icon" aria-hidden="true">
+                        </div>
+                        <div class="menu-step-content" id="step-content-3">
+                            <div class="menu-section" data-section="location">
+                                <div class="menu-section-header">
+                                    <span class="menu-section-title clickable">Choose Location</span>
+                                </div>
+                                <div class="menu-section-content">
+                                    <p class="menu-description">Outdoor locations are generally associated with premium proposal experiences, as they involve unique environments that cannot be replicated or controlled in the same way as indoor settings.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Setup -->
+                    <div class="menu-step disabled" data-step="4">
+                        <div class="menu-step-header" data-step-toggle="4">
+                            <span class="menu-step-number">[04]</span>
+                            <span class="menu-step-title">Setup</span>
+                            <img src="assets/icons/plus.svg" alt="" class="menu-step-icon" aria-hidden="true">
+                        </div>
+                        <div class="menu-step-content" id="step-content-4">
+                            <!-- Signs Section -->
+                            <div class="menu-section" data-section="signs">
+                                <div class="menu-section-header">
+                                    <span class="menu-section-title clickable">Signs</span>
+                                </div>
+                                <div class="menu-section-content">
+                                    <p class="menu-description">Signs are a key part of the proposal reveal, making the question visible, intentional, and impossible to miss.</p>
+                                </div>
+                            </div>
+                            <div class="menu-section-divider"></div>
+                            <!-- Flowers Section -->
+                            <div class="menu-section" data-section="flowers">
+                                <div class="menu-section-header">
+                                    <span class="menu-section-title clickable">Flowers</span>
+                                </div>
+                                <div class="menu-section-content">
+                                    <p class="menu-description">Flowers are an essential element of a marriage proposal, helping to establish the moment as special to the woman.</p>
+                                </div>
+                            </div>
+                            <div class="menu-section-divider"></div>
+                            <!-- Balloons Section -->
+                            <div class="menu-section" data-section="balloons">
+                                <div class="menu-section-header">
+                                    <span class="menu-section-title clickable">Balloons</span>
+                                </div>
+                                <div class="menu-section-content">
+                                    <p class="menu-description">Balloons elevate the proposal from a simple question to a visible celebration. </p>
+                                </div>
+                            </div>
+                            <div class="menu-section-divider"></div>
+                            <!-- Extras Section -->
+                            <div class="menu-section" data-section="extras">
+                                <div class="menu-section-header">
+                                    <span class="menu-section-title clickable">Extras</span>
+                                </div>
+                                <div class="menu-section-content">
+                                    <p class="menu-description">Additional elements with a special touch that enhance and complement the offer experience.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 5: Music -->
+                    <div class="menu-step disabled" data-step="5">
+                        <div class="menu-step-header" data-step-toggle="5">
+                            <span class="menu-step-number">[05]</span>
+                            <span class="menu-step-title">Music</span>
+                            <img src="assets/icons/plus.svg" alt="" class="menu-step-icon" aria-hidden="true">
+                        </div>
+                        <div class="menu-step-content" id="step-content-5">
+                            <div class="menu-section" data-section="music">
+                                <div class="menu-section-header">
+                                    <span class="menu-section-title clickable">Choose Music</span>
+                                </div>
+                                <div class="menu-section-content">
+                                    <p class="menu-description">Choosing a song that is meaningful to both of you adds a personal layer, making the proposal feel intentional, intimate, and uniquely yours.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 6: Deadline -->
+                    <div class="menu-step disabled" data-step="6">
+                        <div class="menu-step-header" data-step-toggle="6">
+                            <span class="menu-step-number">[06]</span>
+                            <span class="menu-step-title">Deadline</span>
+                            <img src="assets/icons/plus.svg" alt="" class="menu-step-icon" aria-hidden="true">
+                        </div>
+                        <div class="menu-step-content" id="step-content-6">
+                            <div class="menu-section" data-section="deadline">
+                                <div class="menu-section-header">
+                                    <span class="menu-section-title clickable">Set Deadline</span>
+                                </div>
+                                <div class="menu-section-content">
+                                    <p class="menu-description">Select the date and time when you want the proposal to take place.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+            
+            <!-- CENTER: Main Content Area -->
+            <div class="configurator-center">
+                <!-- Display Area -->
+                <section class="configurator-display" id="configurator-display">
+                    <div class="display-container">
+                    </div>
+                </section>
+                
+                <!-- Selection Container (step element, dynamically populated by JS) -->
+                <div class="selection-container" id="selection-container"></div>
+            </div>
+            
+            <!-- RIGHT SIDE: Love Meter -->
+            <aside class="love-meter" id="love-meter">
+                <div class="love-meter-container">
+                        <img src="assets/icons/love-meter-arrow.svg" alt="" class="love-meter-arrow" aria-hidden="true">
+                        <div class="love-meter-heart" id="love-meter-heart">
+                            <img src="assets/icons/heart.svg" alt="Love level" class="love-meter-heart-icon">
+                        </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Cart Sidepanel -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside class="cart-sidepanel" id="cart-sidepanel">
+        <!-- Cart Header -->
+        <div class="cart-header">
+            <h2 class="cart-title">Cart</h2>
+            <button class="cart-close-btn" id="cart-close-btn">
+                <img src="assets/icons/cart-x.svg" alt="Close" class="cart-close-icon">
+            </button>
+        </div>
+        <div class="cart-header-divider"></div>
+        
+        <!-- Cart Content (dynamically populated by JS) -->
+        <div class="cart-content" id="cart-content"></div>
+        
+        <!-- Cart Footer -->
+        <div class="cart-footer">
+            <span class="cart-total-label">Total</span>
+            <span class="cart-total-price">$3,850</span>
+        </div>
+    </aside>
+
+    <!-- About Overlay -->
+    <div class="about-overlay" id="about-overlay">
+        <button class="about-close-btn" id="about-close-btn">
+            <img src="assets/icons/about-x.svg" alt="Close" class="about-close-icon">
+        </button>
+        
+        <div class="about-content">
+            <p class="about-text">
+                Isn't Two months' salary a small price to pay for<br>something that lasts <span class="about-forever">forever</span>?<br>At De Beers, we believe a marriage proposal should<br>be the most personal and unforgettable moment of<br>your life. This platform was created to give you full<br>control over one of your life's most meaningful<br>moments, every choice is yours, and you know best<br>what it should feel like.
+            </p>
+        </div>
+        
+        <footer class="about-footer">
+            <div class="about-footer-column">
+                <h3 class="about-footer-title">Terms of Service</h3>
+                <a href="#" class="about-footer-link">Acceptance of Terms</a>
+                <a href="#" class="about-footer-link">Description of Service</a>
+                <a href="#" class="about-footer-link">User Eligibility</a>
+                <a href="#" class="about-footer-link">User Content and Conduct</a>
+                <a href="#" class="about-footer-link">Privacy and Data Collection</a>
+                <a href="#" class="about-footer-link">Indemnification</a>
+                <a href="#" class="about-footer-link">Termination</a>
+            </div>
+            <div class="about-footer-column">
+                <h3 class="about-footer-title">Privacy</h3>
+                <a href="#" class="about-footer-link">Information We Collect</a>
+                <a href="#" class="about-footer-link">How We Use Your Information</a>
+                <a href="#" class="about-footer-link">Security and Protection</a>
+            </div>
+            <div class="about-footer-column">
+                <h3 class="about-footer-title">Contact Us</h3>
+                <a href="mailto:support@diamondrforever.com" class="about-footer-link about-footer-email">support@diamondrforever.com <img src="assets/icons/red-arrow.svg" alt="" class="about-footer-arrow"></a>
+                <span class="about-footer-copyright">©2026 Diamonds Are Forever.</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="cursor.js"></script>
+    <script src="js/about.js"></script>
+    <!-- Configurator modules (load order matters) -->
+    <script src="js/config.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/progress.js"></script>
+    <script src="js/love-meter.js"></script>
+    <script src="js/display.js"></script>
+    <script src="js/cart-helpers.js"></script>
+    <script src="js/cart-ui.js"></script>
+    <script src="js/renderers.js"></script>
+    <script src="configurator.js"></script>
+</body>
+</html>

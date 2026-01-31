@@ -1,0 +1,391 @@
+/* ========================================
+   GALLERY PAGE STYLES
+   ======================================== */
+
+.gallery-main {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.gallery-main .page-background {
+    position: fixed;
+}
+
+/* Gallery Grid Container */
+.gallery-grid {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 140px 50px 80px;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+/* Individual Gallery Card */
+.gallery-card {
+    aspect-ratio: 2100 / 1160;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+/* Display Area within Card - simulates the configurator display */
+.gallery-display {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+/* Ring Container (scaled down version of configurator display) */
+.gallery-ring-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.25) translateY(65px);
+    transform-origin: center center;
+}
+
+/* Core container for ring, stone, packaging */
+.gallery-core {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* Ring image */
+.gallery-ring {
+    height: 500px;
+    object-fit: contain;
+    position: absolute;
+    z-index: 1;
+}
+
+/* Stone on ring */
+.gallery-stone {
+    position: absolute;
+    top: 39px;
+    left: -10px;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    z-index: 2;
+}
+
+/* Packaging behind ring */
+.gallery-packaging {
+    position: absolute;
+    object-fit: contain;
+    z-index: 0;
+    height: 640px;
+    transform: translateX(-50%);
+}
+
+/* Packaging position variants (match display.css) */
+.gallery-packaging-1 {
+    left: -10px;
+    bottom: -220px;
+}
+
+.gallery-packaging-2 {
+    left: -15px;
+    bottom: -185px;
+}
+
+.gallery-packaging-3 {
+    bottom: -255px;
+    left: -10px;
+}
+
+.gallery-packaging-4 {
+    bottom: -240px;
+    left: -5px;
+}
+
+.gallery-packaging-5 {
+    bottom: -235px;
+    left: -8px;
+}
+
+.gallery-packaging-6 {
+    bottom: -240px;
+    left: -10px;
+}
+
+.gallery-packaging-7 {
+    bottom: -260px;
+    left: -7px;
+}
+
+/* Sign behind packaging */
+.gallery-sign {
+    position: absolute;
+    object-fit: contain;
+    z-index: 0;
+    height: 850px;
+    transform: translateX(-50%);
+}
+
+/* Sign position variants (match display.css) */
+.gallery-sign-1 {
+    left: 50%;
+    bottom: -360px;
+}
+
+.gallery-sign-2 {
+    left: -20px;
+    bottom: -335px;
+}
+
+.gallery-sign-3 {
+    left: 50%;
+    bottom: -315px;
+}
+
+.gallery-sign-4 {
+    height: 1100px;
+    left: -60px;
+    bottom: -430px;
+}
+
+.gallery-sign-5 {
+    left: 50%;
+    bottom: -345px;
+}
+
+.gallery-sign-6 {
+    left: 50%;
+    bottom: -330px;
+}
+
+/* Flowers container */
+.gallery-flowers-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Individual flower */
+.gallery-flower {
+    position: absolute;
+    object-fit: contain;
+}
+
+/* Flower position variants (match display.css) */
+.gallery-flower-1 {
+    left: -400px;
+    bottom: 250px;
+    height: 200px;
+}
+
+.gallery-flower-2 {
+    left: 150px;
+    bottom: 280px;
+    height: 150px;
+}
+
+.gallery-flower-3 {
+    left: 260px;
+    bottom: 50px;
+    height: 180px;
+}
+
+.gallery-flower-4 {
+    left: 220px;
+    bottom: -110px;
+    height: 150px;
+}
+
+.gallery-flower-5 {
+    left: -110px;
+    bottom: 320px;
+    height: 190px;
+}
+
+.gallery-flower-6 {
+    rotate: 330deg;
+    left: 50px;
+    top: 150px;
+    height: 180px;
+}
+
+.gallery-flower-7 {
+    left: -80px;
+    top: 150px;
+    height: 170px;
+}
+
+.gallery-flower-8 {
+    right: 280px;
+    bottom: 90px;
+    height: 170px;
+}
+
+/* Balloons container */
+.gallery-balloons-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: -580px;
+    top: -50px;
+    z-index: 2;
+    rotate: -20deg;
+    pointer-events: none;
+}
+
+/* Individual balloon */
+.gallery-balloon {
+    position: absolute;
+    object-fit: contain;
+}
+
+/* Balloon position variants (match display.css) */
+.gallery-balloon-1 {
+    height: 440px;
+}
+
+.gallery-balloon-2 {
+}
+
+.gallery-balloon-3 {
+    left: -165px;
+}
+
+.gallery-balloon-4 {
+    left: -130px;
+    rotate: 20deg;
+}
+
+.gallery-balloon-5 {
+    left: -50px;
+    height: 500px;
+}
+
+.gallery-balloon-6 {
+    left: -50px;
+    top: -20px;
+}
+
+/* Extras container */
+.gallery-extras-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Individual extra */
+.gallery-extra {
+    position: absolute;
+    object-fit: contain;
+    z-index: 4;
+}
+
+/* Extra position variants (match display.css) */
+.gallery-extra-1 {
+    right: 310px;
+    bottom: 110px;
+    height: 450px;
+}
+
+.gallery-extra-2 {
+    left: 330px;
+    bottom: 130px;
+    height: 400px;
+}
+
+.gallery-extra-3 {
+    right: 400px;
+    bottom: 20px;
+    height: 250px;
+    rotate: 340deg;
+}
+
+.gallery-extra-4 {
+    left: 120px;
+    bottom: 50px;
+    height: 270px;
+    rotate: 15deg;
+}
+
+.gallery-extra-5 {
+    left: 160px;
+    top: 30px;
+    height: 200px;
+    rotate: 25deg;
+    z-index: 11;
+}
+
+.gallery-extra-6 {
+    right: 100px;
+    top: 60px;
+    height: 200px;
+    z-index: 11;
+}
+
+.gallery-extra-7 {
+    left: 350px;
+    bottom: -90px;
+    height: 300px;
+}
+
+.gallery-extra-8 {
+    right: -270px;
+    top: -20px;
+    height: 400px;
+    z-index: -1;
+}
+
+/* Gallery Item Wrapper (card + info below) */
+.gallery-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Card info below the card */
+.gallery-card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+}
+
+.gallery-card-title {
+    font-family: 'Narkiss Block TRIAL', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: #282323;
+}
+
+.gallery-card-price {
+    font-family: 'IBM Plex Serif', serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #282323;
+}

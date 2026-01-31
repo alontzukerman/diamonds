@@ -1,0 +1,107 @@
+/* ========================================
+   PROGRESS BAR
+   ======================================== */
+
+.progress-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    width: 50px;
+    position: relative;
+}
+
+/* Continuous line behind all circles */
+.progress-bar-line {
+    position: absolute;
+    width: 2px;
+    background: #F2E772;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+    /* Top and height will be set dynamically by JS */
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    min-height: var(--step-header-height); /* Match step header height (60px) */
+    box-sizing: border-box;
+    z-index: 1; /* Above the line */
+    padding-top: calc((var(--step-header-height) - 32px) / 2); /* Center 32px circle in 60px header */
+}
+
+/* Header area - contains circle, centered in 37px */
+.progress-header {
+    height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Progress Circle Base - all steps have a circle */
+.progress-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.progress-circle img {
+    width: 13px;
+    height: auto;
+}
+
+/* Locked step - yellow circle with lock icon */
+.progress-step.locked .progress-circle {
+    background: #F2E772;
+}
+
+/* Active step - black circle */
+.progress-step.active .progress-circle {
+    background: #000;
+}
+
+/* Completed step - black circle */
+.progress-step.completed .progress-circle {
+    background: #000;
+}
+
+/* Pulse animation for active step */
+.progress-step.active .progress-circle {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(0, 0, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+}
+
+.progress-lock-icon {
+    width: 9px;
+    height: 11px;
+}
+
+.progress-check-icon {
+    width: 11px;
+    height: 12px;
+}
+
+.progress-dot-icon {
+    width: 7px;
+    height: 7px;
+}

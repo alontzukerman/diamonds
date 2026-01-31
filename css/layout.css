@@ -1,0 +1,85 @@
+/* ========================================
+   CONFIGURATOR LAYOUT
+   Three-column layout: Menu | Center | Love Meter
+   ======================================== */
+
+:root {
+    --step-header-height: 60px;
+}
+
+.configurator-layout {
+    position: fixed;
+    top: 130px; /* Space for navbar */
+    left: 40px; /* Margin from left */
+    right: 40px;
+    bottom: 40px; /* Margin from bottom */
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* ========================================
+   CENTER: MAIN CONTENT AREA
+   ======================================== */
+
+.configurator-center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 0; /* Prevent flex overflow */
+}
+
+/* ========================================
+   LEFT SIDE: MENU WRAPPER WITH PROGRESS BAR
+   ======================================== */
+
+.configurator-menu-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    flex-shrink: 0;
+}
+
+/* ========================================
+   RIGHT SIDE: LOVE METER
+   ======================================== */
+
+.love-meter {
+    width: 120px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.love-meter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    position: relative;
+}
+
+.love-meter-arrow {
+    height: 100%;
+    position: absolute;
+    left: -40px;
+}
+
+.love-meter-heart {
+    position: absolute;
+    bottom: 180px;
+    left: 12px;
+    transform: translateX(-50%);
+    transition: bottom 0.5s ease;
+}
+
+.love-meter-heart-icon {
+    width: 54px;
+    height: auto;
+}

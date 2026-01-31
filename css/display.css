@@ -1,0 +1,475 @@
+/* ========================================
+   CENTER: DISPLAY AREA
+   ======================================== */
+
+.configurator-display {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.display-container {
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    max-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    position: relative;
+}
+
+
+/* Ring and Stone display in center */
+.display-ring-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 370px;
+}
+
+/* Inner core container for ring, stone, packaging (with floating animation) */
+.display-core {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* Floating animation for core elements only */
+.display-core.floating {
+    animation: displayFloat 1s ease-in-out infinite;
+}
+
+@keyframes displayFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+.display-ring {
+    object-fit: contain;
+    animation: ringDrop 0.4s ease-out forwards;
+    z-index: 1;
+    height: 500px;
+    position: absolute;
+}
+
+.display-stone {
+    position: absolute;
+    top: 39px;
+    left: -10px;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+    z-index: 2;
+}
+
+/* Packaging display behind ring */
+.display-packaging {
+    position: absolute;
+    object-fit: contain;
+    z-index: 0;
+    height: 640px;
+    animation: packagingFadeIn 0.3s ease-out forwards;
+    transform: translateX(-50%);
+}
+
+.display-packaging-1 {
+    left: -10px;
+    bottom: -220px;
+}
+
+.display-packaging-2 {
+    left: -15px;
+    bottom: -185px;
+}
+
+.display-packaging-3 {
+    bottom: -255px;
+    left: -10px;
+}
+
+.display-packaging-4 {
+    bottom: -240px;
+    left: -5px;
+}
+
+.display-packaging-5 {
+    bottom: -235px;
+    left: -8px;
+}
+
+.display-packaging-6 {
+    bottom: -240px;
+    left: -10px;
+}
+
+.display-packaging-7 {
+    bottom: -260px;
+    left: -7px;
+}
+
+@keyframes packagingFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+/* Sign Display - appears behind packaging */
+.display-sign {
+    position: absolute;
+    object-fit: contain;
+    z-index: 0;
+    height: 850px;
+    animation: signFadeIn 0.3s ease-out forwards;
+    transform: translateX(-50%);
+}
+
+.display-sign-1 {
+    left: 50%;
+    bottom: -360px;
+}
+
+.display-sign-2 {
+    left: -20px;
+    bottom: -335px;
+}
+
+.display-sign-3 {
+    left: 50%;
+    bottom: -315px;
+}
+
+.display-sign-4 {
+    height: 1100px;
+    left: -60px;
+    bottom: -430px;
+}
+
+.display-sign-5 {
+    left: 50%;
+    bottom: -345px;
+}
+
+.display-sign-6 {
+    left: 50%;
+    bottom: -330px;
+}
+
+/* Flowers Container - between sign and packaging */
+.flowers-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Individual Flower Display */
+.display-flower {
+    position: absolute;
+    object-fit: contain;
+    animation: flowerFadeIn 0.3s ease-out forwards;
+}
+
+.display-flower.fade-out {
+    animation: flowerFadeOut 0.3s ease-out forwards;
+}
+
+.display-flower-1 {
+    left: -400px;
+    bottom: 250px;
+    height: 200px;
+}
+
+.display-flower-2 {
+    left: 150px;
+    bottom: 280px;
+    height: 150px;
+}
+
+.display-flower-3 {
+    left: 260px;
+    bottom: 50px;
+    height: 180px;
+}
+
+.display-flower-4 {
+    left: 220px;
+    bottom: -110px;
+    height: 150px;
+}
+
+.display-flower-5 {
+    left: -110px;
+    bottom: 320px;
+    height: 190px;
+}
+
+.display-flower-6 {
+    rotate: 330deg;
+    left: 50px;
+    top: 150px;
+    height: 180px;
+}
+
+.display-flower-7 {
+    left: -80px;
+    top: 150px;
+    height: 170px;
+}
+
+.display-flower-8 {
+    right: 280px;;
+    bottom: 90px;
+    height: 170px;
+}
+
+/* Balloons Container */
+.balloons-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: -580px;
+    top: -50px;
+    z-index: 2;
+    rotate: -20deg;
+    pointer-events: none;
+}
+
+/* Individual Balloon Display */
+.display-balloon {
+    position: absolute;
+    object-fit: contain;
+    animation: balloonFadeIn 0.3s ease-out forwards;
+}
+
+.display-balloon.fade-out {
+    animation: balloonFadeOut 0.3s ease-out forwards;
+}
+
+.display-balloon-1 {
+    height: 440px;
+}
+
+.display-balloon-2 {
+}
+
+.display-balloon-3 {
+    left: -165px;
+}
+
+.display-balloon-4 {
+    left: -130px;
+    rotate: 20deg;
+}
+
+.display-balloon-5 {
+    left: -50px;
+    height: 500px;
+}
+
+.display-balloon-6 {
+    left: -50px;
+    top: -20px;
+}
+
+@keyframes balloonFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes balloonFadeOut {
+    0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+}
+
+/* Extras Container */
+.extras-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Individual Extra Display */
+.display-extra {
+    position: absolute;
+    object-fit: contain;
+    animation: extraFadeIn 0.3s ease-out forwards;
+    z-index: 4;
+
+}
+
+.display-extra.fade-out {
+    animation: extraFadeOut 0.3s ease-out forwards;
+}
+
+.display-extra-1 {
+    right: 310px;
+    bottom: 110px;
+    height: 450px;
+}
+
+.display-extra-2 {
+    left: 330px;
+    bottom: 130px;
+    height: 400px;
+}
+
+.display-extra-3 {
+    right: 400px;
+    bottom: 20px;
+    height: 250px;
+    rotate: 340deg;
+}
+
+.display-extra-4 {
+    left: 120px;
+    bottom: 50px;
+    height: 270px;
+    rotate: 15deg;
+}
+
+.display-extra-5 {
+    left: 160px;
+    top: 30px;
+    height: 200px;
+    rotate: 25deg;
+    z-index: 11;
+}
+
+.display-extra-6 {
+    right: 100px;
+    top: 60px;
+    height: 200px;
+    z-index: 11;
+}
+
+.display-extra-7 {
+    left: 350px;
+    bottom: -90px;
+    height: 300px;
+}
+
+.display-extra-8 {
+    right: -270px;
+    top: -20px;
+    height: 400px;
+    z-index: -1;
+}
+
+@keyframes extraFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes extraFadeOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+@keyframes flowerFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes flowerFadeOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+@keyframes signFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+@keyframes ringDrop {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(4px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes stoneDrop {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(-20px);
+    }
+    60% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(3px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0);
+    }
+}

@@ -1,0 +1,11 @@
+/* ========================================
+   CONFIGURATOR PAGE STYLES
+   This file imports all modular CSS files
+   ======================================== */
+
+@import url('css/layout.css');
+@import url('css/progress-bar.css');
+@import url('css/menu.css');
+@import url('css/display.css');
+@import url('css/selectors.css');
+@import url('css/cart.css');
