@@ -8,39 +8,111 @@
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
+    background-color: #FFD2F6;
 }
 
 .gallery-main .page-background {
-    position: fixed;
+    display: none;
 }
 
-/* Gallery Grid Container */
+/* Close button (like About overlay) */
+.gallery-close-btn {
+    position: fixed;
+    top: 10px;
+    right: 40px;
+    background: none;
+    border: none;
+    z-index: 100;
+    text-decoration: none;
+}
+
+.gallery-close-btn:hover .gallery-close-icon {
+    transform: scale(1.1);
+    transition: transform 0.1s ease;
+}
+
+/* Gallery List Container */
 .gallery-grid {
     position: relative;
     z-index: 10;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    padding: 140px 50px 80px;
-    max-width: 1800px;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
 }
 
 /* Individual Gallery Card */
 .gallery-card {
+    height: 250px;
     aspect-ratio: 2100 / 1160;
-    border-radius: 20px;
-    overflow: hidden;
     position: relative;
     background-size: cover;
     background-position: center;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.gallery-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+/* Music card component on gallery card (matches carousel music-card) */
+.gallery-music-card {
+    width: 305px;
+    height: 65px;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    background: #282323;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.gallery-music-card-image {
+    width: 57px;
+    height: 57px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(242, 231, 114, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.gallery-music-card-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.gallery-music-card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    background: transparent;
+    padding: 0;
+    text-align: left;
+}
+
+.gallery-music-card-song {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 100%;
+    color: #F2E772;
+    white-space: nowrap;
+}
+
+.gallery-music-card-artist {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    color: #F2E772;
+    white-space: nowrap;
 }
 
 /* Display Area within Card - simulates the configurator display */
@@ -54,6 +126,7 @@
     align-items: center;
     justify-content: center;
     pointer-events: none;
+    transform: scale(1.2);
 }
 
 /* Ring Container (scaled down version of configurator display) */
@@ -361,31 +434,76 @@
     z-index: -1;
 }
 
-/* Gallery Item Wrapper (card + info below) */
+/* Gallery Item Wrapper (card + info side by side) */
 .gallery-item {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    flex-direction: row;
+    gap: 40px;
+    width: 100%;
+    padding: 40px 75px 40px 40px;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.3);
 }
 
-/* Card info below the card */
+/* Card takes left side */
+.gallery-item .gallery-card {
+    box-shadow: none;
+}
+
+/* Card info on the right side */
 .gallery-card-info {
+    flex: 1;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    padding: 0 5px;
 }
 
 .gallery-card-title {
+    color: #FF0000;
+}
+
+.gallery-card-title-the {
     font-family: 'Narkiss Block TRIAL', sans-serif;
-    font-weight: 600;
-    font-size: 18px;
-    color: #282323;
+    font-weight: 400;
+    font-size: 120px;
+    line-height: 1;
+    color: #FF0000;
+}
+
+.gallery-card-title-name {
+    font-family: 'sloop-script-three', cursive;
+    font-weight: 700;
+    font-size: 130px;
+    line-height: 1;
+    color: #FF0000;
+    margin-left: -10px;
+}
+
+.gallery-card-premium-icon {
+    margin-left: 70px;
+    transform: translateY(-3px);
+}
+
+/* Bottom row with description and price */
+.gallery-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.gallery-card-description {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: #FF0000;
+    line-height: 115%;
+    max-width: 65%;
 }
 
 .gallery-card-price {
-    font-family: 'IBM Plex Serif', serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: #282323;
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: #FF0000;
+    white-space: nowrap;
+    line-height: 100%;
 }

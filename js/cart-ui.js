@@ -112,12 +112,21 @@ function renderCartItems(items, total) {
             info.appendChild(sizeInfo);
         }
         
-        // Add carat info for stone items
-        if (item.carat) {
-            const caratInfo = document.createElement('span');
-            caratInfo.className = 'cart-item-subtitle';
-            caratInfo.textContent = `${item.carat.toFixed(2)} ct`;
-            info.appendChild(caratInfo);
+        // Add carat and source info for stone items (displayed side by side)
+        if (item.carat || item.source) {
+            const stoneInfo = document.createElement('span');
+            stoneInfo.className = 'cart-item-subtitle';
+            
+            const parts = [];
+            if (item.carat) {
+                parts.push(`${item.carat.toFixed(2)} ct`);
+            }
+            if (item.source) {
+                const sourceName = item.source === 'lab' ? 'Lab' : 'Natural';
+                parts.push(sourceName);
+            }
+            stoneInfo.textContent = parts.join(' · ');
+            info.appendChild(stoneInfo);
         }
         
         const price = document.createElement('span');

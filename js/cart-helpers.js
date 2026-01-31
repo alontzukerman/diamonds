@@ -53,12 +53,13 @@ function updateRingCartItem(sourceElement) {
 }
 
 /**
- * Update the stone cart item (combines stone + carat into one item)
+ * Update the stone cart item (combines stone + carat + source into one item)
  * Only adds to cart if stone is selected
  */
 function updateStoneCartItem(sourceElement) {
     const stoneId = state.selections.diamond.stone;
     const carat = state.selections.diamond.carat;
+    const source = state.selections.diamond.source;
     
     if (!stoneId) {
         // No stone selected yet, remove stone from cart
@@ -69,16 +70,21 @@ function updateStoneCartItem(sourceElement) {
     const stoneIndex = parseInt(stoneId) - 1;
     const stoneName = STONE_NAMES[stoneIndex];
     const stoneImage = ASSETS.stones(stoneId);
-    const caratPrice = Cart.calculateCaratPrice(carat);
+    const caratPrice = Cart.calculateCaratPrice(carat, source);
     
-    // Create cart item with carat info
+    // Determine if premium based on source
+    const isPremium = source === 'natural';
+    
+    // Create cart item with carat and source info
     const cartItem = {
         id: 'diamond-stone',
         category: 'diamond-stone',
         name: stoneName,
         carat: carat, // Store carat separately for display
+        source: source, // Store source separately for display
         price: caratPrice,
-        image: stoneImage
+        image: stoneImage,
+        premium: isPremium
     };
     
     Cart.setItem(cartItem, sourceElement);

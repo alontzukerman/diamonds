@@ -3,13 +3,31 @@
 // Note: Requires config.js to be loaded first
 // ========================================
 
+// Package display names
+const PACKAGE_NAMES = [
+    'Iconic',
+    'All Inclusive',
+    'Once in a Lifetime',
+    'Love Story',
+    'Unforgettable',
+    'Dreamy',
+    'Classic',
+    'Romantic',
+    'Fairytale',
+    'Forever Yours',
+    'Magical'
+];
+
 // Static gallery examples
 const GALLERY_EXAMPLES = [
     // 1. Romantic Paris Evening
     {
+        name: PACKAGE_NAMES[0], // Iconic
+        premium: true,
         material: 'gold',
         stone: 5,
-        carat: 1.8,
+        carat: 3.8,
+        source: 'natural',
         packaging: 3,
         location: LOCATIONS[9], // Paris
         sign: 2,
@@ -20,19 +38,23 @@ const GALLERY_EXAMPLES = [
     },
     // 2. Maldives Beach Sunset
     {
+        name: PACKAGE_NAMES[1], // Classic
+        premium: true,
         material: 'white-gold',
         stone: 8,
-        carat: 2.2,
+        carat: 4,
+        source: 'natural',
         packaging: 2,
         location: LOCATIONS[6], // Maldives
         sign: 1,
-        flowers: [2, 4, 7, 8],
+        flowers: [1, 2, 3, 4, 5, 6, 7, 8],
         balloon: 1,
-        extras: [1, 4, 6],
+        extras: [1, 2, 3, 4, 5, 6, 8],
         song: MUSIC[11] // Elvis - Can't Help Falling in Love
     },
     // 3. New York City Lights
     {
+        name: PACKAGE_NAMES[2], // Once in a Lifetime
         material: 'silver',
         stone: 12,
         carat: 1.5,
@@ -46,9 +68,11 @@ const GALLERY_EXAMPLES = [
     },
     // 4. Santorini Dream
     {
+        name: PACKAGE_NAMES[3], // Love Story
         material: 'rose-gold',
         stone: 3,
         carat: 2.0,
+        source: 'natural',
         packaging: 1,
         location: LOCATIONS[11], // Santorini
         sign: 3,
@@ -59,9 +83,11 @@ const GALLERY_EXAMPLES = [
     },
     // 5. Hot Air Balloon Adventure
     {
+        name: PACKAGE_NAMES[4], // Dreamer
         material: 'gold',
         stone: 17,
         carat: 1.2,
+        source: 'lab',
         packaging: 4,
         location: LOCATIONS[4], // Hot Air Balloon
         sign: 5,
@@ -72,6 +98,7 @@ const GALLERY_EXAMPLES = [
     },
     // 6. Jerusalem Sacred Moment
     {
+        name: PACKAGE_NAMES[5], // Eternal
         material: 'white-gold',
         stone: 6,
         carat: 1.6,
@@ -85,9 +112,12 @@ const GALLERY_EXAMPLES = [
     },
     // 7. Rome Eternal Love
     {
+        name: PACKAGE_NAMES[6], // Timeless
+        premium: true,
         material: 'gold',
         stone: 19,
         carat: 2.4,
+        source: 'natural',
         packaging: 7,
         location: LOCATIONS[10], // Rome
         sign: 1,
@@ -98,9 +128,11 @@ const GALLERY_EXAMPLES = [
     },
     // 8. Cozy Home Proposal
     {
+        name: PACKAGE_NAMES[7], // Fairytale
         material: 'rose-gold',
         stone: 11,
         carat: 1.0,
+        source: 'lab',
         packaging: 3,
         location: LOCATIONS[0], // At Home
         sign: 3,
@@ -111,6 +143,7 @@ const GALLERY_EXAMPLES = [
     },
     // 9. Barcelona Fiesta
     {
+        name: PACKAGE_NAMES[8], // Enchanted
         material: 'silver',
         stone: 15,
         carat: 1.7,
@@ -124,22 +157,27 @@ const GALLERY_EXAMPLES = [
     },
     // 10. Thailand Paradise
     {
+        name: PACKAGE_NAMES[9], // Unforgettable
+        premium: true,
         material: 'gold',
         stone: 9,
-        carat: 1.9,
+        carat: 4,
+        source: 'natural',
         packaging: 4,
         location: LOCATIONS[13], // Thailand
         sign: 2,
-        flowers: [4, 7, 8],
+        flowers: [1, 2, 3, 4, 5, 6,7, 8],
         balloon: 6,
         extras: [1, 5],
         song: MUSIC[13] // Sarit Hadad - Ahava Kmo Shelanu
     },
     // 11. Amsterdam Canal Romance
     {
+        name: PACKAGE_NAMES[10], // Forever Yours
         material: 'white-gold',
         stone: 14,
         carat: 2.1,
+        source: 'lab',
         packaging: 5,
         location: LOCATIONS[1], // Amsterdam
         sign: 4,
@@ -245,6 +283,39 @@ function createGalleryCard(pkg) {
     display.appendChild(ringContainer);
     card.appendChild(display);
     
+    // Song UI component at bottom center of card (same as music carousel)
+    const songCard = document.createElement('div');
+    songCard.className = 'gallery-music-card';
+    
+    // Image container with cover
+    const imageContainer = document.createElement('div');
+    imageContainer.className = 'gallery-music-card-image';
+    
+    const coverImg = document.createElement('img');
+    coverImg.className = 'gallery-music-card-cover';
+    coverImg.src = ASSETS.music.image(pkg.song.image);
+    coverImg.alt = pkg.song.song;
+    imageContainer.appendChild(coverImg);
+    
+    songCard.appendChild(imageContainer);
+    
+    // Song info
+    const songInfo = document.createElement('div');
+    songInfo.className = 'gallery-music-card-info';
+    
+    const songTitle = document.createElement('div');
+    songTitle.className = 'gallery-music-card-song';
+    songTitle.textContent = pkg.song.song;
+    songInfo.appendChild(songTitle);
+    
+    const songArtist = document.createElement('div');
+    songArtist.className = 'gallery-music-card-artist';
+    songArtist.textContent = pkg.song.artist;
+    songInfo.appendChild(songArtist);
+    
+    songCard.appendChild(songInfo);
+    card.appendChild(songCard);
+    
     // Create audio element for hover playback
     const audio = document.createElement('audio');
     audio.src = ASSETS.music.audio(pkg.song.audio);
@@ -268,25 +339,124 @@ function createGalleryCard(pkg) {
     item.className = 'gallery-item';
     item.appendChild(card);
     
-    // Info below the card
+    // Info on the right side of the card
     const info = document.createElement('div');
     info.className = 'gallery-card-info';
     
+    // Title (The + package name + premium icon if applicable)
     const title = document.createElement('div');
     title.className = 'gallery-card-title';
-    title.textContent = pkg.location.name;
     
-    const price = document.createElement('div');
-    price.className = 'gallery-card-price';
-    // Calculate approximate price
-    const totalPrice = calculatePackagePrice(pkg);
-    price.textContent = `$${totalPrice.toLocaleString()}`;
+    const titleThe = document.createElement('span');
+    titleThe.className = 'gallery-card-title-the';
+    titleThe.textContent = 'The';
+    title.appendChild(titleThe);
+    
+    const titleName = document.createElement('span');
+    titleName.className = 'gallery-card-title-name';
+    titleName.textContent = pkg.name;
+    title.appendChild(titleName);
+    
+    // Add premium icon if package is premium
+    if (pkg.premium) {
+        const premiumIcon = document.createElement('img');
+        premiumIcon.src = 'assets/icons/premium.svg';
+        premiumIcon.alt = 'Premium';
+        premiumIcon.className = 'gallery-card-premium-icon';
+        title.appendChild(premiumIcon);
+    }
     
     info.appendChild(title);
-    info.appendChild(price);
+    
+    // Bottom row with description and price
+    const bottom = document.createElement('div');
+    bottom.className = 'gallery-card-bottom';
+    
+    // Description with all selected item names
+    const features = [];
+    
+    // Location name
+    features.push(pkg.location.name);
+    
+    // Material
+    features.push(pkg.material.replace('-', ' ').replace(/\b\w/g, c => c.toUpperCase()) + ' Ring');
+    
+    // Stone name
+    if (STONE_NAMES[pkg.stone - 1]) {
+        features.push(STONE_NAMES[pkg.stone - 1]);
+    }
+    
+    // Carat
+    features.push(`${pkg.carat} Carat`);
+    
+    // Source (if defined)
+    if (pkg.source) {
+        features.push(pkg.source === 'natural' ? 'Natural Diamond' : 'Lab-Grown Diamond');
+    }
+    
+    // Packaging name
+    if (PACKAGING[pkg.packaging - 1]) {
+        features.push(PACKAGING[pkg.packaging - 1].name);
+    }
+    
+    // Sign name
+    if (SIGNS[pkg.sign - 1]) {
+        features.push(SIGNS[pkg.sign - 1].name);
+    }
+    
+    // Each flower by name
+    pkg.flowers.forEach(flowerId => {
+        if (FLOWERS[flowerId - 1]) {
+            features.push(FLOWERS[flowerId - 1].name);
+        }
+    });
+    
+    // Balloon name
+    if (pkg.balloon && BALLOONS[pkg.balloon - 1]) {
+        features.push(BALLOONS[pkg.balloon - 1].name);
+    }
+    
+    // Each extra by name
+    pkg.extras.forEach(extraId => {
+        if (EXTRAS[extraId - 1]) {
+            features.push(EXTRAS[extraId - 1].name);
+        }
+    });
+    
+    const description = document.createElement('div');
+    description.className = 'gallery-card-description';
+    description.textContent = `including: ${features.join(', ')}.`;
+    bottom.appendChild(description);
+    
+    // Price
+    const price = document.createElement('div');
+    price.className = 'gallery-card-price';
+    const totalPrice = calculatePackagePrice(pkg);
+    price.textContent = `$${totalPrice.toLocaleString()}`;
+    bottom.appendChild(price);
+    
+    info.appendChild(bottom);
     item.appendChild(info);
     
     return item;
+}
+
+// Calculate carat price based on source (same formula as Cart.calculateCaratPrice)
+// Lab: $1,000 - $5,000 | Natural: $4,000 - $30,000
+function calculateCaratPrice(carat, source) {
+    const minCarat = 0.5;
+    const maxCarat = 4.0;
+    
+    // Get price range based on source (default to lab if not specified)
+    const priceRange = (source && CARAT_RANGES[source]) ? CARAT_RANGES[source] : CARAT_RANGES.lab;
+    const minPrice = priceRange.minPrice;
+    const maxPrice = priceRange.maxPrice;
+    
+    // Linear interpolation
+    const ratio = (carat - minCarat) / (maxCarat - minCarat);
+    const price = minPrice + ratio * (maxPrice - minPrice);
+    
+    return Math.round(price);
 }
 
 // Calculate approximate package price
@@ -296,8 +466,10 @@ function calculatePackagePrice(pkg) {
     // Material price
     total += MATERIAL_PRICES[pkg.material] || 0;
     
-    // Source (random between lab and natural for display)
-    total += Math.random() > 0.5 ? SOURCE_PRICES.lab : SOURCE_PRICES.natural;
+    // Carat price (includes source-based pricing, no separate source price)
+    // Use defined source or default to lab
+    const source = pkg.source || 'lab';
+    total += calculateCaratPrice(pkg.carat, source);
     
     // Location price
     total += pkg.location.price || 0;

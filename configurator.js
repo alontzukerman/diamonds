@@ -65,6 +65,21 @@ document.addEventListener('DOMContentLoaded', function() {
             step: 0.1,
             defaultValue: 0.5,
             unit: 'ct',
+            // Dynamic prices based on selected source
+            getMinPrice: () => {
+                const source = state.selections.diamond.source;
+                if (source && CARAT_RANGES[source]) {
+                    return CARAT_RANGES[source].minPrice;
+                }
+                return CARAT_RANGES.lab.minPrice; // Default to lab
+            },
+            getMaxPrice: () => {
+                const source = state.selections.diamond.source;
+                if (source && CARAT_RANGES[source]) {
+                    return CARAT_RANGES[source].maxPrice;
+                }
+                return CARAT_RANGES.lab.maxPrice; // Default to lab
+            },
             onSelect: (value, sourceElement) => {
                 state.selections.diamond.carat = parseFloat(value);
                 updateLoveMeter();
@@ -75,24 +90,20 @@ document.addEventListener('DOMContentLoaded', function() {
         source: {
             type: 'carousel',
             items: [
-                { id: 'lab', label: 'Lab', price: '[From $1,000]', image: ASSETS.rings.lab, premium: false },
-                { id: 'natural', label: 'Natural', price: '[From $4,000]', image: ASSETS.rings.natural, premium: true }
+                { id: 'lab', label: 'Lab', price: '[From $600]', image: ASSETS.rings.lab, premium: false },
+                { id: 'natural', label: 'Natural', price: '[From $1,800]', image: ASSETS.rings.natural, premium: true }
             ],
             onSelect: (value, sourceElement) => {
                 state.selections.diamond.source = value;
                 updateLoveMeter();
                 
-                const sourceName = value === 'lab' ? 'Lab Diamond' : 'Natural Diamond';
-                const isPremium = value === 'natural';
-                const cartItem = {
-                    id: `source-${value}`,
-                    category: 'source',
-                    name: sourceName,
-                    price: SOURCE_PRICES[value],
-                    image: value === 'lab' ? ASSETS.rings.lab : ASSETS.rings.natural,
-                    premium: isPremium
-                };
-                Cart.setItem(cartItem, sourceElement);
+                // Update the stone cart item (source is now part of the stone item, not separate)
+                updateStoneCartItem(sourceElement);
+                
+                // Re-render carat slider if it's currently shown (prices depend on source)
+                if (state.currentSection === 'carat') {
+                    showSelector('carat', SELECTORS_CONFIG);
+                }
             }
         },
         packaging: {

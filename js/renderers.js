@@ -523,6 +523,18 @@ function renderSlider(sectionName, config) {
     
     const currentValue = getSelectionValue(sectionName) || config.defaultValue;
     
+    // Get dynamic prices (use functions if available, otherwise fallback to static values)
+    const minPriceValue = config.getMinPrice ? config.getMinPrice() : 500;
+    const maxPriceValue = config.getMaxPrice ? config.getMaxPrice() : 6000;
+    
+    // Format price for display
+    const formatPrice = (price) => {
+        if (price >= 1000) {
+            return `[$${price.toLocaleString()}]`;
+        }
+        return `[$${price}]`;
+    };
+    
     // Slider wrapper (contains left label, bar, right label) in a row
     const sliderWrapper = document.createElement('div');
     sliderWrapper.className = 'carat-slider-wrapper';
@@ -537,7 +549,7 @@ function renderSlider(sectionName, config) {
     
     const minPrice = document.createElement('span');
     minPrice.className = 'carat-price';
-    minPrice.textContent = '[$500]';
+    minPrice.textContent = formatPrice(minPriceValue);
     
     minLabelWrapper.appendChild(minLabel);
     minLabelWrapper.appendChild(minPrice);
@@ -555,7 +567,7 @@ function renderSlider(sectionName, config) {
     const handleLabel = document.createElement('span');
     handleLabel.className = 'carat-handle-label';
     handleLabel.id = 'carat-handle-label';
-    handleLabel.textContent = `${config.defaultValue.toFixed(2)} ${config.unit}`;
+    handleLabel.textContent = `${currentValue.toFixed(2)} ${config.unit}`;
     handle.appendChild(handleLabel);
     
     const barImg = document.createElement('img');
@@ -583,7 +595,7 @@ function renderSlider(sectionName, config) {
     
     const maxPrice = document.createElement('span');
     maxPrice.className = 'carat-price';
-    maxPrice.textContent = '[$6000]';
+    maxPrice.textContent = formatPrice(maxPriceValue);
     
     maxLabelWrapper.appendChild(premiumTag);
     maxLabelWrapper.appendChild(maxLabel);

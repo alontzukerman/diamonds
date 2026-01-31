@@ -225,16 +225,21 @@ const Cart = (function() {
     }
     
     /**
-     * Calculate carat price using linear interpolation
-     * 0.5 ct = $500, 4.0 ct = $6000
+     * Calculate carat price using linear interpolation based on source
+     * Lab: 0.5 ct = $1,000, 4.0 ct = $5,000
+     * Natural: 0.5 ct = $4,000, 4.0 ct = $30,000
      * @param {number} carat - Carat value (0.5 to 4.0)
+     * @param {string} source - Diamond source ('lab' or 'natural')
      * @returns {number}
      */
-    function calculateCaratPrice(carat) {
+    function calculateCaratPrice(carat, source) {
         const minCarat = 0.5;
         const maxCarat = 4.0;
-        const minPrice = 500;
-        const maxPrice = 6000;
+        
+        // Get price range based on source (default to lab if not specified)
+        const priceRange = (source && CARAT_RANGES[source]) ? CARAT_RANGES[source] : CARAT_RANGES.lab;
+        const minPrice = priceRange.minPrice;
+        const maxPrice = priceRange.maxPrice;
         
         // Linear interpolation
         const ratio = (carat - minCarat) / (maxCarat - minCarat);

@@ -18,7 +18,7 @@ const STEPS_CONFIG = {
     },
     2: {
         name: 'The Diamond',
-        sections: ['stone', 'carat', 'source', 'packaging'],
+        sections: ['stone', 'source', 'carat', 'packaging'],
         defaultSection: 'stone'
     },
     3: {
@@ -60,23 +60,22 @@ const START_POINTS = 90;
 const MAX_LOVE_POINTS = 150;
 
 // Location data (15 locations) - name, image filename, premium status, and price
-const LOCATION_PRICE = 1000; // Fixed price for all locations
 const LOCATIONS = [
-    { name: 'At Home', image: 'l4.png', premium: false, price: LOCATION_PRICE },
-    { name: 'Amsterdam', image: 'l7.png', premium: true, price: LOCATION_PRICE },
-    { name: 'Barcelona', image: 'l13.png', premium: true, price: LOCATION_PRICE },
-    { name: 'Eilat', image: 'l1.png', premium: false, price: LOCATION_PRICE },
-    { name: 'Hot Air Balloon', image: 'l8.png', premium: true, price: LOCATION_PRICE },
-    { name: 'Jerusalem – Western Wall', image: 'l10.png', premium: false, price: LOCATION_PRICE },
-    { name: 'Maldives', image: 'l12.png', premium: true, price: LOCATION_PRICE },
-    { name: 'Mount Hermon', image: 'l11.png', premium: false, price: LOCATION_PRICE },
-    { name: 'New York', image: 'l6.png', premium: true, price: LOCATION_PRICE },
-    { name: 'Paris', image: 'l5.png', premium: true, price: LOCATION_PRICE },
-    { name: 'Rome', image: 'l2.png', premium: true, price: LOCATION_PRICE },
-    { name: 'Santorini', image: 'l9.png', premium: true, price: LOCATION_PRICE },
-    { name: 'Tel Aviv Port', image: 'l14.png', premium: false, price: LOCATION_PRICE },
-    { name: 'Thailand', image: 'l3.png', premium: true, price: LOCATION_PRICE },
-    { name: 'Yes Planet Lake, Rishon LeZion', image: 'l15.png', premium: false, price: LOCATION_PRICE }
+    { name: 'At Home', image: 'l4.png', premium: false, price: 0 },
+    { name: 'Amsterdam', image: 'l7.png', premium: true, price: 4500 },
+    { name: 'Barcelona', image: 'l13.png', premium: true, price: 4300 },
+    { name: 'Eilat', image: 'l1.png', premium: false, price: 1800 },
+    { name: 'Hot Air Balloon', image: 'l8.png', premium: true, price: 2000 },
+    { name: 'Jerusalem – Western Wall', image: 'l10.png', premium: false, price: 0 },
+    { name: 'Maldives', image: 'l12.png', premium: true, price: 8000 },
+    { name: 'Mount Hermon', image: 'l11.png', premium: false, price: 0 },
+    { name: 'New York', image: 'l6.png', premium: true, price: 5000 },
+    { name: 'Paris', image: 'l5.png', premium: true, price: 5200 },
+    { name: 'Rome', image: 'l2.png', premium: true, price: 4700 },
+    { name: 'Santorini', image: 'l9.png', premium: true, price: 6000 },
+    { name: 'Tel Aviv Port', image: 'l14.png', premium: false, price: 0 },
+    { name: 'Thailand', image: 'l3.png', premium: true, price: 4000 },
+    { name: 'Yes Planet Lake, Rishon LeZion', image: 'l15.png', premium: false, price: 0 }
 ];
 
 // Material prices
@@ -89,8 +88,14 @@ const MATERIAL_PRICES = {
 
 // Source prices
 const SOURCE_PRICES = {
-    lab: 1000,
-    natural: 4000
+    lab: 600,
+    natural: 1800
+};
+
+// Carat price ranges based on source
+const CARAT_RANGES = {
+    lab: { minPrice: 600, maxPrice: 4000 },
+    natural: { minPrice: 1800, maxPrice: 20000 }
 };
 
 // Signs data (6 signs) - name, display price string, and numeric price
