@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
             items: STONE_NAMES.map((name, i) => ({
                 id: String(i + 1),
                 label: name,
-                image: ASSETS.stones(i + 1)
+                image: ASSETS.stonesCarousel(i + 1)
             })),
             onSelect: (value, sourceElement) => {
                 state.selections.diamond.stone = value;
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         source: {
-            type: 'carousel',
+            type: 'flex-carousel',
             items: [
                 { id: 'lab', label: 'Lab', price: '[From $600]', image: ASSETS.rings.lab, premium: false },
                 { id: 'natural', label: 'Natural', price: '[From $1,800]', image: ASSETS.rings.natural, premium: true }
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         packaging: {
-            type: 'carousel',
+            type: 'flex-carousel',
             items: PACKAGING.map((pkg, i) => ({
                 id: String(i + 1),
                 label: pkg.name,
@@ -131,8 +131,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         location: {
-            type: 'buttons',
-            items: LOCATIONS.map(loc => loc.name),
+            type: 'flex-carousel',
+            items: LOCATIONS.map(loc => ({
+                id: loc.name,
+                label: loc.name,
+                price: loc.price > 0 ? `[$${loc.price.toLocaleString()}]` : '[Free]',
+                image: `assets/locations/${loc.image}`,
+                premium: loc.premium
+            })),
             onSelect: (value, sourceElement) => {
                 state.selections.location = value;
                 updateLocationBackground(value);
@@ -151,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         signs: {
-            type: 'carousel',
+            type: 'flex-carousel',
             items: SIGNS.map((sign, i) => ({
                 id: String(i + 1),
                 label: sign.name,
@@ -174,7 +180,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         flowers: {
-            type: 'multiselect',
+            type: 'flex-carousel',
+            multiselect: true,
             items: FLOWERS.map((flower, i) => ({
                 id: String(i + 1),
                 label: flower.name,
@@ -203,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         balloons: {
-            type: 'carousel',
+            type: 'flex-carousel',
             items: BALLOONS.map((balloon, i) => ({
                 id: String(i + 1),
                 label: balloon.name,
@@ -226,7 +233,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         extras: {
-            type: 'multiselect',
+            type: 'flex-carousel',
+            multiselect: true,
             items: EXTRAS.map((extra, i) => ({
                 id: String(i + 1),
                 label: extra.name,
@@ -255,9 +263,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
         music: {
-            type: 'music-carousel',
+            type: 'flex-carousel',
+            musicPlayer: true,
             items: MUSIC.map((track, i) => ({
                 id: String(i + 1),
+                label: `${track.artist} - ${track.song}`,
                 artist: track.artist,
                 song: track.song,
                 image: ASSETS.music.image(track.image),
@@ -294,6 +304,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     initRenderers();
     initCartUI();
+    initNavigation();
+    
+    // Create a global function for navigation.js to call showSelector
+    window.showSelectorFromNav = function(sectionName) {
+        showSelector(sectionName, SELECTORS_CONFIG);
+    };
     
     // ========================================
     // ACCORDION MENU
@@ -338,6 +354,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const sectionName = expandedSection.getAttribute('data-section');
             showSelector(sectionName, SELECTORS_CONFIG);
         }
+        
+        // Update navigation buttons
+        updateNavButtons();
     }
     
     function toggleStep(stepNumber) {
@@ -404,6 +423,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Animate sync heights during transition
         animateSyncProgressBarHeights();
+        
+        // Update navigation buttons
+        updateNavButtons();
     }
     
     // ========================================

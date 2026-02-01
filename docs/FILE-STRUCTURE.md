@@ -47,6 +47,7 @@ shahar-diamond/
 │   ├── checkout.js         # Checkout modal and share link generation
 │   ├── checkout-page.js    # Checkout page: receipt rendering and payment modal
 │   ├── renderers.js        # Selector renderers (carousel, buttons, slider, etc.)
+│   ├── navigation.js       # Navigation buttons (Next/Previous) logic
 │   └── gallery.js          # Gallery page: static examples and card generation
 │
 └── assets/
@@ -80,7 +81,7 @@ shahar-diamond/
     ├── carat-bar.svg       # Custom carat slider track
     │
     ├── ui/                 # UI elements and backgrounds
-    │   ├── background.jpeg     # Page background image
+    │   ├── background.png      # Page background image
     │   ├── logo.png            # "By" logo on landing page
     │   ├── navbar-logo.svg     # Main navbar logo
     │   ├── cursor.png          # Custom cursor image (hand pointer)

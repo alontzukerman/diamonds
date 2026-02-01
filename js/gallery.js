@@ -94,7 +94,7 @@ const GALLERY_EXAMPLES = [
         flowers: [3, 4, 8],
         balloon: 2,
         extras: [5],
-        song: MUSIC[14] // Jason Mraz - I'm Yours
+        song: MUSIC[13] // Jason Mraz - I'm Yours
     },
     // 6. Jerusalem Sacred Moment
     {
@@ -169,7 +169,7 @@ const GALLERY_EXAMPLES = [
         flowers: [1, 2, 3, 4, 5, 6,7, 8],
         balloon: 6,
         extras: [1, 5],
-        song: MUSIC[13] // Sarit Hadad - Ahava Kmo Shelanu
+        song: MUSIC[0] // Ben Snof - Boey Beshalom
     },
     // 11. Amsterdam Canal Romance
     {

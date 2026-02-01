@@ -220,7 +220,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    line-height: 100%;
+    line-height: 1;
 }
 
 .receipt-info-label {
@@ -267,7 +267,8 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    line-height: 205%;
+    /* 51px / 1160 * 100 = 4.4cqh */
+    line-height: 4.4cqh;
 }
 
 .receipt-item-name {
@@ -485,4 +486,9 @@
     color: #999;
     /* 20px / 1160 * 100 = 1.72cqh */
     padding: 1.72cqh 0;
+}
+
+/* Hide system cursor */
+*, *::before, *::after, a, a:hover, button, button:hover, img {
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto !important;
 }

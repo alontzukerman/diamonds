@@ -34,8 +34,9 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    /* 370px / 1160 * 100 = 31.9cqh */
-    top: 31.9cqh;
+    /* 370px / 1160 * 100 = 26cqh */
+    top: 26cqh;
+    transform: scale(0.8);
 }
 
 /* Inner core container for ring, stone, packaging (with floating animation) */
@@ -314,6 +315,8 @@
     position: absolute;
     object-fit: contain;
     animation: balloonFadeIn 0.3s ease-out forwards;
+    /* Default balloon height - 440px / 1160 * 100 = 37.93cqh */
+    height: 37.93cqh;
 }
 
 .display-balloon.fade-out {

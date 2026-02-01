@@ -30,6 +30,13 @@
     text-decoration: none;
 }
 
+.gallery-close-btn img {
+    /* 150px / 2100 * 100 = 7.14cqw */
+    width: 7.14cqw;
+    /* 150px / 1160 * 100 = 12.93cqh */
+    height: 12.93cqh;
+}
+
 .gallery-close-btn:hover .gallery-close-icon {
     transform: scale(1.1);
     transition: transform 0.1s ease;
@@ -48,7 +55,7 @@
 /* Individual Gallery Card - uses container queries for internal scaling */
 .gallery-card {
     /* 250px / 1160 * 100 = 21.55vh */
-    height: 21.55vw;
+    height: 21.55vh;
     aspect-ratio: 2100 / 1160;
     position: relative;
     background-size: cover;
@@ -153,7 +160,7 @@
     align-items: center;
     justify-content: center;
     /* Scale relative to card size */
-    transform: scale(0.25) translateY(5.6cqh);
+    transform: scale(1.1) translateY(5.6cqh);
     transform-origin: center center;
 }
 
@@ -360,6 +367,8 @@
 .gallery-balloon {
     position: absolute;
     object-fit: contain;
+    /* Default balloon height - 440px / 1160 * 100 = 37.93cqh */
+    height: 37.93cqh;
 }
 
 /* Balloon position variants (match display.css) */
@@ -510,6 +519,10 @@
 }
 
 .gallery-card-premium-icon {
+    /* 140px / 2100 * 100 = 6.67cqw */
+    width: 6.67cqw;
+    /* 58px / 1160 * 100 = 5.0cqh */
+    height: 5.0cqh;
     /* 70px / 2100 * 100 = 3.33vw */
     margin-left: 3.33vw;
     /* 3px / 1160 * 100 = 0.26vh */

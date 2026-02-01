@@ -43,9 +43,9 @@ function updateLoveMeter() {
     // Update heart position and scale
     const loveMeterHeart = document.getElementById('love-meter-heart');
     if (loveMeterHeart) {
-        // Position
+        // Position (using cqh units for responsive scaling)
         const heartPosition = (state.loveLevel / 100) * LOVE_METER_MAX_HEIGHT + LOVE_METER_BASE_POSITION;
-        loveMeterHeart.style.bottom = `${heartPosition}px`;
+        loveMeterHeart.style.bottom = `${heartPosition}cqh`;
         
         // Store current position for next comparison
         state.loveMeterPosition = heartPosition;

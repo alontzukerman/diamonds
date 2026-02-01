@@ -6,8 +6,11 @@
 const TOTAL_STEPS = 6;
 const STEP_HEADER_HEIGHT = 60;
 const TRANSITION_DURATION = 350;
-const LOVE_METER_MAX_HEIGHT = 730;
-const LOVE_METER_BASE_POSITION = 140;
+// Love meter positions in cqh units (relative to 1160px height)
+// 730px / 1160 * 100 = 62.93cqh
+const LOVE_METER_MAX_HEIGHT = 62.93;
+// 140px / 1160 * 100 = 12.07cqh
+const LOVE_METER_BASE_POSITION = 12.07;
 
 // Steps configuration
 const STEPS_CONFIG = {
@@ -54,15 +57,16 @@ const LOVE_METER_CONFIG = {
     minScale: 1.0,      // Heart scale at 0%
     maxScale: 1.4,      // Heart scale at 100%
     
-    // Checkpoints: trigger popover messages at specific positions
-    // bottom = LOVE_METER_BASE_POSITION + offset
+    // Checkpoints: trigger popover messages at specific positions (in cqh units)
+    // bottom = LOVE_METER_BASE_POSITION + offset (where offset is in cqh)
     // image: path to SVG image
+    // Original px values: 250, 405, 560, 715, 865 -> converted to cqh
     checkpoints: [
-        { offset: 110, bottom: 250, image: 'assets/texts/pop-t1.svg' },
-        { offset: 265, bottom: 405, image: 'assets/texts/pop-t2.svg' },
-        { offset: 420, bottom: 560, image: 'assets/texts/pop-t3.svg' },
-        { offset: 575, bottom: 715, image: 'assets/texts/pop-t4.svg' },
-        { offset: 725, bottom: 865, image: 'assets/texts/pop-t5.svg' }
+        { offset: 9.48, bottom: 21.55, image: 'assets/texts/pop-t1.svg' },   // 250px / 1160 = 21.55cqh
+        { offset: 22.84, bottom: 34.91, image: 'assets/texts/pop-t2.svg' },  // 405px / 1160 = 34.91cqh
+        { offset: 36.21, bottom: 48.28, image: 'assets/texts/pop-t3.svg' },  // 560px / 1160 = 48.28cqh
+        { offset: 49.57, bottom: 61.64, image: 'assets/texts/pop-t4.svg' },  // 715px / 1160 = 61.64cqh
+        { offset: 62.5, bottom: 74.57, image: 'assets/texts/pop-t5.svg' }    // 865px / 1160 = 74.57cqh
     ]
 };
 
@@ -81,8 +85,7 @@ const LOCATIONS = [
     { name: 'Rome', image: 'l2.png', premium: true, price: 4700 },
     { name: 'Santorini', image: 'l9.png', premium: true, price: 6000 },
     { name: 'Tel Aviv Port', image: 'l14.png', premium: false, price: 0 },
-    { name: 'Thailand', image: 'l3.png', premium: true, price: 4000 },
-    { name: 'Yes Planet Lake, Rishon LeZion', image: 'l15.png', premium: false, price: 0 }
+    { name: 'Thailand', image: 'l3.png', premium: true, price: 4000 }
 ];
 
 // Material prices
@@ -175,8 +178,7 @@ const MUSIC = [
     { artist: 'Bill Withers', song: 'Just The Two Of Us', image: 'c11.png', audio: 's11.mp3' },
     { artist: 'Elvis Presley', song: 'Can\'t Help Falling in Love', image: 'c12.png', audio: 's12.mp3' },
     { artist: 'Nathan Goshen', song: 'Shney Yeladim Ba\'olam', image: 'c13.png', audio: 's13.mp3' },
-    { artist: 'Sarit Hadad', song: 'Ahava Kmo Shelanu', image: 'c14.png', audio: 's14.mp3' },
-    { artist: 'Jason Mraz', song: 'I\'m Yours', image: 'c15.png', audio: 's15.mp3' }
+    { artist: 'Jason Mraz', song: 'I\'m Yours', image: 'c14.png', audio: 's14.mp3' }
 ];
 
 // Stone names (20 stones) - no price, just name and image
@@ -226,6 +228,7 @@ const ASSETS = {
         natural: 'assets/rings/natural.png'
     },
     stones: (id) => `assets/stones/s${id}.png`,
+    stonesCarousel: (id) => `assets/stones/s-c${id}.png`,
     packing: (id) => `assets/packing/p${id}.png`,
     signs: (id) => `assets/signs/si${id}.png`,
     flowers: (id) => `assets/flowers/f${id}.gif`,

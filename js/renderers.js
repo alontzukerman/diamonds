@@ -6,8 +6,34 @@
 // Reference to selection container (set during initialization)
 let selectionContainer = null;
 
+// Reference to hover info box elements
+let hoverInfoBox = null;
+let hoverInfoLabel = null;
+let hoverInfoPrice = null;
+
 function initRenderers() {
     selectionContainer = document.getElementById('selection-container');
+    hoverInfoBox = document.getElementById('hover-info-box');
+    hoverInfoLabel = document.getElementById('hover-info-label');
+    hoverInfoPrice = document.getElementById('hover-info-price');
+}
+
+// ========================================
+// HOVER INFO BOX FUNCTIONS
+// ========================================
+
+function showHoverInfo(label, price) {
+    if (!hoverInfoBox || !hoverInfoLabel || !hoverInfoPrice) return;
+    
+    hoverInfoLabel.textContent = label || '';
+    hoverInfoPrice.textContent = price || '';
+    hoverInfoPrice.style.display = price ? 'block' : 'none';
+    hoverInfoBox.classList.add('visible');
+}
+
+function hideHoverInfo() {
+    if (!hoverInfoBox) return;
+    hoverInfoBox.classList.remove('visible');
 }
 
 function hideAllSelectors() {
@@ -54,6 +80,11 @@ function showSelector(sectionName, SELECTORS_CONFIG) {
         case 'multiselect':
             renderMultiSelect(sectionName, config);
             break;
+    }
+    
+    // Update navigation buttons after showing selector
+    if (typeof updateNavButtons === 'function') {
+        updateNavButtons();
     }
 }
 
@@ -236,38 +267,64 @@ function createFlexCarouselItem(item, sectionName, config, SELECTORS_CONFIG) {
     itemEl.className = 'flex-carousel-item';
     itemEl.setAttribute(`data-${sectionName}`, item.id);
     
-    // Check if this item is currently selected
-    const isSelected = getSelectionValue(sectionName) === item.id;
+    // Check if this item is currently selected (handle both single and multiselect)
+    const currentValue = getSelectionValue(sectionName);
+    const isSelected = config.multiselect 
+        ? (Array.isArray(currentValue) && currentValue.includes(item.id))
+        : currentValue === item.id;
     if (isSelected) {
         itemEl.classList.add('selected');
     }
     
-    // Image with section-specific class
-    const img = document.createElement('img');
-    img.src = item.image;
-    img.alt = item.label;
-    img.className = `flex-carousel-image flex-carousel-image-${sectionName}-${item.id}`;
-    itemEl.appendChild(img);
-    
-    // Info container
-    const info = document.createElement('div');
-    info.className = 'flex-carousel-info';
-    
-    // Label
-    const label = document.createElement('span');
-    label.className = 'flex-carousel-label';
-    label.textContent = item.label;
-    info.appendChild(label);
-    
-    // Price (if exists)
-    if (item.price) {
-        const price = document.createElement('span');
-        price.className = 'flex-carousel-price';
-        price.textContent = item.price;
-        info.appendChild(price);
+    // Music player items have special rendering with card layout
+    if (config.musicPlayer) {
+        itemEl.classList.add('music-flex-item');
+        
+        // Check if this item is currently playing
+        if (currentPlayingId === item.id) {
+            itemEl.classList.add('playing');
+        }
+        
+        // Image container
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'music-flex-image-container';
+        
+        const img = document.createElement('img');
+        img.src = item.image;
+        img.alt = item.label;
+        img.className = `flex-carousel-image flex-carousel-image-${sectionName}-${item.id}`;
+        img.onerror = function() {
+            this.style.display = 'none';
+            imageContainer.classList.add('placeholder');
+        };
+        imageContainer.appendChild(img);
+        itemEl.appendChild(imageContainer);
+        
+        // Info container (song + artist)
+        const info = document.createElement('div');
+        info.className = 'music-flex-info';
+        
+        // Song name (first, bold)
+        const song = document.createElement('span');
+        song.className = 'music-flex-song';
+        song.textContent = item.song;
+        info.appendChild(song);
+        
+        // Artist name (second, regular)
+        const artist = document.createElement('span');
+        artist.className = 'music-flex-artist';
+        artist.textContent = item.artist;
+        info.appendChild(artist);
+        
+        itemEl.appendChild(info);
+    } else {
+        // Regular image
+        const img = document.createElement('img');
+        img.src = item.image;
+        img.alt = item.label;
+        img.className = `flex-carousel-image flex-carousel-image-${sectionName}-${item.id}`;
+        itemEl.appendChild(img);
     }
-    
-    itemEl.appendChild(info);
     
     // Premium label (if exists)
     if (item.premium) {
@@ -279,6 +336,15 @@ function createFlexCarouselItem(item, sectionName, config, SELECTORS_CONFIG) {
         premium.appendChild(premiumImg);
         itemEl.appendChild(premium);
     }
+    
+    // Hover to show info in hover box
+    itemEl.addEventListener('mouseenter', () => {
+        showHoverInfo(item.label, item.price);
+    });
+    
+    itemEl.addEventListener('mouseleave', () => {
+        hideHoverInfo();
+    });
     
     // Click to select
     itemEl.addEventListener('click', () => {
@@ -292,19 +358,37 @@ function selectFlexCarouselItem(sectionName, value, config, SELECTORS_CONFIG) {
     const container = document.getElementById(`${sectionName}-flex-carousel`);
     let selectedElement = null;
     
-    if (container) {
-        container.querySelectorAll('.flex-carousel-item').forEach(item => {
-            const isSelected = item.getAttribute(`data-${sectionName}`) === value;
-            item.classList.toggle('selected', isSelected);
-            if (isSelected) {
-                selectedElement = item;
+    if (config.multiselect) {
+        // Multiselect: toggle the clicked item
+        if (container) {
+            const clickedItem = container.querySelector(`.flex-carousel-item[data-${sectionName}="${value}"]`);
+            if (clickedItem) {
+                const isNowSelected = !clickedItem.classList.contains('selected');
+                clickedItem.classList.toggle('selected', isNowSelected);
+                selectedElement = isNowSelected ? clickedItem : null;
+                
+                // Call the onSelect handler with isSelected state
+                if (config.onSelect) {
+                    config.onSelect(value, isNowSelected, selectedElement);
+                }
             }
-        });
-    }
-    
-    // Call the onSelect handler
-    if (config.onSelect) {
-        config.onSelect(value, selectedElement);
+        }
+    } else {
+        // Single select: only one item selected at a time
+        if (container) {
+            container.querySelectorAll('.flex-carousel-item').forEach(item => {
+                const isSelected = item.getAttribute(`data-${sectionName}`) === value;
+                item.classList.toggle('selected', isSelected);
+                if (isSelected) {
+                    selectedElement = item;
+                }
+            });
+        }
+        
+        // Call the onSelect handler
+        if (config.onSelect) {
+            config.onSelect(value, selectedElement);
+        }
     }
     
     // Check if current step is now complete
@@ -485,6 +569,55 @@ function toggleMusicPlayback(item, cardElement) {
     currentAudio.addEventListener('ended', () => {
         cardElement.classList.remove('playing');
         document.querySelectorAll(`.music-card[data-music="${item.id}"]`).forEach(card => {
+            card.classList.remove('playing');
+        });
+        currentPlayingId = null;
+    });
+    
+    currentAudio.play().catch(err => {
+        console.warn('Audio playback failed:', err);
+        cardElement.classList.remove('playing');
+        currentPlayingId = null;
+    });
+}
+
+function toggleMusicFlexPlayback(item, cardElement) {
+    // If clicking on the same song that's playing, pause it
+    if (currentPlayingId === item.id && currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+        cardElement.classList.remove('playing');
+        // Update all flex music items with this id
+        document.querySelectorAll(`.music-flex-item[data-music="${item.id}"]`).forEach(card => {
+            card.classList.remove('playing');
+        });
+        currentPlayingId = null;
+        return;
+    }
+    
+    // Stop any currently playing audio
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+        // Remove playing class from all music items
+        document.querySelectorAll('.music-flex-item.playing, .music-card.playing').forEach(card => {
+            card.classList.remove('playing');
+        });
+    }
+    
+    // Create and play new audio
+    currentAudio = new Audio(item.audio);
+    currentPlayingId = item.id;
+    
+    // Add playing class to this card
+    cardElement.classList.add('playing');
+    document.querySelectorAll(`.music-flex-item[data-music="${item.id}"]`).forEach(card => {
+        card.classList.add('playing');
+    });
+    
+    // Handle audio ending
+    currentAudio.addEventListener('ended', () => {
+        cardElement.classList.remove('playing');
+        document.querySelectorAll(`.music-flex-item[data-music="${item.id}"]`).forEach(card => {
             card.classList.remove('playing');
         });
         currentPlayingId = null;

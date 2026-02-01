@@ -85,9 +85,11 @@ body {
     position: fixed;
     pointer-events: none;
     z-index: 99999;
-    width: 400px;
+    /* 400px / 2100 * 100 = 19.05vw */
+    width: 19.05vw;
     height: auto;
-    transform: translate(-130px, -40px);
+    /* 130px / 2100 * 100 = 6.19vw, 40px / 1160 * 100 = 3.45vh */
+    transform: translate(-6.19vw, -3.45vh);
     transition: opacity 0.15s ease;
 }
 
@@ -103,7 +105,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
-    background-image: url('assets/ui/background.jpeg');
+    background-image: url('assets/ui/background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -335,6 +337,13 @@ body {
     background: none;
     border: none;
     z-index: 1001;
+}
+
+.about-close-btn img {
+    /* 150px / 2100 * 100 = 7.14cqw */
+    width: 7.14cqw;
+    /* 150px / 1160 * 100 = 12.93cqh */
+    height: 12.93cqh;
 }
 
 .about-close-btn:hover .about-close-icon {

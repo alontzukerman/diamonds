@@ -10,6 +10,11 @@ function checkStepCompletion(stepNumber) {
             completeStep(stepNumber);
         }
     }
+    
+    // Update navigation buttons after any selection
+    if (typeof updateNavButtons === 'function') {
+        updateNavButtons();
+    }
 }
 
 function completeStep(stepNumber) {
@@ -96,10 +101,16 @@ function updateProgressBar() {
 function syncProgressBarHeights() {
     const progressBar = document.querySelector('.progress-bar');
     const menu = document.querySelector('.configurator-menu');
+    const pageScene = document.querySelector('.page-scene');
+    
+    // Get container height for cqh calculations
+    const containerHeight = pageScene ? pageScene.offsetHeight : 1160;
     
     // Sync overall height
     if (progressBar && menu) {
-        progressBar.style.height = `${menu.offsetHeight}px`;
+        // Convert to cqh units
+        const heightInCqh = (menu.offsetHeight / containerHeight) * 100;
+        progressBar.style.height = `${heightInCqh}cqh`;
     }
     
     for (let i = 1; i <= TOTAL_STEPS; i++) {
@@ -108,7 +119,9 @@ function syncProgressBarHeights() {
         
         if (progressStep && menuStep) {
             const menuStepHeight = menuStep.offsetHeight;
-            progressStep.style.height = `${menuStepHeight}px`;
+            // Convert to cqh units
+            const heightInCqh = (menuStepHeight / containerHeight) * 100;
+            progressStep.style.height = `${heightInCqh}cqh`;
         }
     }
     
@@ -121,8 +134,12 @@ function updateProgressBarLine() {
     const firstStep = document.querySelector('.progress-step[data-progress-step="1"]');
     const lastStep = document.querySelector('.progress-step[data-progress-step="6"]');
     const firstCircle = document.querySelector('.progress-step[data-progress-step="1"] .progress-circle');
+    const pageScene = document.querySelector('.page-scene');
     
     if (progressBarLine && firstStep && lastStep && firstCircle) {
+        // Get container height for cqh calculations
+        const containerHeight = pageScene ? pageScene.offsetHeight : 1160;
+        
         // Get the padding-top of progress step (where circle starts)
         const paddingTop = parseFloat(getComputedStyle(firstStep).paddingTop) || 0;
         const circleHeight = firstCircle.offsetHeight;
@@ -135,8 +152,12 @@ function updateProgressBarLine() {
         
         const lineHeight = lineBottom - lineTop;
         
-        progressBarLine.style.top = `${lineTop}px`;
-        progressBarLine.style.height = `${lineHeight}px`;
+        // Convert to cqh units
+        const topInCqh = (lineTop / containerHeight) * 100;
+        const heightInCqh = (lineHeight / containerHeight) * 100;
+        
+        progressBarLine.style.top = `${topInCqh}cqh`;
+        progressBarLine.style.height = `${heightInCqh}cqh`;
     }
 }
 
@@ -161,3 +182,13 @@ function unlockStep(stepNumber) {
         menuStep.classList.remove('disabled');
     }
 }
+
+// Re-sync progress bar on window resize for responsive scaling
+let resizeTimeout;
+window.addEventListener('resize', function() {
+    // Debounce resize handler
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(function() {
+        syncProgressBarHeights();
+    }, 100);
+});

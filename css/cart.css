@@ -75,6 +75,13 @@
     transition: transform 0.2s ease;
 }
 
+.cart-close-btn img {
+    /* 73px / 2100 * 100 = 3.48cqw */
+    width: 3.48cqw;
+    /* 73px / 1160 * 100 = 6.29cqh */
+    height: 6.29cqh;
+}
+
 .cart-close-btn:hover {
     transform: scale(1.1);
 }

@@ -1,13 +1,24 @@
 # Step Implementation Details
 
+## Unified Selection UI
+
+All selection steps (except Size and Carat) now use a unified **Flex Carousel** layout:
+- All items visible at once (no arrow navigation)
+- Hover shows item name and price in a **center-top info box**
+- Selected items have white/yellow glow effect
+- Items wrap into multiple rows when needed (with `flex-wrap`)
+- Premium items show a star icon
+
+---
+
 ## [01] The Ring - COMPLETE
 
-### Material Selection (Carousel)
-- Gold: Displays `gold-ring.png` in center + adds 15 points to love meter
-- Silver: Displays `silver-ring.png` in center + adds 10 points to love meter
-- Gold has "Premium" label
-- Prices: Gold [From $400], Silver [From $80]
-- User manually navigates to size section after selection
+### Material Selection (Flex Carousel)
+- Gold, Silver, Rose Gold, White Gold options
+- All materials visible at once with images
+- Hover shows name and price in center-top info box
+- Gold and White Gold have "Premium" label
+- Prices: Gold [From $400], Silver [From $80], Rose Gold [From $300], White Gold [From $700]
 
 ### Size Selection (Buttons)
 - Sizes 48-56 available as horizontal button row
@@ -25,19 +36,19 @@
 
 ## [02] The Diamond - COMPLETE
 
-### Stone Selection (Carousel)
+### Stone Selection (Flex Carousel)
 - 20 stone options (`assets/stones/s1.png` - `s20.png`)
+- All stones visible at once, wrapped into 2 rows
+- Hover shows stone name in center-top info box
 - Stone names configured in `STONE_NAMES` array in `js/config.js`
-- Navigate with arrows, click to select
 - Selected stone appears on ring in display area
-- User manually navigates to source section after selection
 
-### Source Selection (Carousel)
-- Lab: `assets/rings/lab.png`, [From $1,000], adds 5 points
-- Natural: `assets/rings/natural.png`, [From $4,000], adds 10 points
-- Natural has "Premium" label
+### Source Selection (Flex Carousel)
+- Lab and Natural options visible at once
+- Hover shows name and price in center-top info box
+- Lab: `assets/rings/lab.png`, [From $600]
+- Natural: `assets/rings/natural.png`, [From $1,800], has "Premium" label
 - **Source must be selected before carat** - carat prices depend on source
-- User manually navigates to carat section after selection
 
 ### Carat Slider (Custom)
 - Custom slider using `assets/carat-bar.svg` as track
@@ -53,23 +64,26 @@
 - User manually navigates to packaging section after selection
 - **Cart item combines stone + carat + source** (displayed as "0.50 ct · Lab" or "1.25 ct · Natural")
 
-### Packaging Selection (Carousel)
+### Packaging Selection (Flex Carousel)
 - 7 packaging options (`assets/packing/p1.png` - `p7.png`)
+- All options visible at once
+- Hover shows name and price in center-top info box
 - Packaging names and prices configured in `PACKAGING` array in `js/config.js`
-- Name and price displayed vertically stacked under each option
 - Selected packaging appears behind ring in display area
 
 ---
 
 ## [03] Location - COMPLETE
 
-### Location Selection (Buttons with Flex Wrap)
-- 15 location options displayed as button grid with flex-wrap
-- Yellow background buttons matching navbar style
+### Location Selection (Flex Carousel)
+- 15 location options displayed as image thumbnails with flex-wrap (2 rows)
+- Location images from `assets/locations/` (l1.png - l15.png)
+- Image size: 150px width × 83px height
+- Hover shows location name and price in center-top info box
 - Locations configured in `LOCATIONS` array in `js/config.js`
-- Each location has: name, image filename (l1.png - l15.png), premium status
+- Each location has: name, image filename, premium status, price
 - Selecting a location changes the page background image
-- Premium locations display a red star icon (`red-star.svg`) on top-right
+- Premium locations display a star icon
 
 ### Location Options
 
@@ -100,10 +114,10 @@
 ## [04] Setup - COMPLETE
 
 ### Sub-steps
-- Signs (Carousel) - **IMPLEMENTED**
-- Flowers (MultiSelect) - **IMPLEMENTED**
-- Balloons (Carousel) - **IMPLEMENTED**
-- Extras (MultiSelect) - **IMPLEMENTED**
+- Signs (Flex Carousel) - **IMPLEMENTED**
+- Flowers (Flex Carousel, Multiselect) - **IMPLEMENTED**
+- Balloons (Flex Carousel) - **IMPLEMENTED**
+- Extras (Flex Carousel, Multiselect) - **IMPLEMENTED**
 
 ### Step Completion Requirement
 All four sub-steps must be completed before Step 5 (Music) unlocks:
@@ -112,11 +126,12 @@ All four sub-steps must be completed before Step 5 (Music) unlocks:
 - Balloons must be selected
 - Extras must be selected
 
-### Signs Selection (Carousel)
+### Signs Selection (Flex Carousel)
 - 6 sign options (`assets/signs/si1.png` - `si6.png`)
+- All signs visible at once
+- Hover shows name and price in center-top info box
 - Signs configured in `SIGNS` array in `js/config.js` with name and price
 - Selected sign appears in display area behind packaging but above background
-- Each sign has individual CSS class for positioning adjustments (`.display-sign-1` through `.display-sign-6`)
 
 **Sign Names:**
 1. Light-Up Heart Frame - $180
@@ -126,14 +141,14 @@ All four sub-steps must be completed before Step 5 (Music) unlocks:
 5. Classic Balloon Arch - $190
 6. Romantic Proposal Silk Ribbon - $40
 
-### Flowers Selection (MultiSelect)
+### Flowers Selection (Flex Carousel, Multiselect)
 - 8 flower options (`assets/flowers/f1.gif` - `f8.gif`)
-- Flowers configured in `FLOWERS` array in `js/config.js` with name and price
+- All flowers visible at once
+- Hover shows name and price in center-top info box
 - Multi-select behavior: click to select, click again to deselect
 - Multiple flowers can be selected simultaneously
-- Displayed in flex-wrap grid layout in selection container
-- Selected flowers show white glow effect (same as carousel items)
-- Each flower has individual CSS class for positioning (`.display-flower-1` through `.display-flower-8`)
+- Selected flowers show white glow effect
+- Flowers configured in `FLOWERS` array in `js/config.js` with name and price
 
 **Flower Names:**
 1. Red Rose - $25
@@ -145,13 +160,13 @@ All four sub-steps must be completed before Step 5 (Music) unlocks:
 7. Baby's breath flower - $18
 8. Pink Lotus - $32
 
-### Balloons Selection (Carousel)
+### Balloons Selection (Flex Carousel)
 - 6 balloon options (`assets/baloons/b1.gif` - `b6.gif`)
-- Balloons configured in `BALLOONS` array in `js/config.js` with name and price
+- All balloons visible at once
+- Hover shows name and price in center-top info box
 - Single-select behavior: selecting a new balloon replaces the previous one
 - Selected balloon appears in display area
-- Each balloon has individual CSS class for positioning (`.display-balloon-1` through `.display-balloon-6`)
-- Balloons container positioned with rotation effect (-20deg)
+- Balloons configured in `BALLOONS` array in `js/config.js` with name and price
 
 **Balloon Names:**
 1. Classic Red Balloon Bouquet - $55
@@ -161,14 +176,14 @@ All four sub-steps must be completed before Step 5 (Music) unlocks:
 5. Kiss Me Balloon Set - $70
 6. Golden Celebration Balloon Bouquet - $85
 
-### Extras Selection (MultiSelect)
+### Extras Selection (Flex Carousel, Multiselect)
 - 8 extra options (`assets/extras/e1.gif` - `e8.gif`)
-- Extras configured in `EXTRAS` array in `js/config.js` with name and price
+- All extras visible at once
+- Hover shows name and price in center-top info box
 - Multi-select behavior: click to select, click again to deselect
 - Multiple extras can be selected simultaneously
-- Displayed in flex-wrap grid layout in selection container
-- Selected extras show white glow effect (same as carousel items)
-- Each extra has individual CSS class for positioning (`.display-extra-1` through `.display-extra-8`)
+- Selected extras show white glow effect
+- Extras configured in `EXTRAS` array in `js/config.js` with name and price
 
 **Extra Names:**
 1. Symbolic Dove Release - $450
@@ -192,8 +207,10 @@ All four sub-steps must be completed before Step 5 (Music) unlocks:
 
 ## [05] Music - COMPLETE
 
-### Music Selection (Music Carousel)
-- 15 song options with cover art and audio playback
+### Music Selection (Flex Carousel with Card Layout)
+- 15 song options with cover art displayed as cards
+- All cards visible at once, wrapped into 2 rows
+- Hover shows "Artist - Song" in center-top info box
 - Music configured in `MUSIC` array in `js/config.js`
 - Each song has: artist, song name, cover image (`c1.png` - `c15.png`), audio file (`s1.mp3` - `s15.mp3`)
 - Assets stored in `assets/music/` folder
@@ -201,16 +218,9 @@ All four sub-steps must be completed before Step 5 (Music) unlocks:
 ### Card Design
 - Horizontal card layout with dark background (`#282323`)
 - Cover image on left (89x89px, border-radius: 15px)
-- Song name (bold, 25px, yellow) and artist name (regular, 20px, yellow) on right
+- Song name (bold, yellow) and artist name (regular, yellow) on right
 - Card has 20px border-radius and 8px padding
-
-### Audio Playback
-- Hover on cover image shows play icon overlay
-- Click play icon to start playback (icon changes to pause)
-- Click pause icon to stop playback
-- Only one song can play at a time
-- Play/pause click uses stopPropagation to not trigger selection
-- Clicking card (outside play button) selects the song without affecting playback
+- Selected card has white glow effect
 
 **Song List:**
 1. Boey Beshalom - Ben Snof

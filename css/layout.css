@@ -40,6 +40,46 @@
 }
 
 /* ========================================
+   HOVER INFO BOX
+   Shows item name/price on hover at center top
+   ======================================== */
+
+.hover-info-box {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 5px / 1160 * 100 = 0.43cqh */
+    gap: 0.43cqh;
+    background: #F2E772;
+    /* 2px / 2100 * 100 = 0.095cqw */
+    padding: 0.17cqh 0.48cqw;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.hover-info-box.visible {
+    opacity: 1;
+}
+
+.hover-info-label,
+.hover-info-price {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 400;
+    /* 25px / 2100 * 100 = 1.19cqw */
+    font-size: 1.19cqw;
+    line-height: 100%;
+    color: #282323;
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* ========================================
    LEFT SIDE: MENU WRAPPER WITH PROGRESS BAR
    ======================================== */
 

@@ -277,11 +277,27 @@
             
             <!-- CENTER: Main Content Area -->
             <div class="configurator-center">
+                <!-- Hover Info Box (shows item name/price on hover) -->
+                <div class="hover-info-box" id="hover-info-box">
+                    <span class="hover-info-label" id="hover-info-label"></span>
+                    <span class="hover-info-price" id="hover-info-price"></span>
+                </div>
+                
                 <!-- Display Area -->
                 <section class="configurator-display" id="configurator-display">
                     <div class="display-container">
                     </div>
                 </section>
+                
+                <!-- Navigation Buttons -->
+                <div class="nav-buttons" id="nav-buttons">
+                    <button class="nav-btn nav-btn-prev" id="nav-btn-prev" disabled>
+                        <span class="nav-btn-label">Previous</span>
+                    </button>
+                    <button class="nav-btn nav-btn-next" id="nav-btn-next" disabled>
+                        <span class="nav-btn-label">Next</span>
+                    </button>
+                </div>
                 
                 <!-- Selection Container (step element, dynamically populated by JS) -->
                 <div class="selection-container" id="selection-container"></div>
@@ -387,6 +403,7 @@
     <script src="js/cart-ui.js"></script>
     <script src="js/checkout.js"></script>
     <script src="js/renderers.js"></script>
+    <script src="js/navigation.js"></script>
     <script src="configurator.js"></script>
 </body>
 </html>
