@@ -356,3 +356,4 @@ function updateLocationBackground(locationName) {
         }, 100); // Match the CSS transition duration
     }
 }
+

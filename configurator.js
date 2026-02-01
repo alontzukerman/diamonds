@@ -343,6 +343,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show the selector for the expanded section
         if (expandedSection) {
             const sectionName = expandedSection.getAttribute('data-section');
+            state.currentSection = sectionName;
             showSelector(sectionName, SELECTORS_CONFIG);
         }
         
@@ -407,6 +408,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // If it wasn't expanded, expand it now
         if (!wasExpanded) {
             section.classList.add('expanded');
+            state.currentSection = sectionName;
             showSelector(sectionName, SELECTORS_CONFIG);
         } else {
             hideAllSelectors();

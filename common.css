@@ -465,6 +465,723 @@ body {
 }
 
 /* ========================================
+   GALLERY OVERLAY
+   ======================================== */
+
+.gallery-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #FFD2F6;
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    transform: scale(0);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.gallery-overlay.active {
+    display: flex;
+    animation: gallery-pop-in 0.2s ease-out forwards;
+}
+
+.gallery-overlay.closing {
+    animation: gallery-pop-out 0.15s ease-in forwards;
+}
+
+@keyframes gallery-pop-in {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes gallery-pop-out {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+.gallery-close-btn {
+    position: fixed;
+    /* 30px / 1160 * 100 = 2.59vh, 40px / 2100 * 100 = 1.9vw */
+    top: 2.59vh;
+    right: 1.9vw;
+    background: none;
+    border: none;
+    z-index: 1001;
+}
+
+.gallery-close-btn:hover .gallery-close-icon {
+    transform: scale(1.1);
+    transition: transform 0.1s ease;
+}
+
+.gallery-close-icon {
+    /* 150px / 2100 * 100 = 7.14vw */
+    width: 7.14vw;
+    height: auto;
+}
+
+/* Gallery List Container */
+.gallery-grid {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+}
+
+/* Individual Gallery Card - uses container queries for internal scaling */
+.gallery-card {
+    /* 250px / 1160 * 100 = 21.55vh */
+    height: 21.55vh;
+    aspect-ratio: 2100 / 1160;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    container-type: size;
+    container-name: card;
+}
+
+/* Music card component on gallery card */
+.gallery-music-card {
+    /* 305px / 2100 * 100 = 14.52vw */
+    width: 14.52vw;
+    /* 65px / 1160 * 100 = 5.6vh */
+    height: 5.6vh;
+    position: absolute;
+    /* 20px / 1160 * 100 = 1.72vh */
+    bottom: -1.72vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* 10px / 2100 * 100 = 0.48vw */
+    gap: 0.48vw;
+    background: #282323;
+    /* 8px / 2100 * 100 = 0.38vw */
+    border-radius: 0.38vw;
+    /* 4px / 2100 * 100 = 0.19vw */
+    padding: 0.19vw;
+}
+
+.gallery-music-card-image {
+    /* 57px / 2100 * 100 = 2.71vw */
+    width: 2.71vw;
+    height: 2.71vw;
+    /* 6px / 2100 * 100 = 0.29vw */
+    border-radius: 0.29vw;
+    overflow: hidden;
+    background: rgba(242, 231, 114, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.gallery-music-card-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-music-card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* 4px / 1160 * 100 = 0.34vh */
+    gap: 0.34vh;
+    background: transparent;
+    padding: 0;
+    text-align: left;
+}
+
+.gallery-music-card-song {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 700;
+    /* 20px / 2100 * 100 = 0.95vw */
+    font-size: 0.95vw;
+    line-height: 100%;
+    color: #F2E772;
+    white-space: nowrap;
+}
+
+.gallery-music-card-artist {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 400;
+    font-size: 0.95vw;
+    line-height: 100%;
+    color: #F2E772;
+    white-space: nowrap;
+}
+
+/* Display Area within Card */
+.gallery-display {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    transform: scale(1.2);
+}
+
+/* Ring Container (scaled down version of configurator display) */
+.gallery-ring-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1.1) translateY(5.6cqh);
+    transform-origin: center center;
+}
+
+/* Core container for ring, stone, packaging */
+.gallery-core {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* Ring image */
+.gallery-ring {
+    /* 500px / 1160 * 100 = 43.1cqh */
+    height: 43.1cqh;
+    object-fit: contain;
+    position: absolute;
+    z-index: 1;
+}
+
+/* Stone on ring */
+.gallery-stone {
+    position: absolute;
+    top: 3.36cqh;
+    left: -0.48cqw;
+    transform: translate(-50%, -50%);
+    width: 7.14cqw;
+    height: 12.93cqh;
+    object-fit: contain;
+    z-index: 2;
+}
+
+/* Packaging behind ring */
+.gallery-packaging {
+    position: absolute;
+    object-fit: contain;
+    z-index: 0;
+    height: 55.17cqh;
+    transform: translateX(-50%);
+}
+
+/* Packaging position variants */
+.gallery-packaging-1 { left: -0.48cqw; bottom: -18.97cqh; }
+.gallery-packaging-2 { left: -0.71cqw; bottom: -15.95cqh; }
+.gallery-packaging-3 { bottom: -21.98cqh; left: -0.48cqw; }
+.gallery-packaging-4 { bottom: -20.69cqh; left: -0.24cqw; }
+.gallery-packaging-5 { bottom: -20.26cqh; left: -0.38cqw; }
+.gallery-packaging-6 { bottom: -20.69cqh; left: -0.48cqw; }
+.gallery-packaging-7 { bottom: -22.41cqh; left: -0.33cqw; }
+
+/* Sign behind packaging */
+.gallery-sign {
+    position: absolute;
+    object-fit: contain;
+    z-index: 0;
+    height: 73.28cqh;
+    transform: translateX(-50%);
+}
+
+/* Sign position variants */
+.gallery-sign-1 { left: 50%; bottom: -31.03cqh; }
+.gallery-sign-2 { left: -0.95cqw; bottom: -28.88cqh; }
+.gallery-sign-3 { left: 50%; bottom: -27.16cqh; }
+.gallery-sign-4 { height: 94.83cqh; left: -2.86cqw; bottom: -37.07cqh; }
+.gallery-sign-5 { left: 50%; bottom: -29.74cqh; }
+.gallery-sign-6 { left: 50%; bottom: -28.45cqh; }
+
+/* Flowers container */
+.gallery-flowers-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Individual flower */
+.gallery-flower {
+    position: absolute;
+    object-fit: contain;
+}
+
+/* Flower position variants */
+.gallery-flower-1 { left: -19.05cqw; bottom: 21.55cqh; height: 17.24cqh; }
+.gallery-flower-2 { left: 7.14cqw; bottom: 24.14cqh; height: 12.93cqh; }
+.gallery-flower-3 { left: 12.38cqw; bottom: 4.31cqh; height: 15.52cqh; }
+.gallery-flower-4 { left: 10.48cqw; bottom: -9.48cqh; height: 12.93cqh; }
+.gallery-flower-5 { left: -5.24cqw; bottom: 27.59cqh; height: 16.38cqh; }
+.gallery-flower-6 { rotate: 330deg; left: 2.38cqw; top: 12.93cqh; height: 15.52cqh; }
+.gallery-flower-7 { left: -3.81cqw; top: 12.93cqh; height: 14.66cqh; }
+.gallery-flower-8 { right: 13.33cqw; bottom: 7.76cqh; height: 14.66cqh; }
+
+/* Balloons container */
+.gallery-balloons-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: -27.62cqw;
+    top: -4.31cqh;
+    z-index: 2;
+    rotate: -20deg;
+    pointer-events: none;
+}
+
+/* Individual balloon */
+.gallery-balloon {
+    position: absolute;
+    object-fit: contain;
+    height: 37.93cqh;
+}
+
+/* Balloon position variants */
+.gallery-balloon-1 { height: 37.93cqh; }
+.gallery-balloon-2 { /* default position */ height: 37.93cqh; }
+.gallery-balloon-3 { left: -7.86cqw; }
+.gallery-balloon-4 { left: -6.19cqw; rotate: 20deg; }
+.gallery-balloon-5 { left: -2.38cqw; height: 43.1cqh; }
+.gallery-balloon-6 { left: -2.38cqw; top: -1.72cqh; }
+
+/* Extras container */
+.gallery-extras-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Individual extra */
+.gallery-extra {
+    position: absolute;
+    object-fit: contain;
+    z-index: 4;
+}
+
+/* Extra position variants */
+.gallery-extra-1 { right: 14.76cqw; bottom: 9.48cqh; height: 38.79cqh; }
+.gallery-extra-2 { left: 15.71cqw; bottom: 11.21cqh; height: 34.48cqh; }
+.gallery-extra-3 { right: 19.05cqw; bottom: 1.72cqh; height: 21.55cqh; rotate: 340deg; }
+.gallery-extra-4 { left: 5.71cqw; bottom: 4.31cqh; height: 23.28cqh; rotate: 15deg; }
+.gallery-extra-5 { left: 7.62cqw; top: 2.59cqh; height: 17.24cqh; rotate: 25deg; z-index: 11; }
+.gallery-extra-6 { right: 4.76cqw; top: 5.17cqh; height: 17.24cqh; z-index: 11; }
+.gallery-extra-7 { left: 16.67cqw; bottom: -7.76cqh; height: 25.86cqh; }
+.gallery-extra-8 { right: -12.86cqw; top: -1.72cqh; height: 34.48cqh; z-index: -1; }
+
+/* Gallery Item Wrapper (card + info side by side) */
+.gallery-item {
+    display: flex;
+    flex-direction: row;
+    gap: 1.9vw;
+    width: 100%;
+    padding: 3.45vh 3.57vw 3.45vh 1.9vw;
+    border-bottom: 0.095vw solid rgba(255, 0, 0, 0.3);
+}
+
+/* Card takes left side */
+.gallery-item .gallery-card {
+    box-shadow: none;
+}
+
+/* Card info on the right side */
+.gallery-card-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.gallery-card-title {
+    color: #FF0000;
+}
+
+.gallery-card-title-the {
+    font-family: 'Narkiss Block TRIAL', sans-serif;
+    font-weight: 400;
+    font-size: 5.71vw;
+    line-height: 1;
+    color: #FF0000;
+}
+
+.gallery-card-title-name {
+    font-family: 'sloop-script-three', cursive;
+    font-weight: 700;
+    font-size: 6.19vw;
+    line-height: 1;
+    color: #FF0000;
+    margin-left: -0.48vw;
+}
+
+.gallery-card-premium-icon {
+    width: 6.67cqw;
+    height: 5.0cqh;
+    margin-left: 3.33vw;
+    transform: translateY(-0.26vh);
+}
+
+/* Bottom row with description and price */
+.gallery-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.gallery-card-description {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 400;
+    font-size: 0.95vw;
+    color: #FF0000;
+    line-height: 115%;
+    max-width: 65%;
+}
+
+.gallery-card-bottom-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* 10px / 1160 * 100 = 0.86vh */
+    gap: 0.86vh;
+}
+
+/* Gallery Share Button (matches deadline share button) */
+.gallery-share-btn {
+    font-family: 'sloop-script-two', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    /* 32px / 2100 * 100 = 1.52vw */
+    font-size: 1.52vw;
+    line-height: 100%;
+    letter-spacing: 0.04em;
+    color: #FF0000;
+    background: transparent;
+    /* 2px / 2100 * 100 = 0.095vw */
+    border: 0.095vw solid #FF0000;
+    /* 22.5px / 2100 * 100 = 1.07vw */
+    border-radius: 1.07vw;
+    padding: 0.3vw 0.8vw 0.15vw 0.8vw;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    transform: translateX(10px);
+}
+
+@keyframes gallery-share-bounce {
+    0%, 100% { transform: translateY(0) translateX(10px); }
+    50% { transform: translateY(-0.3vw) translateX(10px); }
+}
+
+.gallery-share-btn:hover {
+    animation: gallery-share-bounce 0.5s ease;
+}
+
+.gallery-card-price {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 700;
+    font-size: 1.52vw;
+    color: #FF0000;
+    white-space: nowrap;
+    line-height: 100%;
+}
+
+/* ========================================
+   DEADLINE POPOVER
+   ======================================== */
+
+.deadline-popover-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* Higher than gallery overlay (1000) and about overlay (1000) */
+    z-index: 1100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deadline-popover-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.deadline-popover {
+    background: #FFD2F6;
+    padding: 2.59vh 1.9vw;
+    /* 440px / 2100 * 100 = 20.95vw */
+    width: 20.95vw;
+    max-width: 90vw;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.deadline-popover-overlay.open .deadline-popover {
+    transform: scale(1);
+}
+
+.deadline-popover-title {
+    font-family: 'Narkiss Block TRIAL', sans-serif;
+    font-weight: 400;
+    /* 20px / 2100 * 100 = 0.95vw */
+    font-size: 0.95vw;
+    line-height: 100%;
+    color: #FF0000;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-underline-offset: 10%;
+    margin: 0 0 0.5vw 0;
+    align-self: flex-start;
+}
+
+.deadline-popover-input {
+    font-family: 'Narkiss Yair Variable', 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 700;
+    /* 25px / 2100 * 100 = 1.19vw */
+    font-size: 1.19vw;
+    line-height: 100%;
+    color: #FF0000;
+    background: transparent;
+    /* 2px / 2100 * 100 = 0.095vw */
+    border: 0.095vw solid #FF0000;
+    padding: 0.6vw 0.9vw;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0.7vw;
+    cursor: default;
+    /* Keep full opacity when disabled */
+    opacity: 1;
+    -webkit-text-fill-color: #FF0000;
+}
+
+.deadline-popover-input::-webkit-calendar-picker-indicator {
+    filter: invert(16%) sepia(100%) saturate(7460%) hue-rotate(0deg) brightness(100%) contrast(112%);
+    cursor: default;
+    /* Keep visible when disabled */
+    opacity: 1;
+}
+
+/* Calendar Container */
+.deadline-popover-calendar {
+    width: 100%;
+    /* 2px / 2100 * 100 = 0.095vw */
+    border: 0.095vw solid #FF0000;
+    padding: 0.7vw;
+    box-sizing: border-box;
+    margin-bottom: 0.9vw;
+    /* Calendar uses Narkiss Block TRIAL, 32px font */
+    font-family: 'Narkiss Block TRIAL', sans-serif;
+    font-weight: 400;
+    /* 32px / 2100 * 100 = 1.52vw */
+    font-size: 1.52vw;
+    line-height: 100%;
+    color: #FF0000;
+}
+
+/* Calendar Header */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5vw;
+}
+
+.calendar-month-year {
+    font-family: 'Narkiss Block TRIAL', sans-serif;
+    font-weight: 400;
+    /* 32px / 2100 * 100 = 1.52vw */
+    font-size: 1.52vw;
+    line-height: 100%;
+    color: #FF0000;
+}
+
+.calendar-nav {
+    background: none;
+    border: none;
+    font-size: 1.52vw;
+    color: #FF0000;
+    cursor: pointer;
+    padding: 0.2vw 0.4vw;
+    transition: transform 0.2s ease;
+}
+
+.calendar-nav:hover {
+    transform: scale(1.1);
+}
+
+/* Calendar Weekdays */
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    margin-bottom: 0.3vw;
+}
+
+.calendar-weekdays span {
+    font-family: 'Narkiss Block TRIAL', sans-serif;
+    font-weight: 700;
+    /* Smaller than main calendar text for weekday labels */
+    font-size: 1.1vw;
+    line-height: 100%;
+    color: #FF0000;
+    padding: 0.2vw 0;
+}
+
+/* Calendar Days */
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.1vw;
+}
+
+.calendar-day {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 400;
+    font-size: 0.9vw;
+    line-height: 100%;
+    color: #FF0000;
+    text-align: center;
+    padding: 0.6vw 0;
+    cursor: pointer;
+    border-radius: 0.24vw;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.calendar-day:not(.empty):not(.disabled):hover {
+    background: rgba(255, 0, 0, 0.1);
+}
+
+.calendar-day.selected {
+    /* Use inset box-shadow instead of border to prevent row jumping */
+    box-shadow: inset 0 0 0 0.095vw #FF0000;
+    border-radius: 50%;
+}
+
+.calendar-day.disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.calendar-day.empty {
+    cursor: default;
+}
+
+/* Share Button */
+.deadline-popover-share {
+    font-family: 'sloop-script-two', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    /* 32px / 2100 * 100 = 1.52vw */
+    font-size: 1.52vw;
+    line-height: 100%;
+    letter-spacing: 0.04em;
+    color: #FF0000;
+    background: transparent;
+    /* 2px / 2100 * 100 = 0.095vw */
+    border: 0.095vw solid #FF0000;
+    /* 22.5px / 2100 * 100 = 1.07vw */
+    border-radius: 1.07vw;
+    padding: 0.3vw 0.8vw 0.15vw 0.8vw;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+@keyframes deadline-share-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-0.3vw); }
+}
+
+.deadline-popover-share:hover {
+    animation: deadline-share-bounce 0.5s ease;
+}
+
+/* Share Container */
+.deadline-share-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.5vw;
+}
+
+/* Share Link Box (hidden by default) */
+.deadline-share-link-box {
+    display: none;
+    width: 100%;
+    gap: 0.48vw;
+    align-items: center;
+}
+
+.deadline-share-link {
+    flex: 1;
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-size: 0.67vw;
+    color: #FF0000;
+    background: white;
+    border: 0.048vw solid #FF0000;
+    padding: 0.5vw 0.71vw;
+    outline: none;
+    min-width: 0;
+}
+
+.deadline-share-copy {
+    font-family: 'sloop-script-two', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.52vw;
+    line-height: 100%;
+    letter-spacing: 0.04em;
+    color: #FF0000;
+    background: transparent;
+    border: 0.095vw solid #FF0000;
+    border-radius: 1.07vw;
+    padding: 0.3vw 0.8vw 0.15vw 0.8vw;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+@keyframes deadline-copy-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-0.3vw); }
+}
+
+.deadline-share-copy:hover {
+    animation: deadline-copy-bounce 0.5s ease;
+}
+
+/* ========================================
    HIDE SYSTEM CURSOR GLOBALLY
    This must be at the end to override all other rules
    ======================================== */

@@ -316,28 +316,28 @@ function createGalleryCard(pkg) {
     songCard.appendChild(songInfo);
     card.appendChild(songCard);
     
-    // Create audio element for hover playback
-    const audio = document.createElement('audio');
-    audio.src = ASSETS.music.audio(pkg.song.audio);
-    audio.preload = 'none';
-    audio.loop = true;
-    card.appendChild(audio);
-    
-    // Play on hover, stop on leave
-    card.addEventListener('mouseenter', () => {
-        audio.currentTime = 0;
-        audio.play().catch(() => {}); // Catch autoplay restrictions
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        audio.pause();
-        audio.currentTime = 0;
-    });
-    
     // Create wrapper for card + info
     const item = document.createElement('div');
     item.className = 'gallery-item';
     item.appendChild(card);
+    
+    // Create audio element for hover playback (attached to item, not card)
+    const audio = document.createElement('audio');
+    audio.src = ASSETS.music.audio(pkg.song.audio);
+    audio.preload = 'none';
+    audio.loop = true;
+    item.appendChild(audio);
+    
+    // Play on hover over entire row, stop on leave
+    item.addEventListener('mouseenter', () => {
+        audio.currentTime = 0;
+        audio.play().catch(() => {}); // Catch autoplay restrictions
+    });
+    
+    item.addEventListener('mouseleave', () => {
+        audio.pause();
+        audio.currentTime = 0;
+    });
     
     // Info on the right side of the card
     const info = document.createElement('div');
@@ -428,12 +428,28 @@ function createGalleryCard(pkg) {
     description.textContent = `including: ${features.join(', ')}.`;
     bottom.appendChild(description);
     
+    // Right side container for share button and price
+    const bottomRight = document.createElement('div');
+    bottomRight.className = 'gallery-card-bottom-right';
+    
+    // Share button
+    const shareBtn = document.createElement('button');
+    shareBtn.className = 'gallery-share-btn';
+    shareBtn.textContent = 'Share';
+    shareBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent event bubbling
+        handleGalleryShare(pkg);
+    });
+    bottomRight.appendChild(shareBtn);
+    
     // Price
     const price = document.createElement('div');
     price.className = 'gallery-card-price';
     const totalPrice = calculatePackagePrice(pkg);
     price.textContent = `$${totalPrice.toLocaleString()}`;
-    bottom.appendChild(price);
+    bottomRight.appendChild(price);
+    
+    bottom.appendChild(bottomRight);
     
     info.appendChild(bottom);
     item.appendChild(info);
@@ -503,8 +519,152 @@ function calculatePackagePrice(pkg) {
     return total;
 }
 
-// Initialize gallery
+// Track if gallery has been initialized
+let galleryInitialized = false;
+
+/**
+ * Handle gallery share button click
+ * Adds package items to cart and opens deadline popover above gallery
+ * @param {Object} pkg - The package data to share
+ */
+function handleGalleryShare(pkg) {
+    // Populate cart with package items (if Cart is available)
+    if (typeof Cart !== 'undefined') {
+        // Clear existing cart
+        Cart.clear();
+        
+        // Add material
+        const materialItem = Cart.createItem(
+            `material-${pkg.material}`,
+            'material',
+            pkg.material.replace('-', ' ').replace(/\b\w/g, c => c.toUpperCase()),
+            MATERIAL_PRICES[pkg.material] || 0,
+            ASSETS.rings[pkg.material]
+        );
+        Cart.addItem(materialItem);
+        
+        // Add stone with carat and source
+        const stoneName = STONE_NAMES[pkg.stone - 1] || `Stone ${pkg.stone}`;
+        const source = pkg.source || 'lab';
+        const caratPrice = calculateCaratPrice(pkg.carat, source);
+        const stoneItem = {
+            id: `stone-${pkg.stone}`,
+            category: 'stone',
+            name: stoneName,
+            price: caratPrice,
+            image: ASSETS.stones(pkg.stone),
+            carat: pkg.carat,
+            source: source
+        };
+        Cart.addItem(stoneItem);
+        
+        // Add packaging
+        const packagingData = PACKAGING[pkg.packaging - 1];
+        if (packagingData) {
+            const packagingItem = Cart.createItem(
+                `packaging-${pkg.packaging}`,
+                'packaging',
+                packagingData.name,
+                packagingData.price,
+                ASSETS.packing(pkg.packaging)
+            );
+            Cart.addItem(packagingItem);
+        }
+        
+        // Add location
+        const locationItem = {
+            id: `location-${pkg.location.name}`,
+            category: 'location',
+            name: pkg.location.name,
+            price: pkg.location.price || 0,
+            image: `assets/locations/${pkg.location.image}`,
+            premium: pkg.location.premium
+        };
+        Cart.addItem(locationItem);
+        
+        // Add sign
+        const signData = SIGNS[pkg.sign - 1];
+        if (signData) {
+            const signItem = Cart.createItem(
+                `signs-${pkg.sign}`,
+                'signs',
+                signData.name,
+                signData.price,
+                ASSETS.signs(pkg.sign)
+            );
+            Cart.addItem(signItem);
+        }
+        
+        // Add flowers
+        pkg.flowers.forEach(flowerId => {
+            const flowerData = FLOWERS[flowerId - 1];
+            if (flowerData) {
+                const flowerItem = Cart.createItem(
+                    `flowers-${flowerId}`,
+                    'flowers',
+                    flowerData.name,
+                    flowerData.price,
+                    ASSETS.flowers(flowerId)
+                );
+                Cart.addItem(flowerItem);
+            }
+        });
+        
+        // Add balloon
+        if (pkg.balloon) {
+            const balloonData = BALLOONS[pkg.balloon - 1];
+            if (balloonData) {
+                const balloonItem = Cart.createItem(
+                    `balloons-${pkg.balloon}`,
+                    'balloons',
+                    balloonData.name,
+                    balloonData.price,
+                    ASSETS.balloons(pkg.balloon)
+                );
+                Cart.addItem(balloonItem);
+            }
+        }
+        
+        // Add extras
+        pkg.extras.forEach(extraId => {
+            const extraData = EXTRAS[extraId - 1];
+            if (extraData) {
+                const extraItem = Cart.createItem(
+                    `extras-${extraId}`,
+                    'extras',
+                    extraData.name,
+                    extraData.price,
+                    ASSETS.extras(extraId)
+                );
+                Cart.addItem(extraItem);
+            }
+        });
+        
+        // Add music (free)
+        const musicIndex = MUSIC.indexOf(pkg.song);
+        if (musicIndex !== -1) {
+            const musicItem = Cart.createItem(
+                `music-${musicIndex + 1}`,
+                'music',
+                `${pkg.song.artist} - ${pkg.song.song}`,
+                0,
+                ASSETS.music.image(pkg.song.image)
+            );
+            Cart.addItem(musicItem);
+        }
+    }
+    
+    // Open the deadline popover above the gallery overlay
+    if (typeof Deadline !== 'undefined' && typeof Deadline.openPopover === 'function') {
+        Deadline.openPopover();
+    }
+}
+
+// Initialize gallery (called when overlay is opened)
 function initGallery() {
+    // Only initialize once
+    if (galleryInitialized) return;
+    
     const grid = document.getElementById('gallery-grid');
     if (!grid) return;
     
@@ -514,63 +674,5 @@ function initGallery() {
         grid.appendChild(card);
     });
     
-    // Set up close button to return to the previous page
-    setupCloseButton();
+    galleryInitialized = true;
 }
-
-// Set up close button to navigate back to the referring page
-function setupCloseButton() {
-    const closeBtn = document.querySelector('.gallery-close-btn');
-    if (!closeBtn) return;
-    
-    // Check if we have a stored referrer from sessionStorage
-    const storedReferrer = sessionStorage.getItem('galleryReferrer');
-    
-    // Also check document.referrer as fallback
-    const docReferrer = document.referrer;
-    
-    // Determine the return URL
-    let returnUrl = 'index.html'; // Default fallback
-    
-    if (storedReferrer) {
-        // Use stored referrer (set when clicking gallery link)
-        returnUrl = storedReferrer;
-    } else if (docReferrer) {
-        // Parse the document referrer to get just the page
-        try {
-            const url = new URL(docReferrer);
-            const pathname = url.pathname;
-            
-            // Check if it's from our site (configurator or index)
-            if (pathname.includes('configurator.html')) {
-                returnUrl = 'configurator.html';
-            } else if (pathname.includes('index.html') || pathname.endsWith('/')) {
-                returnUrl = 'index.html';
-            }
-        } catch (e) {
-            // Invalid URL, use default
-        }
-    }
-    
-    // Update the close button href
-    closeBtn.href = returnUrl;
-    
-    // Add click handler to use history.back() for better state preservation
-    closeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Clear the stored referrer
-        sessionStorage.removeItem('galleryReferrer');
-        
-        // Use history.back() to preserve the previous page's state
-        if (window.history.length > 1 && docReferrer) {
-            window.history.back();
-        } else {
-            // Fallback to direct navigation
-            window.location.href = returnUrl;
-        }
-    });
-}
-
-// Initialize on DOM ready
-document.addEventListener('DOMContentLoaded', initGallery);

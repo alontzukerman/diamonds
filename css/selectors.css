@@ -446,11 +446,9 @@
 }
 
 #flowers-flex-carousel {
-    transform: translateY(15px);
 }
 
 #balloons-flex-carousel {
-    transform: translateY(15px);
 }
 
 #balloons-flex-carousel .flex-carousel-image {
@@ -459,7 +457,6 @@
 }
 
 #extras-flex-carousel {
-    transform: translateY(15px);
 }
 
 /* Stone-specific flex carousel styles */
@@ -969,7 +966,7 @@
     /* 200px / 2100 * 100 = 9.52cqw */
     border-radius: 9.52cqw;
     flex-shrink: 0;
-    transform: translateX(15px);
+    transform: translateX(3px);
 }
 
 .nav-btn:hover:not(:disabled) {

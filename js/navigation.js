@@ -162,6 +162,9 @@ function navigateToSection(stepNumber, sectionName) {
         sectionElement.classList.add('expanded');
     }
     
+    // Update current section in state
+    state.currentSection = sectionName;
+    
     // Show the selector for this section
     // Note: showSelector is defined in renderers.js and needs SELECTORS_CONFIG
     // This will be called from configurator.js context
