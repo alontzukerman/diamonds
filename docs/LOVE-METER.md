@@ -28,13 +28,13 @@ const LOVE_METER_CONFIG = {
     minScale: 1.0,      // Heart scale at 0%
     maxScale: 1.4,      // Heart scale at 100%
     
-    // Checkpoints with SVG images
+    // Checkpoints with SVG images (positions in cqh units)
     checkpoints: [
-        { offset: 110, bottom: 250, image: 'assets/texts/pop-t1.svg' },
-        { offset: 265, bottom: 405, image: 'assets/texts/pop-t2.svg' },
-        { offset: 420, bottom: 560, image: 'assets/texts/pop-t3.svg' },
-        { offset: 575, bottom: 715, image: 'assets/texts/pop-t4.svg' },
-        { offset: 725, bottom: 865, image: 'assets/texts/pop-t5.svg' }
+        { offset: 7.76, bottom: 19.83, image: 'assets/texts/pop-t1.svg' },   // 230px
+        { offset: 19.83, bottom: 31.90, image: 'assets/texts/pop-t2.svg' },  // 370px
+        { offset: 31.90, bottom: 43.97, image: 'assets/texts/pop-t3.svg' },  // 510px
+        { offset: 43.96, bottom: 56.03, image: 'assets/texts/pop-t4.svg' },  // 650px
+        { offset: 56.03, bottom: 68.10, image: 'assets/texts/pop-t5.svg' }   // 790px
     ]
 };
 ```
@@ -42,9 +42,9 @@ const LOVE_METER_CONFIG = {
 ### Position Constants
 
 ```javascript
-const LOVE_METER_MAX_HEIGHT = 770;     // Travel distance
-const LOVE_METER_BASE_POSITION = 100;  // Starting position (bottom)
-// Max position = 100 + 770 = 870px
+const LOVE_METER_MAX_HEIGHT = 56.90;      // Travel distance in cqh (660px range)
+const LOVE_METER_BASE_POSITION = 12.07;   // Starting position in cqh (140px)
+// Max position = 12.07 + 56.90 = 68.97cqh (800px)
 ```
 
 ---
@@ -53,8 +53,9 @@ const LOVE_METER_BASE_POSITION = 100;  // Starting position (bottom)
 
 - Heart icon moves vertically based on cart total
 - Heart scales from 1.0x to 1.4x as price increases
-- Position formula: `(loveLevel / 100) * 770 + 100` pixels from bottom
+- Position formula: `(loveLevel / 100) * 56.90 + 12.07` cqh from bottom
 - Smooth transitions (0.5s ease)
+- Next button positioned below the love meter
 
 ---
 

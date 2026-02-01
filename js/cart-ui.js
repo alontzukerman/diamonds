@@ -104,14 +104,6 @@ function renderCartItems(items, total) {
         name.textContent = item.name;
         info.appendChild(name);
         
-        // Add size info for ring items
-        if (item.size) {
-            const sizeInfo = document.createElement('span');
-            sizeInfo.className = 'cart-item-subtitle';
-            sizeInfo.textContent = `Size: ${item.size}`;
-            info.appendChild(sizeInfo);
-        }
-        
         // Add carat and source info for stone items (displayed side by side)
         if (item.carat || item.source) {
             const stoneInfo = document.createElement('span');

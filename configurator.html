@@ -103,16 +103,6 @@
                                     <p class="menu-description">Gold is more valuable than silver due to its greater rarity, resistance to corrosion, and unique physical properties.<br>Its wide industrial use, and status as a financial safe haven consistently keep its value higher.</p>
                                 </div>
                             </div>
-                            <div class="menu-section-divider"></div>
-                            <!-- Size Section -->
-                            <div class="menu-section" data-section="size">
-                                <div class="menu-section-header">
-                                    <span class="menu-section-title clickable">Ring Size</span>
-                                </div>
-                                <div class="menu-section-content">
-                                    <p class="menu-description">If you're unsure, size 51 is the most common for women's engagement rings.</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     
@@ -277,26 +267,16 @@
             
             <!-- CENTER: Main Content Area -->
             <div class="configurator-center">
-                <!-- Hover Info Box (shows item name/price on hover) -->
-                <div class="hover-info-box" id="hover-info-box">
-                    <span class="hover-info-label" id="hover-info-label"></span>
-                    <span class="hover-info-price" id="hover-info-price"></span>
-                </div>
-                
                 <!-- Display Area -->
                 <section class="configurator-display" id="configurator-display">
                     <div class="display-container">
                     </div>
                 </section>
                 
-                <!-- Navigation Buttons -->
-                <div class="nav-buttons" id="nav-buttons">
-                    <button class="nav-btn nav-btn-prev" id="nav-btn-prev" disabled>
-                        <span class="nav-btn-label">Previous</span>
-                    </button>
-                    <button class="nav-btn nav-btn-next" id="nav-btn-next" disabled>
-                        <span class="nav-btn-label">Next</span>
-                    </button>
+                <!-- Item Info Box (shows current selection name/price on hover) -->
+                <div class="item-info-box" id="item-info-box">
+                    <span class="item-info-label" id="item-info-label"></span>
+                    <span class="item-info-price" id="item-info-price"></span>
                 </div>
                 
                 <!-- Selection Container (step element, dynamically populated by JS) -->
@@ -311,6 +291,10 @@
                             <img src="assets/icons/heart.svg" alt="Love level" class="love-meter-heart-icon">
                         </div>
                 </div>
+                <!-- Next Button (below love meter) -->
+                <button class="nav-btn nav-btn-next" id="nav-btn-next" disabled>
+                    <span class="nav-btn-label">Next</span>
+                </button>
             </aside>
         </div>
         </div> <!-- close .page-scene -->

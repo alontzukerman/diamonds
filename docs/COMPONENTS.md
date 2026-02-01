@@ -70,7 +70,7 @@
 - Uses `requestAnimationFrame` for smooth 350ms animation sync
 
 ### Step Completion Requirements
-- Step 1 (The Ring): Material AND Ring Size must be selected
+- Step 1 (The Ring): Material must be selected
 - Step 2 (The Diamond): Stone, Source, AND Packaging must be selected
 - Step 3 (Location): Location must be selected
 - Step 4 (Setup): Signs, Flowers, Balloons, AND Extras must be selected
@@ -108,7 +108,6 @@
 | Type | Use Case | Features |
 |------|----------|----------|
 | `carousel` | Single item view with navigation | Left/right arrows, click to select |
-| `buttons` | Simple options in a row | Horizontal layout, instant select |
 | `slider` | Range values | Min/max labels, floating label, confirm button |
 | `grid` | Multiple items visible | Wrap layout, click to select |
 | `multiselect` | Multiple selections (e.g., flowers) | Flex-wrap grid, toggle select, multiple items allowed |

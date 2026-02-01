@@ -30,7 +30,7 @@
 
 ## Phase 1: Complete Step Content
 
-- [x] The Ring - Material and Size selection
+- [x] The Ring - Material selection
 - [x] The Diamond - Stone, Carat, Source, Packaging selection
 - [x] Add location options with 15 locations and background images
 - [x] Add setup signs selection (6 sign options)

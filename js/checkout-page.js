@@ -96,14 +96,6 @@
             name.className = 'receipt-item-name';
             name.textContent = item.name;
             
-            // Add size as inline sub-text (e.g., "[Size 51]")
-            if (item.size) {
-                const sizeSpan = document.createElement('span');
-                sizeSpan.className = 'receipt-item-size';
-                sizeSpan.textContent = ` [Size ${item.size}]`;
-                name.appendChild(sizeSpan);
-            }
-            
             // Add source and carat as inline sub-text (e.g., "[Natural, 2.10 ct]")
             if (item.source || item.carat) {
                 const stoneSpan = document.createElement('span');

@@ -10,8 +10,7 @@ const state = {
     unlockedSteps: [1], // Track which steps are unlocked (start with step 1)
     selections: {
         ring: {
-            material: null,
-            size: null
+            material: null
         },
         diamond: {
             stone: null,
@@ -38,7 +37,7 @@ const state = {
 // ========================================
 
 const STEP_REQUIREMENTS = {
-    1: () => state.selections.ring.material !== null && state.selections.ring.size !== null,
+    1: () => state.selections.ring.material !== null,
     2: () => state.selections.diamond.stone !== null && 
              state.selections.diamond.source !== null && 
              state.selections.diamond.packaging !== null,
@@ -58,7 +57,6 @@ const STEP_REQUIREMENTS = {
 function getSelectionValue(sectionName) {
     switch (sectionName) {
         case 'material': return state.selections.ring.material;
-        case 'size': return state.selections.ring.size;
         case 'stone': return state.selections.diamond.stone;
         case 'carat': return state.selections.diamond.carat;
         case 'source': return state.selections.diamond.source;

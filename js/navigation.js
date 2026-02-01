@@ -3,8 +3,7 @@
 // Note: Requires config.js, state.js to be loaded first
 // ========================================
 
-// References to navigation buttons
-let navBtnPrev = null;
+// Reference to navigation button
 let navBtnNext = null;
 
 // ========================================
@@ -14,7 +13,6 @@ let navBtnNext = null;
 const SECTION_REQUIREMENTS = {
     // Step 1: Ring
     material: () => state.selections.ring.material !== null,
-    size: () => state.selections.ring.size !== null,
     
     // Step 2: Diamond
     stone: () => state.selections.diamond.stone !== null,
@@ -43,12 +41,7 @@ const SECTION_REQUIREMENTS = {
 // ========================================
 
 function initNavigation() {
-    navBtnPrev = document.getElementById('nav-btn-prev');
     navBtnNext = document.getElementById('nav-btn-next');
-    
-    if (navBtnPrev) {
-        navBtnPrev.addEventListener('click', navigatePrevious);
-    }
     
     if (navBtnNext) {
         navBtnNext.addEventListener('click', navigateNext);
@@ -63,27 +56,16 @@ function initNavigation() {
 // ========================================
 
 function updateNavButtons() {
-    if (!navBtnPrev || !navBtnNext) return;
+    if (!navBtnNext) return;
     
     const currentStep = state.currentStep;
     const currentSection = state.currentSection;
     const stepConfig = STEPS_CONFIG[currentStep];
     
     if (!stepConfig) {
-        navBtnPrev.disabled = true;
         navBtnNext.disabled = true;
         return;
     }
-    
-    // Get current section index within the step
-    const sections = stepConfig.sections;
-    const currentSectionIndex = sections.indexOf(currentSection);
-    
-    // === PREVIOUS BUTTON ===
-    // Enabled if we're not at the very first section of the first step
-    const isFirstSection = currentSectionIndex === 0;
-    const isFirstStep = currentStep === 1;
-    navBtnPrev.disabled = isFirstStep && isFirstSection;
     
     // === NEXT BUTTON ===
     // Enabled if the current section requirement is met
@@ -95,31 +77,6 @@ function updateNavButtons() {
 // ========================================
 // NAVIGATION ACTIONS
 // ========================================
-
-function navigatePrevious() {
-    const currentStep = state.currentStep;
-    const currentSection = state.currentSection;
-    const stepConfig = STEPS_CONFIG[currentStep];
-    
-    if (!stepConfig) return;
-    
-    const sections = stepConfig.sections;
-    const currentSectionIndex = sections.indexOf(currentSection);
-    
-    if (currentSectionIndex > 0) {
-        // Navigate to previous section within the same step
-        const prevSection = sections[currentSectionIndex - 1];
-        navigateToSection(currentStep, prevSection);
-    } else if (currentStep > 1) {
-        // Navigate to last section of the previous step
-        const prevStep = currentStep - 1;
-        if (state.unlockedSteps.includes(prevStep)) {
-            const prevStepConfig = STEPS_CONFIG[prevStep];
-            const lastSection = prevStepConfig.sections[prevStepConfig.sections.length - 1];
-            navigateToSection(prevStep, lastSection);
-        }
-    }
-}
 
 function navigateNext() {
     const currentStep = state.currentStep;

@@ -63,9 +63,8 @@ A slide-in cart panel accessible from the navbar cart icon.
 - Callbacks for UI updates and flying animation
 
 ### Combined Cart Items
-- **Ring:** Material + Size combined into one item
+- **Ring:** Material-based item
   - Name: "Gold Ring" or "Silver Ring"
-  - Subtitle: "Size: {size}" (if selected)
   - Price: $400 (gold) or $80 (silver)
   - Image: gold-ring.png or silver-ring.png
   - Premium: Gold is premium

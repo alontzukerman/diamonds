@@ -279,7 +279,7 @@
     background: radial-gradient(ellipse at center, rgba(242, 231, 114, 0.9) 0%, rgba(242, 231, 114, 0) 70%);
 }
 
-/* Info is now shown in hover-info-box instead of inline */
+/* Info is now shown in item-info-box instead of inline */
 
 /* Music flex carousel styles */
 #music-flex-carousel {
@@ -894,35 +894,28 @@
 }
 
 /* ========================================
-   NAVIGATION BUTTONS (Next/Previous)
+   NAVIGATION BUTTON (Next)
+   Located under love-meter
    ======================================== */
-
-.nav-buttons {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    /* 12px / 1160 * 100 = 1.03cqh */
-    gap: 1.03cqh;
-}
 
 .nav-btn {
     background: #F2E772;
     /* 2px / 2100 * 100 = 0.095cqw */
     border: 0.095cqw solid #282323;
-    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-family: 'sloop-script-two', sans-serif;
     font-weight: 700;
     font-style: normal;
-    /* 20px / 2100 * 100 = 0.95cqw */
-    font-size: 0.95cqw;
+    /* 40px / 2100 * 100 = 1.9cqw */
+    font-size: 1.9cqw;
     line-height: 1;
     color: #282323;
-    /* 10px 30px / 2100 = 0.86cqh 1.43cqw */
-    padding: 0.86cqh 1.43cqw;
+    /* 5px 30px 1px 16px / 2100 = 0.43cqh 1.43cqw 0.08cqh 0.76cqw */
+    padding: 0.43cqh 1.43cqw 0.08cqh 0.76cqw;
     cursor: pointer;
     transition: all 0.2s ease;
-    /* 6px / 2100 * 100 = 0.29cqw */
-    border-radius: 0.29cqw;
+    /* 200px / 2100 * 100 = 9.52cqw */
+    border-radius: 9.52cqw;
+    flex-shrink: 0;
 }
 
 .nav-btn:hover:not(:disabled) {
@@ -931,7 +924,9 @@
 }
 
 .nav-btn:disabled {
-    opacity: 0.4;
+    background: #F5EFB0;
+    color: #858566;
+    border-color: #858566;
     cursor: not-allowed;
 }
 

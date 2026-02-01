@@ -57,8 +57,8 @@ The configurator CSS is split into modular files:
 | `TOTAL_STEPS` | Number of configurator steps (6) |
 | `STEP_HEADER_HEIGHT` | Height of step headers (60px) |
 | `TRANSITION_DURATION` | CSS transition timing (350ms) |
-| `LOVE_METER_MAX_HEIGHT` | Love meter gauge height (700px) |
-| `LOVE_METER_BASE_POSITION` | Base position offset (180px) |
+| `LOVE_METER_MAX_HEIGHT` | Love meter travel distance (56.90cqh / 660px) |
+| `LOVE_METER_BASE_POSITION` | Base position offset (12.07cqh / 140px) |
 | `STEPS_CONFIG` | Step definitions |
 | `POINTS_CONFIG` | Love meter point values |
 | `STONE_NAMES` | Array of 20 stone names for the stone carousel |
@@ -93,7 +93,7 @@ The configurator uses a modular, config-driven system for all selectors.
 ```javascript
 1: {
     name: 'The Ring',
-    sections: ['material', 'size'],
+    sections: ['material'],
     defaultSection: 'material'
 }
 ```
@@ -112,7 +112,7 @@ material: {
 
 **`STEP_REQUIREMENTS`** - Defines completion requirements for each step:
 ```javascript
-1: () => state.selections.ring.material !== null && state.selections.ring.size !== null,
+1: () => state.selections.ring.material !== null,
 2: () => state.selections.diamond.stone !== null && 
          state.selections.diamond.source !== null && 
          state.selections.diamond.packaging !== null,
@@ -182,7 +182,7 @@ const state = {
     completedSteps: [],
     unlockedSteps: [1],
     selections: {
-        ring: { material: null, size: null },
+        ring: { material: null },
         diamond: { stone: null, carat: 0.5, source: null, packaging: null },
         location: null,
         setup: { signs: null, flowers: [], balloons: null, extras: [] },

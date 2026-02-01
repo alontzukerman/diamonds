@@ -7,7 +7,7 @@ A diamond ring and proposal configurator web application.
 ## Project Overview
 
 This project allows users to design their perfect proposal by configuring:
-- The engagement ring (material, size)
+- The engagement ring (material)
 - The diamond
 - The proposal location
 - The setup/ambiance

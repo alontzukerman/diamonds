@@ -2,7 +2,7 @@
 
 ## Unified Selection UI
 
-All selection steps (except Size and Carat) now use a unified **Flex Carousel** layout:
+All selection steps (except Carat) now use a unified **Flex Carousel** layout:
 - All items visible at once (no arrow navigation)
 - Hover shows item name and price in a **center-top info box**
 - Selected items have white/yellow glow effect
@@ -19,13 +19,6 @@ All selection steps (except Size and Carat) now use a unified **Flex Carousel** 
 - Hover shows name and price in center-top info box
 - Gold and White Gold have "Premium" label
 - Prices: Gold [From $400], Silver [From $80], Rose Gold [From $300], White Gold [From $700]
-
-### Size Selection (Buttons)
-- Sizes 48-56 available as horizontal button row
-- Yellow background buttons with 2px border, pill shape (matching navbar style)
-- Hover: bounce animation
-- Selected: White glow effect
-- Does NOT affect display area or love meter
 
 ### Display Area
 - Ring appears with drop animation when material selected

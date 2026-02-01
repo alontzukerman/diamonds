@@ -101,8 +101,7 @@ const Cart = (function() {
             existingItem.name !== item.name ||
             existingItem.price !== item.price ||
             existingItem.carat !== item.carat ||
-            existingItem.source !== item.source ||
-            existingItem.size !== item.size;
+            existingItem.source !== item.source;
         
         // Remove existing item in this category (silently, no update yet)
         items = items.filter(i => i.category !== item.category);

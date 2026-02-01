@@ -7,8 +7,8 @@ const TOTAL_STEPS = 6;
 const STEP_HEADER_HEIGHT = 60;
 const TRANSITION_DURATION = 350;
 // Love meter positions in cqh units (relative to 1160px height)
-// 730px / 1160 * 100 = 62.93cqh
-const LOVE_METER_MAX_HEIGHT = 62.93;
+// Max bottom 800px - base 140px = 660px range → 660 / 1160 * 100 = 56.90cqh
+const LOVE_METER_MAX_HEIGHT = 56.90;
 // 140px / 1160 * 100 = 12.07cqh
 const LOVE_METER_BASE_POSITION = 12.07;
 
@@ -16,7 +16,7 @@ const LOVE_METER_BASE_POSITION = 12.07;
 const STEPS_CONFIG = {
     1: {
         name: 'The Ring',
-        sections: ['material', 'size'],
+        sections: ['material'],
         defaultSection: 'material'
     },
     2: {
@@ -60,13 +60,13 @@ const LOVE_METER_CONFIG = {
     // Checkpoints: trigger popover messages at specific positions (in cqh units)
     // bottom = LOVE_METER_BASE_POSITION + offset (where offset is in cqh)
     // image: path to SVG image
-    // Original px values: 250, 405, 560, 715, 865 -> converted to cqh
+    // px values: 230, 370, 510, 650, 790 -> converted to cqh
     checkpoints: [
-        { offset: 9.48, bottom: 21.55, image: 'assets/texts/pop-t1.svg' },   // 250px / 1160 = 21.55cqh
-        { offset: 22.84, bottom: 34.91, image: 'assets/texts/pop-t2.svg' },  // 405px / 1160 = 34.91cqh
-        { offset: 36.21, bottom: 48.28, image: 'assets/texts/pop-t3.svg' },  // 560px / 1160 = 48.28cqh
-        { offset: 49.57, bottom: 61.64, image: 'assets/texts/pop-t4.svg' },  // 715px / 1160 = 61.64cqh
-        { offset: 62.5, bottom: 74.57, image: 'assets/texts/pop-t5.svg' }    // 865px / 1160 = 74.57cqh
+        { offset: 7.76, bottom: 19.83, image: 'assets/texts/pop-t1.svg' },   // 230px / 1160 = 19.83cqh
+        { offset: 19.83, bottom: 31.90, image: 'assets/texts/pop-t2.svg' },  // 370px / 1160 = 31.90cqh
+        { offset: 31.90, bottom: 43.97, image: 'assets/texts/pop-t3.svg' },  // 510px / 1160 = 43.97cqh
+        { offset: 43.96, bottom: 56.03, image: 'assets/texts/pop-t4.svg' },  // 650px / 1160 = 56.03cqh
+        { offset: 56.03, bottom: 68.10, image: 'assets/texts/pop-t5.svg' }   // 790px / 1160 = 68.10cqh
     ]
 };
 

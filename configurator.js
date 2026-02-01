@@ -35,15 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 updateRingCartItem(sourceElement);
             }
         },
-        size: {
-            type: 'buttons',
-            items: ['48', '49', '50', '51', '52', '53', '54', '55', '56'],
-            onSelect: (value, sourceElement) => {
-                state.selections.ring.size = value;
-                // No flying animation for size changes
-                updateRingCartItem(null);
-            }
-        },
         stone: {
             type: 'flex-carousel',
             items: STONE_NAMES.map((name, i) => ({

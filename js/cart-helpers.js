@@ -4,12 +4,11 @@
 // ========================================
 
 /**
- * Update the ring cart item (combines material + size into one item)
+ * Update the ring cart item
  * Only adds to cart if material is selected
  */
 function updateRingCartItem(sourceElement) {
     const material = state.selections.ring.material;
-    const size = state.selections.ring.size;
     
     if (!material) {
         // No material selected yet, remove ring from cart
@@ -38,12 +37,11 @@ function updateRingCartItem(sourceElement) {
     const ringPrice = MATERIAL_PRICES[material];
     const isPremium = material === 'gold' || material === 'white-gold';
     
-    // Create cart item with size info if available
+    // Create cart item
     const cartItem = {
         id: 'ring',
         category: 'ring',
         name: ringName,
-        size: size, // Store size separately for display
         price: ringPrice,
         image: ringImage,
         premium: isPremium

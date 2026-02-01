@@ -6,34 +6,34 @@
 // Reference to selection container (set during initialization)
 let selectionContainer = null;
 
-// Reference to hover info box elements
-let hoverInfoBox = null;
-let hoverInfoLabel = null;
-let hoverInfoPrice = null;
+// Reference to item info box elements
+let itemInfoBox = null;
+let itemInfoLabel = null;
+let itemInfoPrice = null;
 
 function initRenderers() {
     selectionContainer = document.getElementById('selection-container');
-    hoverInfoBox = document.getElementById('hover-info-box');
-    hoverInfoLabel = document.getElementById('hover-info-label');
-    hoverInfoPrice = document.getElementById('hover-info-price');
+    itemInfoBox = document.getElementById('item-info-box');
+    itemInfoLabel = document.getElementById('item-info-label');
+    itemInfoPrice = document.getElementById('item-info-price');
 }
 
 // ========================================
-// HOVER INFO BOX FUNCTIONS
+// ITEM INFO BOX FUNCTIONS
 // ========================================
 
-function showHoverInfo(label, price) {
-    if (!hoverInfoBox || !hoverInfoLabel || !hoverInfoPrice) return;
+function showItemInfo(label, price) {
+    if (!itemInfoBox || !itemInfoLabel || !itemInfoPrice) return;
     
-    hoverInfoLabel.textContent = label || '';
-    hoverInfoPrice.textContent = price || '';
-    hoverInfoPrice.style.display = price ? 'block' : 'none';
-    hoverInfoBox.classList.add('visible');
+    itemInfoLabel.textContent = label || '';
+    itemInfoPrice.textContent = price || '';
+    itemInfoPrice.style.display = price ? 'block' : 'none';
+    itemInfoBox.classList.add('visible');
 }
 
-function hideHoverInfo() {
-    if (!hoverInfoBox) return;
-    hoverInfoBox.classList.remove('visible');
+function hideItemInfo() {
+    if (!itemInfoBox) return;
+    itemInfoBox.classList.remove('visible');
 }
 
 function hideAllSelectors() {
@@ -337,13 +337,13 @@ function createFlexCarouselItem(item, sectionName, config, SELECTORS_CONFIG) {
         itemEl.appendChild(premium);
     }
     
-    // Hover to show info in hover box
+    // Hover to show info in item info box
     itemEl.addEventListener('mouseenter', () => {
-        showHoverInfo(item.label, item.price);
+        showItemInfo(item.label, item.price);
     });
     
     itemEl.addEventListener('mouseleave', () => {
-        hideHoverInfo();
+        hideItemInfo();
     });
     
     // Click to select

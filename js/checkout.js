@@ -64,7 +64,6 @@
             price: item.price,
             image: item.image,
             // Include optional fields if present
-            ...(item.size && { size: item.size }),
             ...(item.carat && { carat: item.carat }),
             ...(item.source && { source: item.source }),
             ...(item.premium && { premium: item.premium })
