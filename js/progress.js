@@ -24,7 +24,7 @@ function completeStep(stepNumber) {
     
     // Unlock next step
     const nextStep = stepNumber + 1;
-    if (nextStep <= 6 && !state.unlockedSteps.includes(nextStep)) {
+    if (nextStep <= TOTAL_STEPS && !state.unlockedSteps.includes(nextStep)) {
         state.unlockedSteps.push(nextStep);
         unlockStep(nextStep);
     }
@@ -132,7 +132,7 @@ function syncProgressBarHeights() {
 function updateProgressBarLine() {
     const progressBarLine = document.getElementById('progress-bar-line');
     const firstStep = document.querySelector('.progress-step[data-progress-step="1"]');
-    const lastStep = document.querySelector('.progress-step[data-progress-step="6"]');
+    const lastStep = document.querySelector(`.progress-step[data-progress-step="${TOTAL_STEPS}"]`);
     const firstCircle = document.querySelector('.progress-step[data-progress-step="1"] .progress-circle');
     const pageScene = document.querySelector('.page-scene');
     

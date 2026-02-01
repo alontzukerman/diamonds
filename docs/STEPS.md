@@ -203,7 +203,7 @@ All four sub-steps must be completed before Step 5 (Music) unlocks:
 ### Music Selection (Flex Carousel with Card Layout)
 - 15 song options with cover art displayed as cards
 - All cards visible at once, wrapped into 2 rows
-- Hover shows "Artist - Song" in center-top info box
+- **No item-info-box on hover** (unlike other steps)
 - Music configured in `MUSIC` array in `js/config.js`
 - Each song has: artist, song name, cover image (`c1.png` - `c15.png`), audio file (`s1.mp3` - `s15.mp3`)
 - Assets stored in `assets/music/` folder
@@ -214,6 +214,20 @@ All four sub-steps must be completed before Step 5 (Music) unlocks:
 - Song name (bold, yellow) and artist name (regular, yellow) on right
 - Card has 20px border-radius and 8px padding
 - Selected card has white glow effect
+
+### Music Playback Behavior
+- **First click on song**: Selects and starts playing the song
+- **Second click on same song**: Stops the music but keeps selection
+- **Click again**: Resumes playing
+- **Click different song**: Selects and plays the new song
+- **Leaving music step**: Automatically stops playback (via step change or Confirm button)
+- Music loops continuously while playing
+
+### Display Area
+- Selected song appears as a card in the display area (same styling as carousel card)
+- Card positioned at bottom center of ring container
+- Card shows cover image, song title, and artist name
+- Uses `updateMusicDisplay()` function in `js/display.js`
 
 **Song List:**
 1. Boey Beshalom - Ben Snof

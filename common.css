@@ -109,6 +109,11 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    transition: opacity 0.1s ease;
+}
+
+.page-background.fading {
+    opacity: 0;
 }
 
 /* ========================================
@@ -148,8 +153,7 @@ body {
     left: 0;
     width: 100%;
     z-index: 100;
-    /* 30px 50px 30px 40px -> 2.59cqh 2.38cqw 2.59cqh 1.9cqw */
-    padding: 2.59cqh 2.38cqw 2.59cqh 1.9cqw;
+    padding: 3.5cqh 2.8cqw 2.59cqh 1.9cqw;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;

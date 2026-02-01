@@ -219,6 +219,8 @@
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
     /* 8px / 2100 * 100 = 0.38cqw */
     border-radius: 0.38cqw;
+    background-size: 130% 130%;
+    background-position: center;
 }
 
 
@@ -271,12 +273,12 @@
     filter: drop-shadow(0 0 0.57cqw rgba(255, 255, 255, 0.95));
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
     border-radius: 0.38cqw;
+    transition: transform 0.3s ease;
 }
 
-/* Selected state - yellow glow */
+/* Selected state - scaled glow */
 .flex-carousel-item.selected .flex-carousel-image {
-    filter: drop-shadow(0 0 0.57cqw rgba(242, 231, 114, 0.95));
-    background: radial-gradient(ellipse at center, rgba(242, 231, 114, 0.9) 0%, rgba(242, 231, 114, 0) 70%);
+    transform: scale(1.4);
 }
 
 /* Info is now shown in item-info-box instead of inline */
@@ -370,6 +372,7 @@
 
 .music-flex-item.selected {
     box-shadow: 0 0 0.95cqw rgba(255, 255, 255, 0.9);
+    transform: scale(1.1);
 }
 
 .flex-carousel-premium {
@@ -397,6 +400,47 @@
     right: 2cqw;
 }
 
+#material-flex-carousel {
+    transform: translateY(10px);
+}
+
+#material-flex-carousel .flex-carousel-image {
+    /* 140px / 1160 * 100 = 12.1cqh */
+    height: 12.1cqh;
+}
+
+#source-flex-carousel {
+    transform: translateY(15px);
+    gap: 2.5cqw;
+}
+
+#source-flex-carousel .flex-carousel-image {
+    /* 155px / 1160 * 100 = 13.36cqh */
+    height: 13.36cqh;
+}
+
+#source-flex-carousel .flex-carousel-item[data-source="natural"] .flex-carousel-image {
+    /* 165px / 1160 * 100 = 14.22cqh */
+    height: 14.22cqh;
+}
+
+#flowers-flex-carousel {
+    transform: translateY(15px);
+}
+
+#balloons-flex-carousel {
+    transform: translateY(15px);
+}
+
+#balloons-flex-carousel .flex-carousel-image {
+    /* 140px / 1160 * 100 = 12.07cqh */
+    height: 12.07cqh;
+}
+
+#extras-flex-carousel {
+    transform: translateY(15px);
+}
+
 /* Stone-specific flex carousel styles */
 #stone-flex-carousel {
     gap: 0.71cqw;
@@ -420,8 +464,8 @@
     justify-content: center;
     /* Limit width so locations wrap into 2 lines */
     max-width: 65cqw;
-    gap: 1.5cqw;
-    row-gap: 1.3cqw;
+    gap: 2cqw;
+    row-gap: 1cqw;
 }
 
 #location-flex-carousel .flex-carousel-item {
@@ -579,8 +623,8 @@
     color: #282323;
     white-space: nowrap;
     pointer-events: none;
-    background: #F2E772;
-    padding: 0.095cqw;
+    background: #FFFFFF;
+    box-shadow: #FFFFFF 0 0 12px 10px;
 }
 
 .carat-label-min,
@@ -599,8 +643,8 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    background: #F2E772;
-    padding: 0.095cqw;
+    background: #FFFFFF;
+    box-shadow: #FFFFFF 0 0 12px 10px;
 }
 
 .carat-price {
@@ -777,19 +821,7 @@
 }
 
 .music-play-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(40, 35, 35, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    border-radius: 0.71cqw;
-    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto !important;
+    display: none;
 }
 
 .music-card-image:hover .music-play-overlay {
@@ -916,11 +948,12 @@
     /* 200px / 2100 * 100 = 9.52cqw */
     border-radius: 9.52cqw;
     flex-shrink: 0;
+    transform: translateX(15px);
 }
 
 .nav-btn:hover:not(:disabled) {
-    transform: scale(1.05);
-    box-shadow: 0 0 0.48cqw rgba(242, 231, 114, 0.5);
+    animation: none;
+    transform: translateX(15px) scale(1.08);
 }
 
 .nav-btn:disabled {
@@ -928,6 +961,26 @@
     color: #858566;
     border-color: #858566;
     cursor: not-allowed;
+    animation: none;
+}
+
+/* Bounce animation when button is enabled - bounces a few times then pauses */
+.nav-btn:not(:disabled) {
+    animation: nav-bounce 3s ease infinite;
+}
+
+@keyframes nav-bounce {
+    /* First bounce */
+    0%, 8% { transform: translateX(15px) translateY(0); }
+    4% { transform: translateX(15px) translateY(-8px); }
+    /* Second bounce */
+    12%, 20% { transform: translateX(15px) translateY(0); }
+    16% { transform: translateX(15px) translateY(-8px); }
+    /* Third bounce */
+    24%, 32% { transform: translateX(15px) translateY(0); }
+    28% { transform: translateX(15px) translateY(-8px); }
+    /* Pause for the rest */
+    32%, 100% { transform: translateX(15px) translateY(0); }
 }
 
 .nav-btn-label {

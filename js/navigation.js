@@ -30,10 +30,7 @@ const SECTION_REQUIREMENTS = {
     extras: () => state.selections.setup.extras.length > 0,
     
     // Step 5: Music
-    music: () => state.selections.music !== null,
-    
-    // Step 6: Deadline
-    deadline: () => state.selections.deadline !== null
+    music: () => state.selections.music !== null
 };
 
 // ========================================
@@ -72,6 +69,17 @@ function updateNavButtons() {
     const sectionRequirement = SECTION_REQUIREMENTS[currentSection];
     const isCurrentSectionComplete = sectionRequirement ? sectionRequirement() : false;
     navBtnNext.disabled = !isCurrentSectionComplete;
+    
+    // Check if we're on the last section of the last step (music)
+    const sections = stepConfig.sections;
+    const currentSectionIndex = sections.indexOf(currentSection);
+    const isLastSectionOfLastStep = currentStep === TOTAL_STEPS && currentSectionIndex === sections.length - 1;
+    
+    // Update button text: "Confirm" on last step, "Next" otherwise
+    const btnLabel = navBtnNext.querySelector('.nav-btn-label');
+    if (btnLabel) {
+        btnLabel.textContent = isLastSectionOfLastStep ? 'Submit' : 'Next';
+    }
 }
 
 // ========================================
@@ -100,10 +108,29 @@ function navigateNext() {
             const firstSection = nextStepConfig.sections[0];
             navigateToSection(nextStep, firstSection);
         }
+    } else {
+        // On the last section of the last step - open deadline popover
+        // (cart and share modal should NOT be opened)
+        
+        // Stop music when confirming
+        if (typeof stopMusicPlayback === 'function') {
+            stopMusicPlayback();
+        }
+        
+        if (typeof Deadline !== 'undefined' && typeof Deadline.openPopover === 'function') {
+            Deadline.openPopover();
+        }
     }
 }
 
 function navigateToSection(stepNumber, sectionName) {
+    // Stop music if leaving the music step (step 5)
+    if (state.currentStep === 5 && stepNumber !== 5) {
+        if (typeof stopMusicPlayback === 'function') {
+            stopMusicPlayback();
+        }
+    }
+    
     // If we're changing steps, expand the new step
     if (stepNumber !== state.currentStep) {
         // Collapse all steps

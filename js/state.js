@@ -25,8 +25,7 @@ const state = {
             balloons: null,
             extras: []
         },
-        music: null,
-        deadline: null
+        music: null
     },
     loveLevel: 0,  // Percentage (0-100) based on cart total
     carouselIndices: {} // Track carousel position for each section
@@ -46,8 +45,7 @@ const STEP_REQUIREMENTS = {
              state.selections.setup.flowers.length > 0 &&
              state.selections.setup.balloons !== null &&
              state.selections.setup.extras.length > 0,
-    5: () => state.selections.music !== null,
-    6: () => state.selections.deadline !== null
+    5: () => state.selections.music !== null
 };
 
 // ========================================
@@ -67,7 +65,6 @@ function getSelectionValue(sectionName) {
         case 'balloons': return state.selections.setup.balloons;
         case 'extras': return state.selections.setup.extras;
         case 'music': return state.selections.music;
-        case 'deadline': return state.selections.deadline;
         default: return null;
     }
 }

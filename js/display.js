@@ -10,6 +10,7 @@ let currentSign = null;
 let currentFlowersSet = new Set();
 let currentBalloon = null;
 let currentExtrasSet = new Set();
+let currentMusic = null;
 
 function updateDisplay() {
     const displayContainer = document.querySelector('.display-container');
@@ -275,6 +276,66 @@ function updateExtrasDisplay() {
 }
 
 // ========================================
+// MUSIC DISPLAY
+// ========================================
+
+function updateMusicDisplay() {
+    const ringContainer = document.getElementById('ring-container');
+    if (!ringContainer) return;
+    
+    const selectedMusic = state.selections.music;
+    
+    // Remove ALL existing music cards (including ones fading out)
+    ringContainer.querySelectorAll('.display-music-card').forEach(card => {
+        card.remove();
+    });
+    
+    // Reset tracking
+    currentMusic = null;
+    
+    // Add new music card if selected
+    if (selectedMusic) {
+        const trackIndex = parseInt(selectedMusic) - 1;
+        const track = MUSIC[trackIndex];
+        if (!track) return;
+        
+        const musicCard = document.createElement('div');
+        musicCard.className = 'display-music-card';
+        
+        // Image container with cover
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'display-music-card-image';
+        
+        const coverImg = document.createElement('img');
+        coverImg.className = 'display-music-card-cover';
+        coverImg.src = ASSETS.music.image(track.image);
+        coverImg.alt = track.song;
+        imageContainer.appendChild(coverImg);
+        
+        musicCard.appendChild(imageContainer);
+        
+        // Song info
+        const songInfo = document.createElement('div');
+        songInfo.className = 'display-music-card-info';
+        
+        const songTitle = document.createElement('div');
+        songTitle.className = 'display-music-card-song';
+        songTitle.textContent = track.song;
+        songInfo.appendChild(songTitle);
+        
+        const songArtist = document.createElement('div');
+        songArtist.className = 'display-music-card-artist';
+        songArtist.textContent = track.artist;
+        songInfo.appendChild(songArtist);
+        
+        musicCard.appendChild(songInfo);
+        ringContainer.appendChild(musicCard);
+        
+        currentMusic = selectedMusic;
+    }
+}
+
+// ========================================
 // LOCATION BACKGROUND
 // ========================================
 
@@ -286,6 +347,12 @@ function updateLocationBackground(locationName) {
     const location = LOCATIONS.find(loc => loc.name === locationName);
     
     if (location) {
-        pageBackground.style.backgroundImage = `url('assets/locations/${location.image}')`;
+        // Fade out, change image, fade in
+        pageBackground.classList.add('fading');
+        
+        setTimeout(() => {
+            pageBackground.style.backgroundImage = `url('assets/locations/${location.image}')`;
+            pageBackground.classList.remove('fading');
+        }, 100); // Match the CSS transition duration
     }
 }

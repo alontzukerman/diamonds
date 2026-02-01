@@ -50,6 +50,43 @@
     }
 
     /**
+     * Parse deadline from URL parameter
+     * @returns {Date|null} Deadline date or null if not set
+     */
+    function parseDeadlineFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const deadlineParam = urlParams.get('deadline');
+        
+        if (!deadlineParam) {
+            return null;
+        }
+        
+        try {
+            const deadline = new Date(decodeURIComponent(deadlineParam));
+            // Validate it's a valid date
+            if (isNaN(deadline.getTime())) {
+                return null;
+            }
+            return deadline;
+        } catch (e) {
+            console.error('Failed to parse deadline:', e);
+            return null;
+        }
+    }
+
+    /**
+     * Format date as MM/DD/YYYY
+     * @param {Date} date
+     * @returns {string}
+     */
+    function formatDate(date) {
+        const dd = String(date.getDate()).padStart(2, '0');
+        const mm = String(date.getMonth() + 1).padStart(2, '0');
+        const yyyy = date.getFullYear();
+        return `${mm}/${dd}/${yyyy}`;
+    }
+
+    /**
      * Generate a random order number
      * @returns {string}
      */
@@ -58,22 +95,19 @@
     }
 
     /**
-     * Get today's date formatted as DD/MM/YYYY
+     * Get today's date formatted as MM/DD/YYYY
      * @returns {string}
      */
     function getTodayDate() {
-        const today = new Date();
-        const dd = String(today.getDate()).padStart(2, '0');
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const yyyy = today.getFullYear();
-        return `${mm}/${dd}/${yyyy}`;
+        return formatDate(new Date());
     }
 
     /**
      * Render cart items to the receipt
      * @param {Array} items - Array of cart items
+     * @param {Date|null} deadline - Deadline date or null
      */
-    function renderReceiptItems(items) {
+    function renderReceiptItems(items, deadline) {
         const container = document.getElementById('receipt-items');
         const totalPriceEl = document.getElementById('receipt-total-price');
         const dateEl = document.getElementById('receipt-date');
@@ -131,12 +165,20 @@
 
     /**
      * Initialize and run countdown timer
-     * Counts down from 14 days
+     * Counts down to the deadline date
+     * @param {Date|null} deadline - Deadline date or null (defaults to 14 days from now)
      */
-    function initCountdown() {
-        // Set countdown to 14 days from now
-        const endTime = new Date();
-        endTime.setDate(endTime.getDate() + 14);
+    function initCountdown(deadline) {
+        // Use provided deadline or default to 14 days from now
+        let endTime;
+        if (deadline) {
+            endTime = new Date(deadline);
+            // Set to end of day (23:59:59)
+            endTime.setHours(23, 59, 59, 999);
+        } else {
+            endTime = new Date();
+            endTime.setDate(endTime.getDate() + 14);
+        }
         
         function updateCountdown() {
             const now = new Date();
@@ -173,6 +215,8 @@
     function initPaymentModal() {
         const payBtn = document.getElementById('receipt-pay-btn');
         const modalOverlay = document.getElementById('payment-modal-overlay');
+        const confirmBtn = document.getElementById('payment-confirm-btn');
+        const successScreen = document.getElementById('success-screen');
         const cardNumberInput = document.getElementById('payment-card-number');
         const expiryInput = document.getElementById('payment-expiry');
         const cvvInput = document.getElementById('payment-cvv');
@@ -192,6 +236,14 @@
                 if (e.key === 'Escape' && modalOverlay.classList.contains('open')) {
                     modalOverlay.classList.remove('open');
                 }
+            });
+        }
+
+        // Show success screen when confirm is clicked
+        if (confirmBtn && successScreen) {
+            confirmBtn.addEventListener('click', () => {
+                modalOverlay.classList.remove('open');
+                successScreen.classList.add('open');
             });
         }
 
@@ -253,8 +305,9 @@
      */
     function initCheckoutPage() {
         const items = parseCartFromURL();
-        renderReceiptItems(items);
-        initCountdown();
+        const deadline = parseDeadlineFromURL();
+        renderReceiptItems(items, deadline);
+        initCountdown(deadline);
         initPaymentModal();
     }
 

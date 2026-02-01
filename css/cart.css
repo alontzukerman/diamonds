@@ -283,38 +283,10 @@
 }
 
 /* ========================================
-   CHECKOUT BUTTON
+   DEADLINE POPOVER
    ======================================== */
 
-.cart-checkout-btn {
-    font-family: 'Narkiss Yair TRIAL', sans-serif;
-    font-weight: 400;
-    /* 18px / 2100 * 100 = 0.86vw */
-    font-size: 0.86vw;
-    color: #FFD2F6;
-    background: #FF0000;
-    border: none;
-    /* 20px / 2100 * 100 = 0.95vw */
-    border-radius: 0.95vw;
-    /* 8px 20px / 2100 = 0.38vw 0.95vw */
-    padding: 0.69vh 0.95vw;
-    cursor: pointer;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    margin-left: auto;
-    /* 15px / 2100 * 100 = 0.71vw */
-    margin-right: 0.71vw;
-}
-
-.cart-checkout-btn:hover {
-    opacity: 0.9;
-    transform: scale(1.02);
-}
-
-/* ========================================
-   CHECKOUT SHARE MODAL
-   ======================================== */
-
-.checkout-modal-overlay {
+.deadline-popover-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -330,93 +302,256 @@
     justify-content: center;
 }
 
-.checkout-modal-overlay.open {
+.deadline-popover-overlay.open {
     opacity: 1;
     visibility: visible;
 }
 
-.checkout-modal {
+.deadline-popover {
     background: #FFD2F6;
-    border: 0.095vw solid #FF0000;
-    border-radius: 0.95vw;
-    padding: 1.43vw;
-    /* 400px / 2100 * 100 = 19.05vw */
-    width: 19.05vw;
+    padding: 2.59vh 1.9vw;
+    /* 440px / 2100 * 100 = 20.95vw */
+    width: 20.95vw;
     max-width: 90vw;
     position: relative;
     transform: scale(0.9);
     transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
 
-.checkout-modal-overlay.open .checkout-modal {
-    transform: scale(1);
+.deadline-popover-overlay.open .deadline-popover {
+    transform: translateX(75px) translateY(-80px) scale(1);
 }
 
-.checkout-modal-close {
-    position: absolute;
-    /* 15px / 1160 * 100 = 1.29vh */
-    top: 1.29vh;
-    /* 15px / 2100 * 100 = 0.71vw */
-    right: 0.71vw;
+.deadline-popover-title {
+    font-family: 'Narkiss Block TRIAL', sans-serif;
+    font-weight: 400;
+    /* 20px / 2100 * 100 = 0.95vw */
+    font-size: 0.95vw;
+    line-height: 100%;
+    color: #FF0000;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-underline-offset: 10%;
+    margin: 0 0 0.5vw 0;
+    align-self: flex-start;
+}
+
+.deadline-popover-input {
+    font-family: 'Narkiss Yair Variable', 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 700;
+    /* 25px / 2100 * 100 = 1.19vw */
+    font-size: 1.19vw;
+    line-height: 100%;
+    color: #FF0000;
+    background: transparent;
+    /* 2px / 2100 * 100 = 0.095vw */
+    border: 0.095vw solid #FF0000;
+    padding: 0.6vw 0.9vw;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0.7vw;
+    cursor: default;
+    /* Keep full opacity when disabled */
+    opacity: 1;
+    -webkit-text-fill-color: #FF0000;
+}
+
+.deadline-popover-input::-webkit-calendar-picker-indicator {
+    filter: invert(16%) sepia(100%) saturate(7460%) hue-rotate(0deg) brightness(100%) contrast(112%);
+    cursor: default;
+    /* Keep visible when disabled */
+    opacity: 1;
+}
+
+/* Calendar Container */
+.deadline-popover-calendar {
+    width: 100%;
+    /* 2px / 2100 * 100 = 0.095vw */
+    border: 0.095vw solid #FF0000;
+    padding: 0.7vw;
+    box-sizing: border-box;
+    margin-bottom: 0.9vw;
+    /* Calendar uses Narkiss Block TRIAL, 32px font */
+    font-family: 'Narkiss Block TRIAL', sans-serif;
+    font-weight: 400;
+    /* 32px / 2100 * 100 = 1.52vw */
+    font-size: 1.52vw;
+    line-height: 100%;
+    color: #FF0000;
+}
+
+/* Calendar Header */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5vw;
+}
+
+.calendar-month-year {
+    font-family: 'Narkiss Block TRIAL', sans-serif;
+    font-weight: 400;
+    /* 32px / 2100 * 100 = 1.52vw */
+    font-size: 1.52vw;
+    line-height: 100%;
+    color: #FF0000;
+}
+
+.calendar-nav {
     background: none;
     border: none;
+    font-size: 1.52vw;
+    color: #FF0000;
     cursor: pointer;
+    padding: 0.2vw 0.4vw;
     transition: transform 0.2s ease;
 }
 
-.checkout-modal-close:hover {
+.calendar-nav:hover {
     transform: scale(1.1);
 }
 
-.checkout-modal-close img {
-    /* 24px / 2100 * 100 = 1.14vw */
-    width: 1.14vw;
-    height: 1.14vw;
+/* Calendar Weekdays */
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    margin-bottom: 0.3vw;
 }
 
-.checkout-modal-title {
+.calendar-weekdays span {
     font-family: 'Narkiss Block TRIAL', sans-serif;
-    font-weight: 400;
-    font-size: 1.52vw;
+    font-weight: 700;
+    /* Smaller than main calendar text for weekday labels */
+    font-size: 1.1vw;
+    line-height: 100%;
     color: #FF0000;
-    margin: 0 0 0.95vw 0;
+    padding: 0.2vw 0;
 }
 
-.checkout-modal-link-box {
+/* Calendar Days */
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.1vw;
+}
+
+.calendar-day {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 400;
+    font-size: 0.9vw;
+    line-height: 100%;
+    color: #FF0000;
+    text-align: center;
+    padding: 0.6vw 0;
+    cursor: pointer;
+    border-radius: 0.24vw;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.calendar-day:not(.empty):not(.disabled):hover {
+    background: rgba(255, 0, 0, 0.1);
+}
+
+.calendar-day.selected {
+    /* Use inset box-shadow instead of border to prevent row jumping */
+    box-shadow: inset 0 0 0 0.095vw #FF0000;
+    border-radius: 50%;
+}
+
+.calendar-day.disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.calendar-day.empty {
+    cursor: default;
+}
+
+/* Share Button */
+.deadline-popover-share {
+    font-family: 'sloop-script-two', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    /* 32px / 2100 * 100 = 1.52vw */
+    font-size: 1.52vw;
+    line-height: 100%;
+    letter-spacing: 0.04em;
+    color: #FF0000;
+    background: transparent;
+    /* 2px / 2100 * 100 = 0.095vw */
+    border: 0.095vw solid #FF0000;
+    /* 22.5px / 2100 * 100 = 1.07vw */
+    border-radius: 1.07vw;
+    padding: 0.3vw 0.8vw 0.15vw 0.8vw;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+@keyframes deadline-share-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-0.3vw); }
+}
+
+.deadline-popover-share:hover {
+    animation: deadline-share-bounce 0.5s ease;
+}
+
+/* Share Container */
+.deadline-share-container {
+    width: 100%;
     display: flex;
-    /* 10px / 2100 * 100 = 0.48vw */
-    gap: 0.48vw;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.5vw;
 }
 
-.checkout-modal-link {
+/* Share Link Box (hidden by default) */
+.deadline-share-link-box {
+    display: none;
+    width: 100%;
+    gap: 0.48vw;
+    align-items: center;
+}
+
+.deadline-share-link {
     flex: 1;
     font-family: 'Narkiss Yair TRIAL', sans-serif;
-    /* 14px / 2100 * 100 = 0.67vw */
     font-size: 0.67vw;
     color: #FF0000;
     background: white;
     border: 0.048vw solid #FF0000;
-    border-radius: 0.48vw;
-    /* 12px 15px / 2100 = 0.57vw 0.71vw */
-    padding: 1.03vh 0.71vw;
+    padding: 0.5vw 0.71vw;
     outline: none;
+    min-width: 0;
 }
 
-.checkout-modal-copy {
-    font-family: 'Narkiss Yair TRIAL', sans-serif;
-    font-weight: 400;
-    /* 16px / 2100 * 100 = 0.76vw */
-    font-size: 0.76vw;
-    color: #FFD2F6;
-    background: #FF0000;
-    border: none;
-    border-radius: 0.48vw;
-    /* 12px 20px / 2100 = 0.57vw 0.95vw */
-    padding: 1.03vh 0.95vw;
+.deadline-share-copy {
+    font-family: 'sloop-script-two', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.52vw;
+    line-height: 100%;
+    letter-spacing: 0.04em;
+    color: #FF0000;
+    background: transparent;
+    border: 0.095vw solid #FF0000;
+    border-radius: 1.07vw;
+    padding: 0.3vw 0.8vw 0.15vw 0.8vw;
     cursor: pointer;
-    transition: opacity 0.2s ease;
+    transition: all 0.2s ease;
+    white-space: nowrap;
 }
 
-.checkout-modal-copy:hover {
-    opacity: 0.9;
+@keyframes deadline-copy-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-0.3vw); }
+}
+
+.deadline-share-copy:hover {
+    animation: deadline-copy-bounce 0.5s ease;
 }

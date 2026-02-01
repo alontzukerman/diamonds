@@ -3,7 +3,7 @@
 // ========================================
 
 // Constants
-const TOTAL_STEPS = 6;
+const TOTAL_STEPS = 5;
 const STEP_HEADER_HEIGHT = 60;
 const TRANSITION_DURATION = 350;
 // Love meter positions in cqh units (relative to 1160px height)
@@ -38,11 +38,6 @@ const STEPS_CONFIG = {
         name: 'Music',
         sections: ['music'],
         defaultSection: 'music'
-    },
-    6: {
-        name: 'Deadline',
-        sections: ['deadline'],
-        defaultSection: 'deadline'
     }
 };
 
@@ -178,7 +173,8 @@ const MUSIC = [
     { artist: 'Bill Withers', song: 'Just The Two Of Us', image: 'c11.png', audio: 's11.mp3' },
     { artist: 'Elvis Presley', song: 'Can\'t Help Falling in Love', image: 'c12.png', audio: 's12.mp3' },
     { artist: 'Nathan Goshen', song: 'Shney Yeladim Ba\'olam', image: 'c13.png', audio: 's13.mp3' },
-    { artist: 'Jason Mraz', song: 'I\'m Yours', image: 'c14.png', audio: 's14.mp3' }
+    { artist: 'Jason Mraz', song: 'I\'m Yours', image: 'c14.png', audio: 's14.mp3' },
+    { artist: 'Sarit Hadad', song: 'Ahava Kmo Shelanu', image: 'c15.png', audio: 's15.mp3' }
 ];
 
 // Stone names (20 stones) - no price, just name and image

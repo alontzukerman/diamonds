@@ -11,6 +11,9 @@ let itemInfoBox = null;
 let itemInfoLabel = null;
 let itemInfoPrice = null;
 
+// Track selected item info per section
+let selectedItemInfo = {};
+
 function initRenderers() {
     selectionContainer = document.getElementById('selection-container');
     itemInfoBox = document.getElementById('item-info-box');
@@ -25,6 +28,9 @@ function initRenderers() {
 function showItemInfo(label, price) {
     if (!itemInfoBox || !itemInfoLabel || !itemInfoPrice) return;
     
+    // Don't show item info box for music section
+    if (state.currentSection === 'music') return;
+    
     itemInfoLabel.textContent = label || '';
     itemInfoPrice.textContent = price || '';
     itemInfoPrice.style.display = price ? 'block' : 'none';
@@ -36,10 +42,29 @@ function hideItemInfo() {
     itemInfoBox.classList.remove('visible');
 }
 
+function setSelectedItemInfo(sectionName, label, price) {
+    selectedItemInfo[sectionName] = { label, price };
+}
+
+function clearSelectedItemInfo(sectionName) {
+    delete selectedItemInfo[sectionName];
+}
+
+function showSelectedItemInfo(sectionName) {
+    const info = selectedItemInfo[sectionName];
+    if (info) {
+        showItemInfo(info.label, info.price);
+    } else {
+        hideItemInfo();
+    }
+}
+
 function hideAllSelectors() {
     if (selectionContainer) {
         selectionContainer.innerHTML = '';
     }
+    // Hide the item info box when switching sections
+    hideItemInfo();
 }
 
 function showSelector(sectionName, SELECTORS_CONFIG) {
@@ -253,11 +278,30 @@ function renderFlexCarousel(sectionName, config, SELECTORS_CONFIG) {
     container.className = 'flex-carousel';
     container.id = `${sectionName}-flex-carousel`;
     
+    // Find currently selected item to show its info
+    const currentValue = getSelectionValue(sectionName);
+    let selectedItem = null;
+    
     // Render all items visible
     config.items.forEach((item) => {
         const itemEl = createFlexCarouselItem(item, sectionName, config, SELECTORS_CONFIG);
         container.appendChild(itemEl);
+        
+        // Track selected item for single-select
+        if (!config.multiselect && currentValue === item.id) {
+            selectedItem = item;
+        }
     });
+    
+    // If there's a pre-selected item (single-select), store and show its info
+    if (selectedItem) {
+        setSelectedItemInfo(sectionName, selectedItem.label, selectedItem.price);
+        showItemInfo(selectedItem.label, selectedItem.price);
+    } else {
+        // Clear any previous selected info and hide
+        clearSelectedItemInfo(sectionName);
+        hideItemInfo();
+    }
     
     selectionContainer.appendChild(container);
 }
@@ -340,21 +384,30 @@ function createFlexCarouselItem(item, sectionName, config, SELECTORS_CONFIG) {
     // Hover to show info in item info box
     itemEl.addEventListener('mouseenter', () => {
         showItemInfo(item.label, item.price);
+        // For music items, also start playback on hover
+        if (config.musicPlayer && item.audio) {
+            startMusicFlexPlayback(item, itemEl);
+        }
     });
     
     itemEl.addEventListener('mouseleave', () => {
-        hideItemInfo();
+        // When not hovering, show selected item info if any
+        showSelectedItemInfo(sectionName);
+        // For music items, stop playback on mouse leave
+        if (config.musicPlayer && item.audio) {
+            stopMusicFlexPlayback(item, itemEl);
+        }
     });
     
     // Click to select
     itemEl.addEventListener('click', () => {
-        selectFlexCarouselItem(sectionName, item.id, config, SELECTORS_CONFIG);
+        selectFlexCarouselItem(sectionName, item.id, item, config, SELECTORS_CONFIG);
     });
     
     return itemEl;
 }
 
-function selectFlexCarouselItem(sectionName, value, config, SELECTORS_CONFIG) {
+function selectFlexCarouselItem(sectionName, value, itemData, config, SELECTORS_CONFIG) {
     const container = document.getElementById(`${sectionName}-flex-carousel`);
     let selectedElement = null;
     
@@ -366,6 +419,9 @@ function selectFlexCarouselItem(sectionName, value, config, SELECTORS_CONFIG) {
                 const isNowSelected = !clickedItem.classList.contains('selected');
                 clickedItem.classList.toggle('selected', isNowSelected);
                 selectedElement = isNowSelected ? clickedItem : null;
+                
+                // For multiselect, we don't persist single item info
+                // (could be enhanced to show count or last selected)
                 
                 // Call the onSelect handler with isSelected state
                 if (config.onSelect) {
@@ -383,6 +439,64 @@ function selectFlexCarouselItem(sectionName, value, config, SELECTORS_CONFIG) {
                     selectedElement = item;
                 }
             });
+        }
+        
+        // Store selected item info for showing when not hovering
+        setSelectedItemInfo(sectionName, itemData.label, itemData.price);
+        showItemInfo(itemData.label, itemData.price);
+        
+        // For music items, toggle play/stop when clicking the same song
+        if (config.musicPlayer && itemData.audio) {
+            // Check if clicking the same song that's already selected
+            if (selectedMusicId === value) {
+                // Toggle play/stop, but keep selection
+                if (currentAudio && currentPlayingId === value) {
+                    // Currently playing - stop it
+                    currentAudio.pause();
+                    currentAudio = null;
+                    currentPlayingId = null;
+                    
+                    // Remove playing class but keep selected
+                    document.querySelectorAll('.music-card.playing, .music-flex-item.playing').forEach(card => {
+                        card.classList.remove('playing');
+                    });
+                } else {
+                    // Currently stopped - play it again
+                    currentAudio = new Audio(itemData.audio);
+                    currentPlayingId = value;
+                    currentAudio.loop = true;
+                    
+                    if (selectedElement) {
+                        selectedElement.classList.add('playing');
+                    }
+                    
+                    currentAudio.play().catch(() => {});
+                }
+                
+                return; // Don't call onSelect again, selection is unchanged
+            }
+            
+            // New song selected - stop any currently playing audio first
+            selectedMusicId = value;
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+                document.querySelectorAll('.music-card.playing, .music-flex-item.playing').forEach(card => {
+                    card.classList.remove('playing');
+                });
+            }
+            
+            // Start playing the selected song
+            currentAudio = new Audio(itemData.audio);
+            currentPlayingId = value;
+            currentAudio.loop = true; // Loop the selected song
+            
+            // Add playing class
+            if (selectedElement) {
+                selectedElement.classList.add('playing');
+            }
+            
+            currentAudio.play().catch(() => {});
         }
         
         // Call the onSelect handler
@@ -457,6 +571,19 @@ function renderMusicCarousel(sectionName, config, SELECTORS_CONFIG) {
 // Global audio element for music playback
 let currentAudio = null;
 let currentPlayingId = null;
+let selectedMusicId = null; // Track the selected song to keep playing it
+
+// Global function to stop music playback (called when leaving music step)
+function stopMusicPlayback() {
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+        currentPlayingId = null;
+        document.querySelectorAll('.music-card.playing, .music-flex-item.playing').forEach(card => {
+            card.classList.remove('playing');
+        });
+    }
+}
 
 function createMusicCarouselItem(item, sectionName, config, SELECTORS_CONFIG) {
     const itemEl = document.createElement('div');
@@ -524,12 +651,82 @@ function createMusicCarouselItem(item, sectionName, config, SELECTORS_CONFIG) {
     
     itemEl.appendChild(info);
     
+    // Hover to play music
+    itemEl.addEventListener('mouseenter', () => {
+        startMusicPlayback(item, itemEl);
+    });
+    
+    itemEl.addEventListener('mouseleave', () => {
+        stopMusicCardPlayback(item, itemEl);
+    });
+    
     // Click to select
     itemEl.addEventListener('click', () => {
         selectMusicItem(sectionName, item.id, config, SELECTORS_CONFIG, itemEl);
     });
     
     return itemEl;
+}
+
+function startMusicPlayback(item, cardElement) {
+    // If a song is already selected, don't let hover change it
+    if (selectedMusicId !== null) {
+        return;
+    }
+    
+    // If already playing this song, do nothing
+    if (currentPlayingId === item.id && currentAudio && !currentAudio.paused) {
+        return;
+    }
+    
+    // Stop any currently playing audio
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+        // Remove playing class from all cards
+        document.querySelectorAll('.music-card.playing, .music-flex-item.playing').forEach(card => {
+            card.classList.remove('playing');
+        });
+    }
+    
+    // Create and play new audio
+    currentAudio = new Audio(item.audio);
+    currentPlayingId = item.id;
+    
+    // Add playing class to this card
+    cardElement.classList.add('playing');
+    document.querySelectorAll(`.music-card[data-music="${item.id}"], .music-flex-item[data-music="${item.id}"]`).forEach(card => {
+        card.classList.add('playing');
+    });
+    
+    currentAudio.play().catch(() => {});
+    
+    // Handle audio ending
+    currentAudio.addEventListener('ended', () => {
+        cardElement.classList.remove('playing');
+        document.querySelectorAll(`.music-card[data-music="${item.id}"], .music-flex-item[data-music="${item.id}"]`).forEach(card => {
+            card.classList.remove('playing');
+        });
+        currentPlayingId = null;
+    });
+}
+
+function stopMusicCardPlayback(item, cardElement) {
+    // Don't stop if a song is selected (it should keep playing)
+    if (selectedMusicId !== null) {
+        return;
+    }
+    
+    // Only stop if this is the currently playing song
+    if (currentPlayingId === item.id && currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+        cardElement.classList.remove('playing');
+        document.querySelectorAll(`.music-card[data-music="${item.id}"], .music-flex-item[data-music="${item.id}"]`).forEach(card => {
+            card.classList.remove('playing');
+        });
+        currentPlayingId = null;
+    }
 }
 
 function toggleMusicPlayback(item, cardElement) {
@@ -630,6 +827,58 @@ function toggleMusicFlexPlayback(item, cardElement) {
     });
 }
 
+function startMusicFlexPlayback(item, cardElement) {
+    // If a song is already selected, don't let hover change it
+    if (selectedMusicId !== null) {
+        return;
+    }
+    
+    // If already playing this song, do nothing
+    if (currentPlayingId === item.id && currentAudio && !currentAudio.paused) {
+        return;
+    }
+    
+    // Stop any currently playing audio
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+        // Remove playing class from all cards
+        document.querySelectorAll('.music-card.playing, .music-flex-item.playing').forEach(card => {
+            card.classList.remove('playing');
+        });
+    }
+    
+    // Create and play new audio
+    currentAudio = new Audio(item.audio);
+    currentPlayingId = item.id;
+    
+    // Add playing class to this card
+    cardElement.classList.add('playing');
+    
+    currentAudio.play().catch(() => {});
+    
+    // Handle audio ending
+    currentAudio.addEventListener('ended', () => {
+        cardElement.classList.remove('playing');
+        currentPlayingId = null;
+    });
+}
+
+function stopMusicFlexPlayback(item, cardElement) {
+    // Don't stop if a song is selected (it should keep playing)
+    if (selectedMusicId !== null) {
+        return;
+    }
+    
+    // Only stop if this is the currently playing song
+    if (currentPlayingId === item.id && currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+        cardElement.classList.remove('playing');
+        currentPlayingId = null;
+    }
+}
+
 function selectMusicItem(sectionName, value, config, SELECTORS_CONFIG, sourceElement = null) {
     // Update visual state
     const content = document.getElementById(`${sectionName}-carousel-content`);
@@ -643,6 +892,36 @@ function selectMusicItem(sectionName, value, config, SELECTORS_CONFIG, sourceEle
                 selectedElement = item;
             }
         });
+    }
+    
+    // Find the selected item data and start playing it
+    const selectedItem = config.items.find(item => item.id === value);
+    if (selectedItem) {
+        selectedMusicId = value;
+        
+        // Stop any currently playing audio first
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio = null;
+            document.querySelectorAll('.music-card.playing, .music-flex-item.playing').forEach(card => {
+                card.classList.remove('playing');
+            });
+        }
+        
+        // Start playing the selected song
+        currentAudio = new Audio(selectedItem.audio);
+        currentPlayingId = value;
+        currentAudio.loop = true; // Loop the selected song
+        
+        // Add playing class
+        if (selectedElement) {
+            selectedElement.classList.add('playing');
+        }
+        document.querySelectorAll(`.music-card[data-music="${value}"], .music-flex-item[data-music="${value}"]`).forEach(card => {
+            card.classList.add('playing');
+        });
+        
+        currentAudio.play().catch(() => {});
     }
     
     // Call the onSelect handler with source element for animation

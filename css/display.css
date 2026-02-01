@@ -202,9 +202,9 @@
 }
 
 .display-sign-6 {
+    height: 78cqh;
     left: 50%;
-    /* 330px / 1160 * 100 = 28.45cqh */
-    bottom: -28.45cqh;
+    bottom: -30.45cqh;
 }
 
 /* Flowers Container - between sign and packaging */
@@ -246,12 +246,9 @@
 }
 
 .display-flower-3 {
-    /* 260px / 2100 * 100 = 12.38cqw */
-    left: 12.38cqw;
-    /* 50px / 1160 * 100 = 4.31cqh */
-    bottom: 4.31cqh;
-    /* 180px / 1160 * 100 = 15.52cqh */
-    height: 15.52cqh;
+    left: 11.38cqw;
+    bottom: 5.31cqh;
+    height: 18.52cqh;
 }
 
 .display-flower-4 {
@@ -265,35 +262,29 @@
 .display-flower-5 {
     /* 110px / 2100 * 100 = 5.24cqw */
     left: -5.24cqw;
-    /* 320px / 1160 * 100 = 27.59cqh */
-    bottom: 27.59cqh;
+    /* 370px / 1160 * 100 = 30.59cqh */
+    bottom: 30.59cqh;
     /* 190px / 1160 * 100 = 16.38cqh */
     height: 16.38cqh;
 }
 
 .display-flower-6 {
     rotate: 330deg;
-    /* 50px / 2100 * 100 = 2.38cqw */
     left: 2.38cqw;
-    /* 150px / 1160 * 100 = 12.93cqh */
     top: 12.93cqh;
     height: 15.52cqh;
 }
 
 .display-flower-7 {
-    /* 80px / 2100 * 100 = 3.81cqw */
-    left: -3.81cqw;
-    top: 12.93cqh;
-    /* 170px / 1160 * 100 = 14.66cqh */
-    height: 14.66cqh;
+    left: -5.81cqw;
+    top: 15.93cqh;
+    height: 16.66cqh;
 }
 
 .display-flower-8 {
-    /* 280px / 2100 * 100 = 13.33cqw */
-    right: 13.33cqw;
-    /* 90px / 1160 * 100 = 7.76cqh */
-    bottom: 7.76cqh;
-    height: 14.66cqh;
+    right: 12.33cqw;
+    bottom: 6.76cqh;
+    height: 20.66cqh;
 }
 
 /* Balloons Container */
@@ -329,6 +320,9 @@
 }
 
 .display-balloon-2 {
+    top: -3cqh;
+    left: -3cqw;
+    height: 48cqh;
 }
 
 .display-balloon-3 {
@@ -337,7 +331,8 @@
 }
 
 .display-balloon-4 {
-    /* 130px / 2100 * 100 = 6.19cqw */
+    height: 41cqh;
+    top: -1cqh;
     left: -6.19cqw;
     rotate: 20deg;
 }
@@ -398,21 +393,15 @@
 }
 
 .display-extra-1 {
-    /* 310px / 2100 * 100 = 14.76cqw */
-    right: 14.76cqw;
-    /* 110px / 1160 * 100 = 9.48cqh */
-    bottom: 9.48cqh;
-    /* 450px / 1160 * 100 = 38.79cqh */
-    height: 38.79cqh;
+    right: 11.76cqw;
+    bottom: 7.48cqh;
+    height: 50.79cqh;
 }
 
 .display-extra-2 {
-    /* 330px / 2100 * 100 = 15.71cqw */
-    left: 15.71cqw;
-    /* 130px / 1160 * 100 = 11.21cqh */
-    bottom: 11.21cqh;
-    /* 400px / 1160 * 100 = 34.48cqh */
-    height: 34.48cqh;
+    left: 14.71cqw;
+    bottom: 12.21cqh;
+    height: 39.48cqh;
 }
 
 .display-extra-3 {
@@ -556,5 +545,116 @@
     100% {
         opacity: 1;
         transform: translate(-50%, -50%) translateY(0);
+    }
+}
+
+/* ========================================
+   MUSIC DISPLAY CARD
+   ======================================== */
+
+/* Same styles as .music-flex-item in selectors.css */
+.display-music-card {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    /* 250px / 2100 * 100 = 11.9cqw */
+    width: 11.9cqw;
+    min-height: auto;
+    background: #282323;
+    /* 8px / 2100 * 100 = 0.38cqw */
+    border-radius: 0.38cqw;
+    /* 8px / 2100 * 100 = 0.38cqw */
+    padding: 0.38cqw;
+    gap: 0.48cqw;
+    z-index: 20;
+    /* Position at bottom center - adjust as needed */
+    bottom: 47cqh;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: musicCardFadeIn 0.3s ease-out forwards;
+}
+
+.display-music-card.fade-out {
+    animation: musicCardFadeOut 0.3s ease-out forwards;
+}
+
+/* Same styles as .music-flex-image-container in selectors.css */
+.display-music-card-image {
+    position: relative;
+    /* 35px / 2100 * 100 = 1.67cqw */
+    width: 1.67cqw;
+    min-width: 1.67cqw;
+    /* 35px / 1160 * 100 = 3.02cqh */
+    height: 3.02cqh;
+    /* 6px / 2100 * 100 = 0.29cqw */
+    border-radius: 0.29cqw;
+    overflow: hidden;
+    background: rgba(242, 231, 114, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Same styles as .music-flex-image-container .flex-carousel-image */
+.display-music-card-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    filter: none;
+    background: none;
+}
+
+/* Same styles as .music-flex-info in selectors.css */
+.display-music-card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* 4px / 1160 * 100 = 0.34cqh */
+    gap: 0.34cqh;
+    text-align: left;
+}
+
+/* Same styles as .music-flex-song in selectors.css */
+.display-music-card-song {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 700;
+    font-size: 0.8cqw;
+    line-height: 100%;
+    color: #F2E772;
+    white-space: nowrap;
+}
+
+/* Same styles as .music-flex-artist in selectors.css */
+.display-music-card-artist {
+    font-family: 'Narkiss Yair TRIAL', sans-serif;
+    font-weight: 400;
+    font-size: 0.8cqw;
+    line-height: 100%;
+    color: #F2E772;
+    white-space: nowrap;
+}
+
+@keyframes musicCardFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.4);
+    }
+}
+
+@keyframes musicCardFadeOut {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.4);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.8);
     }
 }

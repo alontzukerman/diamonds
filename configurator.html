@@ -75,13 +75,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="progress-step locked" data-progress-step="6">
-                        <div class="progress-header">
-                            <div class="progress-circle">
-                                <img src="assets/icons/lock.svg" alt="Locked" class="progress-lock-icon">
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 
                 <!-- Accordion Menu -->
@@ -243,25 +236,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Step 6: Deadline -->
-                    <div class="menu-step disabled" data-step="6">
-                        <div class="menu-step-header" data-step-toggle="6">
-                            <span class="menu-step-number">[06]</span>
-                            <span class="menu-step-title">Deadline</span>
-                            <img src="assets/icons/plus.svg" alt="" class="menu-step-icon" aria-hidden="true">
-                        </div>
-                        <div class="menu-step-content" id="step-content-6">
-                            <div class="menu-section" data-section="deadline">
-                                <div class="menu-section-header">
-                                    <span class="menu-section-title clickable">Set Deadline</span>
-                                </div>
-                                <div class="menu-section-content">
-                                    <p class="menu-description">Select the date and time when you want the proposal to take place.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </aside>
             </div>
             
@@ -300,16 +274,20 @@
         </div> <!-- close .page-scene -->
     </main>
 
-    <!-- Checkout Share Modal -->
-    <div class="checkout-modal-overlay" id="checkout-modal-overlay">
-        <div class="checkout-modal">
-            <button class="checkout-modal-close" id="checkout-modal-close">
-                <img src="assets/icons/cart-x.svg" alt="Close">
-            </button>
-            <h3 class="checkout-modal-title">Share Your Cart</h3>
-            <div class="checkout-modal-link-box">
-                <input type="text" class="checkout-modal-link" id="checkout-modal-link" readonly>
-                <button class="checkout-modal-copy" id="checkout-modal-copy">Copy</button>
+    <!-- Deadline Popover -->
+    <div class="deadline-popover-overlay" id="deadline-popover-overlay">
+        <div class="deadline-popover">
+            <h3 class="deadline-popover-title">Choose Deadline</h3>
+            <input type="date" class="deadline-popover-input" id="deadline-popover-input" disabled>
+            <div class="deadline-popover-calendar" id="deadline-popover-calendar">
+                <!-- Calendar will be rendered by JS -->
+            </div>
+            <div class="deadline-share-container" id="deadline-share-container">
+                <button class="deadline-popover-share" id="deadline-popover-share">Share</button>
+                <div class="deadline-share-link-box" id="deadline-share-link-box">
+                    <input type="text" class="deadline-share-link" id="deadline-share-link" readonly>
+                    <button class="deadline-share-copy" id="deadline-share-copy">Copy</button>
+                </div>
             </div>
         </div>
     </div>
@@ -320,7 +298,6 @@
         <!-- Cart Header -->
         <div class="cart-header">
             <h2 class="cart-title">Cart</h2>
-            <button class="cart-checkout-btn" id="cart-checkout-btn">Checkout</button>
             <button class="cart-close-btn" id="cart-close-btn">
                 <img src="assets/icons/cart-x.svg" alt="Close" class="cart-close-icon">
             </button>
@@ -386,6 +363,7 @@
     <script src="js/cart-helpers.js"></script>
     <script src="js/cart-ui.js"></script>
     <script src="js/checkout.js"></script>
+    <script src="js/deadline.js"></script>
     <script src="js/renderers.js"></script>
     <script src="js/navigation.js"></script>
     <script src="configurator.js"></script>

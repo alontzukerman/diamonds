@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
             items: LOCATIONS.map(loc => ({
                 id: loc.name,
                 label: loc.name,
-                price: loc.price > 0 ? `[$${loc.price.toLocaleString()}]` : '[Free]',
+                price: loc.price > 0 ? `[$${loc.price.toLocaleString()}]` : '[$0]',
                 image: `assets/locations/${loc.image}`,
                 premium: loc.premium
             })),
@@ -266,6 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })),
             onSelect: (value, sourceElement) => {
                 state.selections.music = value;
+                updateMusicDisplay();
                 
                 const trackIndex = parseInt(value) - 1;
                 const track = MUSIC[trackIndex];
@@ -277,14 +278,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     ASSETS.music.image(track.image)
                 );
                 Cart.setItem(cartItem, sourceElement);
-            }
-        },
-        deadline: {
-            type: 'carousel',
-            items: [], // To be defined
-            onSelect: (value, sourceElement) => {
-                state.selections.deadline = value;
-                // Note: Deadline has no price, so love meter won't change
             }
         }
     };
@@ -317,6 +310,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Helper function to expand a step (shared by toggleStep and expandStep)
     function doExpandStep(stepNumber) {
+        // Stop music if leaving the music step (step 5)
+        if (state.currentStep === 5 && stepNumber !== 5) {
+            if (typeof stopMusicPlayback === 'function') {
+                stopMusicPlayback();
+            }
+        }
+        
         // Collapse all other steps first
         document.querySelectorAll('.menu-step.expanded').forEach(step => {
             step.classList.remove('expanded');
