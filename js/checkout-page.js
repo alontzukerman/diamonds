@@ -96,10 +96,32 @@
             name.className = 'receipt-item-name';
             name.textContent = item.name;
             
+            // Add size as inline sub-text (e.g., "[Size 51]")
+            if (item.size) {
+                const sizeSpan = document.createElement('span');
+                sizeSpan.className = 'receipt-item-size';
+                sizeSpan.textContent = ` [Size ${item.size}]`;
+                name.appendChild(sizeSpan);
+            }
+            
+            // Add source and carat as inline sub-text (e.g., "[Natural, 2.10 ct]")
+            if (item.source || item.carat) {
+                const stoneSpan = document.createElement('span');
+                stoneSpan.className = 'receipt-item-size';
+                const parts = [];
+                if (item.source) {
+                    parts.push(item.source === 'lab' ? 'Lab Grown' : 'Natural');
+                }
+                if (item.carat) {
+                    parts.push(`${item.carat.toFixed(2)} ct`);
+                }
+                stoneSpan.textContent = ` [${parts.join(', ')}]`;
+                name.appendChild(stoneSpan);
+            }
+            
             const price = document.createElement('span');
             price.className = 'receipt-item-price';
-            // First item gets $ from CSS, rest just show number
-            price.textContent = index === 0 ? formatPrice(item.price) : formatPrice(item.price);
+            price.textContent = formatPriceWithSymbol(item.price);
             
             itemEl.appendChild(name);
             itemEl.appendChild(price);
@@ -114,28 +136,6 @@
         }
     }
 
-    /**
-     * Generate barcode visualization
-     */
-    function generateBarcode() {
-        const barcodeEl = document.getElementById('receipt-barcode');
-        if (!barcodeEl) return;
-        
-        // Create random barcode pattern
-        const barCount = 60;
-        for (let i = 0; i < barCount; i++) {
-            const bar = document.createElement('div');
-            bar.className = 'barcode-bar';
-            // Random width between 1-4px
-            const width = Math.random() > 0.7 ? (Math.random() > 0.5 ? 3 : 4) : (Math.random() > 0.5 ? 1 : 2);
-            bar.style.width = width + 'px';
-            // Occasionally add gaps
-            if (Math.random() > 0.85) {
-                bar.style.background = 'transparent';
-            }
-            barcodeEl.appendChild(bar);
-        }
-    }
 
     /**
      * Initialize and run countdown timer
@@ -176,13 +176,94 @@
     }
 
     /**
+     * Initialize payment modal
+     */
+    function initPaymentModal() {
+        const payBtn = document.getElementById('receipt-pay-btn');
+        const modalOverlay = document.getElementById('payment-modal-overlay');
+        const cardNumberInput = document.getElementById('payment-card-number');
+        const expiryInput = document.getElementById('payment-expiry');
+        const cvvInput = document.getElementById('payment-cvv');
+
+        if (payBtn && modalOverlay) {
+            payBtn.addEventListener('click', () => {
+                modalOverlay.classList.add('open');
+            });
+
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    modalOverlay.classList.remove('open');
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modalOverlay.classList.contains('open')) {
+                    modalOverlay.classList.remove('open');
+                }
+            });
+        }
+
+        // Card number: max 16 digits with spaces between groups of 4
+        if (cardNumberInput) {
+            cardNumberInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 16) {
+                    value = value.slice(0, 16);
+                }
+                // Add space after every 4 digits
+                let formatted = '';
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) {
+                        formatted += ' ';
+                    }
+                    formatted += value[i];
+                }
+                e.target.value = formatted;
+            });
+        }
+
+        // Expiry date: 4 digits with auto "/" after first 2
+        if (expiryInput) {
+            let prevExpiryLength = 0;
+            
+            expiryInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 4) {
+                    value = value.slice(0, 4);
+                }
+                
+                // Add separator when typing (not deleting) and have 2+ digits
+                if (value.length >= 2 && value.length > prevExpiryLength) {
+                    value = value.slice(0, 2) + ' / ' + value.slice(2);
+                } else if (value.length > 2) {
+                    value = value.slice(0, 2) + ' / ' + value.slice(2);
+                }
+                
+                prevExpiryLength = value.replace(/\D/g, '').length;
+                e.target.value = value;
+            });
+        }
+
+        // CVV: max 3 digits
+        if (cvvInput) {
+            cvvInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 3) {
+                    value = value.slice(0, 3);
+                }
+                e.target.value = value;
+            });
+        }
+    }
+
+    /**
      * Initialize checkout page
      */
     function initCheckoutPage() {
         const items = parseCartFromURL();
         renderReceiptItems(items);
-        generateBarcode();
         initCountdown();
+        initPaymentModal();
     }
 
     // Initialize when DOM is ready

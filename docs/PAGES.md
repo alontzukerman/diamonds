@@ -114,6 +114,82 @@ A full-screen overlay accessible from the navbar "About" button.
 
 ---
 
+## 4. Checkout Page (`checkout.html`)
+
+A receipt-style checkout page for reviewing and paying for cart items.
+
+### Layout & Structure
+
+**Container:**
+- Centered on page with fixed background image
+- Scrollable page content (background stays fixed)
+- Padding: 60px 20px
+
+**Receipt Card:**
+- Max-width: 530px
+- Background: #F5F5F5
+- Box-shadow: 20px 20px 26px 0px #00000040
+- Torn paper edge effect (top and bottom)
+
+**Receipt Title:**
+- Font: Sloop Script Three, 160px, weight 500
+- Color: #FF0000
+- Centered
+
+**Order Info:**
+- Date and Order No. rows
+- Font: Narkiss Yair TRIAL, 25px
+- Color: #282323
+- Red dashed dividers below
+
+**Items List:**
+- Item name (left) and price with $ (right)
+- Font: Narkiss Yair TRIAL, 25px, line-height 120%
+- Sub-items (size, carat, source): 18px, 70% opacity, indented
+
+**Total:**
+- Label: Narkiss Yair TRIAL, 32px, weight 400
+- Price: Narkiss Yair TRIAL, 32px, weight 700
+- Color: #282323
+
+**Countdown Timer:**
+- Font: Sloop Script Three, 130px, letter-spacing 4%
+- Color: #FF0000
+- Labels: Narkiss Yair TRIAL, 25px, #282323
+- Counts down from 14 days
+
+**Pay Button:**
+- Font: Sloop Script Three, 32px, weight 700
+- Border: 3px solid #FF0000
+- Pill shape (border-radius: 50px)
+- Hover: Red background, light text
+
+**Barcode:**
+- Image: `assets/ui/barcode.png`
+- Positioned absolute at bottom of receipt
+
+**Heart Decoration:**
+- `assets/decorations/heart.gif`
+- Positioned bottom-right of receipt card
+
+### Payment Modal
+
+Opens when clicking Pay button.
+
+- Overlay: 30% black opacity
+- Modal: Pink background (#FFD2F6), rounded corners
+- Fields: Card number, Expiry date, CVV
+- Inputs: Red border, Narkiss Yair TRIAL font
+- Close: Click outside or press Escape
+
+### Cart Data
+
+- Cart items are encoded in URL as base64 JSON
+- Generated via share link from configurator cart
+- URL format: `checkout.html?cart={base64_encoded_data}`
+
+---
+
 ## Navbar Layout
 
 - **Left side:** Logo (`navbar-logo.svg`, 390px width)

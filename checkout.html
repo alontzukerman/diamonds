@@ -11,12 +11,35 @@
     <link rel="stylesheet" href="css/checkout.css">
 </head>
 <body>
+    <!-- Payment Modal -->
+    <div class="payment-modal-overlay" id="payment-modal-overlay">
+        <div class="payment-modal">
+            <div class="payment-field">
+                <label class="payment-label">Card number</label>
+                <input type="text" class="payment-input" id="payment-card-number" placeholder="">
+            </div>
+            <div class="payment-row">
+                <div class="payment-field">
+                    <label class="payment-label">Expiry date</label>
+                    <input type="text" class="payment-input" id="payment-expiry" placeholder="02 / 26">
+                </div>
+                <div class="payment-field">
+                    <label class="payment-label">CVV</label>
+                    <input type="text" class="payment-input" id="payment-cvv" placeholder="">
+                </div>
+            </div>
+            <button class="payment-confirm-btn" id="payment-confirm-btn">Confirm</button>
+        </div>
+    </div>
+
     <!-- Checkout Page -->
     <main class="checkout-main">
         <div class="page-background"></div>
 
-        <!-- Receipt Card -->
-        <div class="receipt">
+        <!-- Fixed aspect ratio scene container (2100:1160) -->
+        <div class="page-scene">
+            <!-- Receipt Card -->
+            <div class="receipt">
             <!-- Receipt Title -->
             <h1 class="receipt-title">Receipt</h1>
 
@@ -33,7 +56,6 @@
             </div>
 
             <!-- Divider -->
-            <div class="receipt-divider"></div>
             <div class="receipt-divider"></div>
 
             <!-- Items List -->
@@ -59,10 +81,10 @@
                     <span class="countdown-value" id="countdown-seconds">00</span>
                 </div>
                 <div class="receipt-countdown-labels">
-                    <span class="countdown-label">Days</span>
-                    <span class="countdown-label">Hours</span>
-                    <span class="countdown-label">minutes</span>
-                    <span class="countdown-label">Seconds</span>
+                    <span class="countdown-label countdown-label-days">Days</span>
+                    <span class="countdown-label countdown-label-hours">Hours</span>
+                    <span class="countdown-label countdown-label-minutes">minutes</span>
+                    <span class="countdown-label countdown-label-seconds">Seconds</span>
                 </div>
             </div>
 
@@ -70,11 +92,14 @@
             <button class="receipt-pay-btn" id="receipt-pay-btn">Pay</button>
 
             <!-- Barcode -->
-            <div class="receipt-barcode" id="receipt-barcode"></div>
-        </div>
+            <div class="receipt-barcode">
+                <img src="assets/ui/barcode.svg" alt="Barcode">
+            </div>
 
-        <!-- Diamond decoration -->
-        <img src="assets/decorations/diamond.gif" alt="" class="receipt-diamond-decor" aria-hidden="true">
+            <!-- Heart decoration -->
+            <img src="assets/decorations/heart.gif" alt="" class="receipt-heart-decor" aria-hidden="true">
+        </div>
+        </div> <!-- close .page-scene -->
     </main>
 
     <script src="cursor.js"></script>

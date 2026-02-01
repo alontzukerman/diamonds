@@ -40,7 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
             items: ['48', '49', '50', '51', '52', '53', '54', '55', '56'],
             onSelect: (value, sourceElement) => {
                 state.selections.ring.size = value;
-                updateRingCartItem(sourceElement);
+                // No flying animation for size changes
+                updateRingCartItem(null);
             }
         },
         stone: {
@@ -81,7 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
             onSelect: (value, sourceElement) => {
                 state.selections.diamond.carat = parseFloat(value);
                 updateStoneDisplay();
-                updateStoneCartItem(sourceElement);
+                // No flying animation for carat changes
+                updateStoneCartItem(null);
             }
         },
         source: {
@@ -93,8 +95,11 @@ document.addEventListener('DOMContentLoaded', function() {
             onSelect: (value, sourceElement) => {
                 state.selections.diamond.source = value;
                 
+                // Get the source image for the flying animation
+                const sourceImage = value === 'lab' ? ASSETS.rings.lab : ASSETS.rings.natural;
+                
                 // Update the stone cart item (source is now part of the stone item, not separate)
-                updateStoneCartItem(sourceElement);
+                updateStoneCartItem(sourceElement, sourceImage);
                 
                 // Re-render carat slider if it's currently shown (prices depend on source)
                 if (state.currentSection === 'carat') {

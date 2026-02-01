@@ -1,9 +1,11 @@
 /* ========================================
    BOTTOM CENTER: SELECTION CONTAINER
+   Reference: 2100px width, 1160px height
    ======================================== */
 
 .selection-container {
-    height: 220px;
+    /* 220px / 1160 * 100 = 18.97cqh */
+    height: 18.97cqh;
     flex-shrink: 0;
     display: flex;
     justify-content: center;
@@ -17,7 +19,8 @@
 .selection-carousel {
     display: flex;
     align-items: center;
-    gap: 70px;
+    /* 70px / 2100 * 100 = 3.33cqw */
+    gap: 3.33cqw;
 }
 
 .carousel-arrow {
@@ -41,8 +44,10 @@
     justify-content: center;
     position: relative;
     overflow: visible;
-    width: 250px;
-    padding-top: 60px;
+    /* 250px / 2100 * 100 = 11.9cqw */
+    width: 11.9cqw;
+    /* 60px / 1160 * 100 = 5.17cqh */
+    padding-top: 5.17cqh;
 }
 
 /* Carousel slide animations */
@@ -72,7 +77,8 @@
 
 @keyframes slideInLeft {
     0% {
-        transform: translateX(-15px);
+        /* 15px / 2100 * 100 = 0.71cqw */
+        transform: translateX(-0.71cqw);
         opacity: 0;
     }
     100% {
@@ -83,7 +89,7 @@
 
 @keyframes slideInRight {
     0% {
-        transform: translateX(15px);
+        transform: translateX(0.71cqw);
         opacity: 0;
     }
     100% {
@@ -98,7 +104,7 @@
         opacity: 1;
     }
     100% {
-        transform: translateX(-15px);
+        transform: translateX(-0.71cqw);
         opacity: 0;
     }
 }
@@ -109,7 +115,7 @@
         opacity: 1;
     }
     100% {
-        transform: translateX(15px);
+        transform: translateX(0.71cqw);
         opacity: 0;
     }
 }
@@ -119,19 +125,23 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    gap: 10px;
+    /* 10px / 1160 * 100 = 0.86cqh */
+    gap: 0.86cqh;
     padding: 0;
     background: transparent;
     border: none;
     border-radius: 0;
     transition: transform 0.2s ease;
     position: relative;
-    min-height: 195px;
+    /* 195px / 1160 * 100 = 16.81cqh */
+    min-height: 16.81cqh;
 }
 
 .carousel-image {
-    width: 200px;
-    height: 150px;
+    /* 200px / 2100 * 100 = 9.52cqw */
+    width: 9.52cqw;
+    /* 150px / 1160 * 100 = 12.93cqh */
+    height: 12.93cqh;
     object-fit: contain;
 }
 
@@ -139,22 +149,26 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 50px;
+    /* 50px / 2100 * 100 = 2.38cqw */
+    gap: 2.38cqw;
     background: #F2E772;
-    padding: 2px;
+    /* 2px / 2100 * 100 = 0.095cqw */
+    padding: 0.095cqw;
 }
 
 .carousel-item[data-packaging] .carousel-info,
 .carousel-item[data-signs] .carousel-info {
     flex-direction: column;
-    gap: 5px;
+    /* 5px / 1160 * 100 = 0.43cqh */
+    gap: 0.43cqh;
 }
 
 .carousel-label,
 .carousel-price {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 25px;
+    /* 25px / 2100 * 100 = 1.19cqw */
+    font-size: 1.19cqw;
     line-height: 100%;
     color: #282323;
     white-space: nowrap;
@@ -162,8 +176,10 @@
 
 .carousel-premium {
     position: absolute;
-    top: -20px;
-    right: 40px;
+    /* 20px / 1160 * 100 = 1.72cqh */
+    top: -1.72cqh;
+    /* 40px / 2100 * 100 = 1.9cqw */
+    right: 1.9cqw;
 }
 
 .carousel-item[data-material="silver"] .carousel-premium {
@@ -171,12 +187,14 @@
 }
 
 .carousel-item[data-source="natural"] .carousel-premium {
-    top: -20px;
-    right: 65px;
+    top: -1.72cqh;
+    /* 65px / 2100 * 100 = 3.1cqw */
+    right: 3.1cqw;
 }
 
 .carousel-item[data-material="white-gold"] .carousel-premium {
-    right: 85px;
+    /* 85px / 2100 * 100 = 4.05cqw */
+    right: 4.05cqw;
 }
 
 .carousel-item[data-source="lab"] .carousel-image {
@@ -188,7 +206,8 @@
 }
 
 .carousel-item[data-stone] .carousel-image {
-    transform: scale(1.5) translateY(-10px);
+    /* 10px / 1160 * 100 = 0.86cqh */
+    transform: scale(1.5) translateY(-0.86cqh);
 }
 
 .carousel-item[data-material="silver"] .carousel-image {
@@ -196,9 +215,10 @@
 }
 
 .carousel-item.selected .carousel-image {
-    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.95));
+    filter: drop-shadow(0 0 0.57cqw rgba(255, 255, 255, 0.95));
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
-    border-radius: 8px;
+    /* 8px / 2100 * 100 = 0.38cqw */
+    border-radius: 0.38cqw;
 }
 
 
@@ -218,7 +238,8 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    gap: 30px;
+    /* 30px / 2100 * 100 = 1.43cqw */
+    gap: 1.43cqw;
 }
 
 .flex-carousel-item {
@@ -226,14 +247,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 0.86cqh;
     padding: 0;
     background: transparent;
     border: none;
     border-radius: 0;
     transition: transform 0.2s ease;
     position: relative;
-    min-height: 195px;
+    min-height: 16.81cqh;
     cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto !important;
 }
 
@@ -243,17 +264,18 @@
 
 /* Regular state - white glow on all images */
 .flex-carousel-image {
-    height: 110px;
+    /* 110px / 1160 * 100 = 9.48cqh */
+    height: 9.48cqh;
     width: auto;
     object-fit: contain;
-    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.95));
+    filter: drop-shadow(0 0 0.57cqw rgba(255, 255, 255, 0.95));
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
-    border-radius: 8px;
+    border-radius: 0.38cqw;
 }
 
 /* Selected state - yellow glow */
 .flex-carousel-item.selected .flex-carousel-image {
-    filter: drop-shadow(0 0 12px rgba(242, 231, 114, 0.95));
+    filter: drop-shadow(0 0 0.57cqw rgba(242, 231, 114, 0.95));
     background: radial-gradient(ellipse at center, rgba(242, 231, 114, 0.9) 0%, rgba(242, 231, 114, 0) 70%);
 }
 
@@ -261,7 +283,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 0.43cqh;
 }
 
 /* Regular state - white glow on text */
@@ -269,38 +291,41 @@
 .flex-carousel-price {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 25px;
+    font-size: 1.19cqw;
     line-height: 100%;
     color: #282323;
     white-space: nowrap;
     text-shadow: 
-        0 0 5px #fff,
-        0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 10px #fff,
-        0 0 15px #fff,
-        0 0 15px #fff,
-        0 0 20px #fff,
-        0 0 20px #fff,
-        0 0 30px #fff,
-        0 0 30px #fff,
-        0 0 40px #fff,
-        0 0 40px #fff,
-        0 0 60px #fff,
-        0 0 80px #fff,
-        0 0 100px #fff,
-        0 0 120px #fff;
+        0 0 0.24cqw #fff,
+        0 0 0.24cqw #fff,
+        0 0 0.48cqw #fff,
+        0 0 0.48cqw #fff,
+        0 0 0.71cqw #fff,
+        0 0 0.71cqw #fff,
+        0 0 0.95cqw #fff,
+        0 0 0.95cqw #fff,
+        0 0 1.43cqw #fff,
+        0 0 1.43cqw #fff,
+        0 0 1.9cqw #fff,
+        0 0 1.9cqw #fff,
+        0 0 2.86cqw #fff,
+        0 0 3.81cqw #fff,
+        0 0 4.76cqw #fff,
+        0 0 5.71cqw #fff;
 }
 
 .flex-carousel-premium {
     position: absolute;
-    top: 10px;
-    right: 28px;
+    /* 10px / 1160 * 100 = 0.86cqh */
+    top: 0.86cqh;
+    /* 28px / 2100 * 100 = 1.33cqw */
+    right: 1.33cqw;
 }
 
 
 .flex-carousel-premium img {
-    width: 30px;
+    /* 30px / 2100 * 100 = 1.43cqw */
+    width: 1.43cqw;
     height: auto;
 }
 
@@ -310,12 +335,13 @@
 }
 
 .flex-carousel-item[data-material="white-gold"] .flex-carousel-premium {
-    right: 42px;
+    /* 42px / 2100 * 100 = 2cqw */
+    right: 2cqw;
 }
 
 /* Stone-specific flex carousel styles */
 #stone-flex-carousel {
-    gap: 15px;
+    gap: 0.71cqw;
 }
 
 #stone-flex-carousel .flex-carousel-item {
@@ -324,7 +350,8 @@
 
 #stone-flex-carousel .flex-carousel-info {
     position: absolute;
-    top: -30px;
+    /* 30px / 1160 * 100 = 2.59cqh */
+    top: -2.59cqh;
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
@@ -343,7 +370,8 @@
 .selection-buttons {
     display: flex;
     align-items: center;
-    gap: 23px;
+    /* 23px / 2100 * 100 = 1.1cqw */
+    gap: 1.1cqw;
     padding: 0;
     background: transparent;
 }
@@ -351,18 +379,19 @@
 .selection-btn {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 25px;
+    font-size: 1.19cqw;
     line-height: 100%;
     text-align: center;
     color: #282323;
     background: #F2E772;
-    border: 2px solid #282323;
-    border-radius: 200px;
-    padding: 2px 22px;
+    border: 0.095cqw solid #282323;
+    border-radius: 9.52cqw;
+    /* 2px 22px / 2100 = 0.095cqw 1.05cqw */
+    padding: 0.17cqh 1.05cqw;
     letter-spacing: 0.02em;
     text-align: center;
     color: var(--yellow);
-    -webkit-text-stroke: 3px var(--black);
+    -webkit-text-stroke: 0.14cqw var(--black);
     paint-order: stroke fill;
     transition: all 0.2s ease;
     cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto !important;
@@ -379,7 +408,7 @@
 }
 
 .selection-btn.selected {
-    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.95));
+    filter: drop-shadow(0 0 0.57cqw rgba(255, 255, 255, 0.95));
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
 }
 
@@ -387,8 +416,10 @@
 .selection-buttons-location {
     flex-wrap: wrap;
     justify-content: center;
-    padding: 0 90px;
-    row-gap: 14px;
+    /* 90px / 2100 * 100 = 4.29cqw */
+    padding: 0 4.29cqw;
+    /* 14px / 1160 * 100 = 1.21cqh */
+    row-gap: 1.21cqh;
 }
 
 .selection-btn-location {
@@ -397,9 +428,11 @@
 
 .location-premium-star {
     position: absolute;
-    top: -20px;
-    right: -17px;
-    height: 40px;
+    top: -1.72cqh;
+    /* 17px / 2100 * 100 = 0.81cqw */
+    right: -0.81cqw;
+    /* 40px / 1160 * 100 = 3.45cqh */
+    height: 3.45cqh;
 }
 
 /* ========================================
@@ -417,7 +450,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 20px;
+    /* 20px / 2100 * 100 = 0.95cqw */
+    gap: 0.95cqw;
 }
 
 .carat-bar-container {
@@ -434,11 +468,14 @@
 
 .carat-handle {
     position: absolute;
-    top: 5px;
-    width: 30px;
-    height: 30px;
+    /* 5px / 1160 * 100 = 0.43cqh */
+    top: 0.43cqh;
+    /* 30px / 2100 * 100 = 1.43cqw */
+    width: 1.43cqw;
+    /* 30px / 1160 * 100 = 2.59cqh */
+    height: 2.59cqh;
     background: #F2E772;
-    border: 2px solid #000;
+    border: 0.095cqw solid #000;
     border-radius: 50%;
     cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto !important;
     transform: translateX(-50%);
@@ -459,23 +496,24 @@
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
-    margin-bottom: 12px;
+    /* 12px / 1160 * 100 = 1.03cqh */
+    margin-bottom: 1.03cqh;
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 25px;
+    font-size: 1.19cqw;
     line-height: 100%;
     color: #282323;
     white-space: nowrap;
     pointer-events: none;
     background: #F2E772;
-    padding: 2px;
+    padding: 0.095cqw;
 }
 
 .carat-label-min,
 .carat-label-max {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 25px;
+    font-size: 1.19cqw;
     line-height: 100%;
     color: #282323;
     white-space: nowrap;
@@ -488,17 +526,18 @@
     align-items: center;
     position: relative;
     background: #F2E772;
-    padding: 2px;
+    padding: 0.095cqw;
 }
 
 .carat-price {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 25px;
+    font-size: 1.19cqw;
     line-height: 100%;
     color: #282323;
     white-space: nowrap;
-    margin-top: 4px;
+    /* 4px / 1160 * 100 = 0.34cqh */
+    margin-top: 0.34cqh;
 }
 
 .carat-premium-tag {
@@ -515,20 +554,26 @@
 .selection-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    padding: 20px 30px;
+    gap: 0.71cqw;
+    /* 20px 30px / 2100 = 0.95cqw 1.43cqw */
+    padding: 1.72cqh 1.43cqw;
     background: rgba(242, 231, 114, 0.95);
-    border: 2px solid #282323;
-    border-radius: 20px;
-    max-width: 500px;
+    border: 0.095cqw solid #282323;
+    /* 20px / 2100 * 100 = 0.95cqw */
+    border-radius: 0.95cqw;
+    /* 500px / 2100 * 100 = 23.81cqw */
+    max-width: 23.81cqw;
     justify-content: center;
 }
 
 .grid-item {
-    width: 60px;
-    height: 60px;
-    border: 2px solid transparent;
-    border-radius: 10px;
+    /* 60px / 2100 * 100 = 2.86cqw */
+    width: 2.86cqw;
+    /* 60px / 1160 * 100 = 5.17cqh */
+    height: 5.17cqh;
+    border: 0.095cqw solid transparent;
+    /* 10px / 2100 * 100 = 0.48cqw */
+    border-radius: 0.48cqw;
     overflow: hidden;
     transition: all 0.2s ease;
 }
@@ -545,7 +590,7 @@
 
 .grid-item.selected {
     border-color: #FF0000;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+    box-shadow: 0 0 0.48cqw rgba(255, 0, 0, 0.3);
 }
 
 /* ========================================
@@ -556,7 +601,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 0.95cqw;
 }
 
 .multiselect-item {
@@ -565,9 +610,10 @@
     align-items: center;
     cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto !important;
     transition: transform 0.2s ease;
-    padding: 0 10px;
-    border-radius: 10px;
-    gap: 10px;
+    /* 10px / 2100 * 100 = 0.48cqw */
+    padding: 0 0.48cqw;
+    border-radius: 0.48cqw;
+    gap: 0.86cqh;
 }
 
 .multiselect-item:hover {
@@ -575,14 +621,16 @@
 }
 
 .multiselect-item.selected .multiselect-image {
-    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.95));
+    filter: drop-shadow(0 0 0.57cqw rgba(255, 255, 255, 0.95));
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
-    border-radius: 8px;
+    border-radius: 0.38cqw;
 }
 
 .multiselect-image {
-    width: 90px;
-    height: 90px;
+    /* 90px / 2100 * 100 = 4.29cqw */
+    width: 4.29cqw;
+    /* 90px / 1160 * 100 = 7.76cqh */
+    height: 7.76cqh;
     object-fit: contain;
 }
 
@@ -590,16 +638,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
+    /* 2px / 1160 * 100 = 0.17cqh */
+    gap: 0.17cqh;
     background: #F2E772;
-    padding: 2px;
+    padding: 0.095cqw;
 }
 
 .multiselect-label,
 .multiselect-price {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 25px;
+    font-size: 1.19cqw;
     line-height: 100%;
     color: #282323;
     white-space: nowrap;
@@ -611,33 +660,40 @@
    ======================================== */
 
 .music-carousel {
-    gap: 50px;
+    gap: 2.38cqw;
 }
 
 .music-carousel .carousel-content {
-    width: 320px;
-    padding-top: 20px;
+    /* 320px / 2100 * 100 = 15.24cqw */
+    width: 15.24cqw;
+    /* 20px / 1160 * 100 = 1.72cqh */
+    padding-top: 1.72cqh;
 }
 
 .music-card {
-    width: 320px;
+    width: 15.24cqw;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 20px;
+    gap: 0.95cqw;
     min-height: auto;
     justify-content: flex-start;
     background: #282323;
-    border-radius: 20px;
-    padding: 8px;
+    /* 20px / 2100 * 100 = 0.95cqw */
+    border-radius: 0.95cqw;
+    /* 8px / 2100 * 100 = 0.38cqw */
+    padding: 0.38cqw;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .music-card-image {
-    width: 89px;
-    height: 89px;
-    min-width: 89px;
-    border-radius: 15px;
+    /* 89px / 2100 * 100 = 4.24cqw */
+    width: 4.24cqw;
+    /* 89px / 1160 * 100 = 7.67cqh */
+    height: 7.67cqh;
+    min-width: 4.24cqw;
+    /* 15px / 2100 * 100 = 0.71cqw */
+    border-radius: 0.71cqw;
     overflow: hidden;
     background: rgba(242, 231, 114, 0.3);
     display: flex;
@@ -658,7 +714,7 @@
     justify-content: center;
     opacity: 0;
     transition: opacity 0.2s ease;
-    border-radius: 15px;
+    border-radius: 0.71cqw;
     cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto !important;
 }
 
@@ -672,8 +728,10 @@
 }
 
 .music-play-icon {
-    width: 36px;
-    height: 36px;
+    /* 36px / 2100 * 100 = 1.71cqw */
+    width: 1.71cqw;
+    /* 36px / 1160 * 100 = 3.1cqh */
+    height: 3.1cqh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -685,20 +743,25 @@
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 10px 0 10px 18px;
+    /* 10px 0 10px 18px */
+    border-width: 0.86cqh 0 0.86cqh 0.86cqw;
     border-color: transparent transparent transparent #F2E772;
-    margin-left: 4px;
+    /* 4px / 2100 * 100 = 0.19cqw */
+    margin-left: 0.19cqw;
 }
 
 /* Pause bars */
 .music-card.playing .music-play-icon::before {
     content: '';
-    width: 6px;
-    height: 20px;
+    /* 6px / 2100 * 100 = 0.29cqw */
+    width: 0.29cqw;
+    /* 20px / 1160 * 100 = 1.72cqh */
+    height: 1.72cqh;
     background: #F2E772;
     border: none;
     margin-left: 0;
-    box-shadow: 12px 0 0 #F2E772;
+    /* 12px / 2100 * 100 = 0.57cqw */
+    box-shadow: 0.57cqw 0 0 #F2E772;
 }
 
 .music-card-image.placeholder {
@@ -707,7 +770,8 @@
 
 .music-card-image.placeholder::after {
     content: '♪';
-    font-size: 40px;
+    /* 40px / 2100 * 100 = 1.9cqw */
+    font-size: 1.9cqw;
     color: #282323;
     opacity: 0.4;
 }
@@ -722,7 +786,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 4px;
+    /* 4px / 1160 * 100 = 0.34cqh */
+    gap: 0.34cqh;
     background: transparent;
     padding: 0;
     text-align: left;
@@ -731,7 +796,7 @@
 .music-card-song {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 700;
-    font-size: 25px;
+    font-size: 1.19cqw;
     line-height: 100%;
     color: #F2E772;
     white-space: nowrap;
@@ -740,7 +805,7 @@
 .music-card-artist {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 0.95cqw;
     line-height: 100%;
     color: #F2E772;
     white-space: nowrap;
@@ -751,5 +816,5 @@
 }
 
 .music-card.selected {
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 0.95cqw rgba(255, 255, 255, 0.9);
 }

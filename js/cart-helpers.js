@@ -55,8 +55,10 @@ function updateRingCartItem(sourceElement) {
 /**
  * Update the stone cart item (combines stone + carat + source into one item)
  * Only adds to cart if stone is selected
+ * @param {HTMLElement} sourceElement - Element to animate from (optional)
+ * @param {string} animationImage - Optional image to use for flying animation (e.g., source image)
  */
-function updateStoneCartItem(sourceElement) {
+function updateStoneCartItem(sourceElement, animationImage = null) {
     const stoneId = state.selections.diamond.stone;
     const carat = state.selections.diamond.carat;
     const source = state.selections.diamond.source;
@@ -87,5 +89,5 @@ function updateStoneCartItem(sourceElement) {
         premium: isPremium
     };
     
-    Cart.setItem(cartItem, sourceElement);
+    Cart.setItem(cartItem, sourceElement, animationImage);
 }

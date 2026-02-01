@@ -27,7 +27,7 @@
 
 ```css
 :root {
-    --step-header-height: 60px;
+    --step-header-height: 5.17cqh;  /* 60px at 1160px height */
     --yellow: #F2E772;
     --black: #000000;
 }
@@ -103,27 +103,61 @@
 
 ---
 
-## Responsive Scaling (Landing Page)
+## Responsive Scaling (All Pages)
 
-The landing page uses a **fixed aspect ratio container** (2100:1160) to maintain consistent layout across all screen sizes:
+All pages use a **fixed aspect ratio container** (2100:1160) to maintain consistent layout across all screen sizes.
 
 ### How It Works
-- `.landing-scene` container maintains exact 2100:1160 aspect ratio
-- Scales to fill viewport while preserving proportions
-- Uses CSS Container Queries (`container-type: size`)
-- All child elements use container-relative units (`cqw`, `cqh`)
+
+1. **`.page-scene` container** (defined in `common.css`):
+   - Maintains exact 2100:1160 aspect ratio
+   - Centers itself in the viewport
+   - Scales to fill available space while preserving proportions
+   - Uses CSS Container Queries (`container-type: size`)
+
+2. **All child elements** use container-relative units:
+   - Navbar, banner, menu, display, selectors all scale proportionally
+   - Positions remain consistent regardless of screen size
 
 ### Container Query Units
+
 | Unit | Meaning | Example |
 |------|---------|---------|
 | `cqw` | % of container width | `21.43cqw` = 450px at 2100px width |
 | `cqh` | % of container height | `8.62cqh` = 100px at 1160px height |
 
-### Conversion Formula
+### Conversion Formulas
+
 ```
 cqw value = (pixel value / 2100) × 100
 cqh value = (pixel value / 1160) × 100
 ```
+
+### Page-Specific Notes
+
+| Page | Container | Notes |
+|------|-----------|-------|
+| Landing (`index.html`) | `.page-scene` | Fixed viewport, all elements inside |
+| Configurator (`configurator.html`) | `.page-scene` | Fixed viewport, navbar + layout inside |
+| Checkout (`checkout.html`) | `.page-scene` | Fixed viewport, receipt card inside |
+| Gallery (`gallery.html`) | Scrollable | Uses `vw`/`vh` units; cards use container queries internally |
+| Cart Sidepanel | Outside `.page-scene` | Uses `vw`/`vh` units for viewport-relative scaling |
+| About Overlay | Outside `.page-scene` | Uses `vw`/`vh` units for viewport-relative scaling |
+| Payment Modal | Outside `.page-scene` | Uses `vw`/`vh` units for viewport-relative scaling |
+
+### Files Converted
+
+All CSS files now use responsive units:
+- `common.css` - `.page-scene` container, navbar, banner
+- `landing.css` - Landing page elements
+- `css/layout.css` - Configurator three-column layout
+- `css/menu.css` - Accordion menu
+- `css/progress-bar.css` - Step progress indicator
+- `css/display.css` - Ring display, flowers, balloons, extras
+- `css/selectors.css` - Carousel, buttons, sliders, grids
+- `css/cart.css` - Cart sidepanel (uses vw/vh)
+- `css/checkout.css` - Checkout receipt page
+- `gallery.css` - Gallery list (uses vw/vh + container queries on cards)
 
 ---
 

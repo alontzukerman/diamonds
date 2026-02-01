@@ -1,11 +1,13 @@
 /* ========================================
    ACCORDION MENU
+   Reference: 2100px width, 1160px height
    ======================================== */
 
 .configurator-menu {
-    width: 250px;
+    /* 250px / 2100 * 100 = 11.9cqw */
+    width: 11.9cqw;
     height: auto;
-    max-height: 80vh;
+    max-height: 80cqh;
     background: #F2E772;
     overflow-y: auto;
     flex-shrink: 0;
@@ -34,19 +36,21 @@
     align-items: center;
     justify-content: flex-start;
     height: var(--step-header-height);
-    padding: 0 15px 0 18px;
+    /* 15px / 2100 * 100 = 0.71cqw, 18px / 2100 * 100 = 0.86cqw */
+    padding: 0 0.71cqw 0 0.86cqw;
     transition: background 0.2s ease;
-    border-left: 2px solid #000;
-    border-right: 2px solid #000;
-    border-bottom: 2px solid #000;
+    /* 2px / 2100 * 100 = 0.095cqw */
+    border-left: 0.095cqw solid #000;
+    border-right: 0.095cqw solid #000;
+    border-bottom: 0.095cqw solid #000;
 }
 
 .menu-step:first-child .menu-step-header {
-    border-top: 2px solid #000;
+    border-top: 0.095cqw solid #000;
 }
 
 .menu-step.expanded .menu-step-header {
-    border-bottom: 2px solid #000;
+    border-bottom: 0.095cqw solid #000;
 }
 
 .menu-step-header:hover {
@@ -55,10 +59,12 @@
 
 .menu-step-number {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
-    font-size: 25px;
+    /* 25px / 2100 * 100 = 1.19cqw */
+    font-size: 1.19cqw;
     font-weight: 400;
     color: #000;
-    margin-right: 10px;
+    /* 10px / 2100 * 100 = 0.48cqw */
+    margin-right: 0.48cqw;
 }
 
 /* Active step number styling */
@@ -66,21 +72,23 @@
 .menu-step:not(.disabled):hover .menu-step-number {
     font-family: 'sloop-script-two', serif;
     font-weight: 700;
-    font-size: 25px;
+    font-size: 1.19cqw;
     line-height: 100%;
 }
 
 .menu-step-title {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
-    font-size: 25px;
+    /* 25px / 2100 * 100 = 1.19cqw */
+    font-size: 1.19cqw;
     font-weight: 700;
     color: #000;
     flex: 1;
 }
 
 .menu-step-icon {
-    width: 21px;
-    height: 21px;
+    /* 21px / 2100 * 100 = 1cqw */
+    width: 1cqw;
+    height: 1cqw;
     transition: transform 0.3s ease;
 }
 
@@ -95,21 +103,22 @@
     transition: max-height 0.3s ease-out, padding 0.3s ease-out;
     display: flex;
     flex-direction: column;
-    border-left: 2px solid #000;
-    border-right: 2px solid #000;
+    border-left: 0.095cqw solid #000;
+    border-right: 0.095cqw solid #000;
 }
 
 .menu-step.expanded .menu-step-content {
-    max-height: 1000px;
+    max-height: 86.2cqh;
     transition: max-height 0.3s ease-in, padding 0.3s ease-in;
-    border-bottom: 2px solid #000;
+    border-bottom: 0.095cqw solid #000;
 }
 
 /* Menu Sections */
 .menu-section {
     display: flex;
     flex-direction: column;
-    padding: 0 20px;
+    /* 20px / 2100 * 100 = 0.95cqw */
+    padding: 0 0.95cqw;
     transition: background 0.2s ease;
 }
 
@@ -119,7 +128,8 @@
 
 .menu-section-divider {
     width: 100%;
-    height: 1px;
+    /* 1px / 1160 * 100 = 0.086cqh */
+    height: 0.086cqh;
     background: #282323;
 }
 
@@ -134,13 +144,15 @@
 .menu-section-title {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 20px;
+    /* 20px / 2100 * 100 = 0.95cqw */
+    font-size: 0.95cqw;
     line-height: 100%;
     color: #282323;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    /* 10px / 2100 * 100 = 0.48cqw */
+    gap: 0.48cqw;
 }
 
 .menu-section-title.clickable {
@@ -154,8 +166,10 @@
 
 .menu-section-title::before {
     content: '';
-    width: 26px;
-    height: 1px;
+    /* 26px / 2100 * 100 = 1.24cqw */
+    width: 1.24cqw;
+    /* 1px / 1160 * 100 = 0.086cqh */
+    height: 0.086cqh;
     background: #000;
     flex-shrink: 0;
 }
@@ -169,15 +183,18 @@
 }
 
 .menu-section.expanded .menu-section-content {
-    max-height: 500px;
-    padding: 0 0 17px;
-    margin-top: -4px;
+    max-height: 43.1cqh;
+    /* 17px / 1160 * 100 = 1.47cqh */
+    padding: 0 0 1.47cqh;
+    /* 4px / 1160 * 100 = 0.34cqh */
+    margin-top: -0.34cqh;
 }
 
 .menu-description {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 20px;
+    /* 20px / 2100 * 100 = 0.95cqw */
+    font-size: 0.95cqw;
     line-height: 109%;
     color: #282323;
 }

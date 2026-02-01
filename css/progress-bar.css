@@ -1,5 +1,6 @@
 /* ========================================
    PROGRESS BAR
+   Reference: 2100px width, 1160px height
    ======================================== */
 
 .progress-bar {
@@ -7,14 +8,16 @@
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
-    width: 50px;
+    /* 50px / 2100 * 100 = 2.38cqw */
+    width: 2.38cqw;
     position: relative;
 }
 
 /* Continuous line behind all circles */
 .progress-bar-line {
     position: absolute;
-    width: 2px;
+    /* 2px / 2100 * 100 = 0.095cqw */
+    width: 0.095cqw;
     background: #F2E772;
     left: 50%;
     transform: translateX(-50%);
@@ -28,15 +31,17 @@
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    min-height: var(--step-header-height); /* Match step header height (60px) */
+    min-height: var(--step-header-height); /* Match step header height */
     box-sizing: border-box;
     z-index: 1; /* Above the line */
-    padding-top: calc((var(--step-header-height) - 32px) / 2); /* Center 32px circle in 60px header */
+    /* Center circle in header: (5.17cqh - 2.76cqh) / 2 = 1.2cqh */
+    padding-top: 1.2cqh;
 }
 
-/* Header area - contains circle, centered in 37px */
+/* Header area - contains circle */
 .progress-header {
-    height: 37px;
+    /* 37px / 1160 * 100 = 3.19cqh */
+    height: 3.19cqh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,8 +50,9 @@
 
 /* Progress Circle Base - all steps have a circle */
 .progress-circle {
-    width: 32px;
-    height: 32px;
+    /* 32px / 1160 * 100 = 2.76cqh */
+    width: 2.76cqh;
+    height: 2.76cqh;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -55,7 +61,8 @@
 }
 
 .progress-circle img {
-    width: 13px;
+    /* 13px / 2100 * 100 = 0.62cqw */
+    width: 0.62cqw;
     height: auto;
 }
 
@@ -84,7 +91,8 @@
         box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.4);
     }
     70% {
-        box-shadow: 0 0 0 8px rgba(0, 0, 0, 0);
+        /* 8px / 2100 * 100 = 0.38cqw */
+        box-shadow: 0 0 0 0.38cqw rgba(0, 0, 0, 0);
     }
     100% {
         box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
@@ -92,16 +100,21 @@
 }
 
 .progress-lock-icon {
-    width: 9px;
-    height: 11px;
+    /* 9px / 2100 * 100 = 0.43cqw */
+    width: 0.43cqw;
+    /* 11px / 1160 * 100 = 0.95cqh */
+    height: 0.95cqh;
 }
 
 .progress-check-icon {
-    width: 11px;
-    height: 12px;
+    /* 11px / 2100 * 100 = 0.52cqw */
+    width: 0.52cqw;
+    /* 12px / 1160 * 100 = 1.03cqh */
+    height: 1.03cqh;
 }
 
 .progress-dot-icon {
-    width: 7px;
-    height: 7px;
+    /* 7px / 2100 * 100 = 0.33cqw */
+    width: 0.33cqw;
+    height: 0.33cqw;
 }

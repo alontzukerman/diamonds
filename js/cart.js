@@ -90,10 +90,19 @@ const Cart = (function() {
      * Removes existing item in category, then adds new one
      * @param {Object} item - { id, category, name, price, image }
      * @param {HTMLElement} sourceElement - Element to animate from (optional)
+     * @param {string} animationImage - Optional image to use for flying animation (overrides item.image)
      */
-    function setItem(item, sourceElement = null) {
+    function setItem(item, sourceElement = null, animationImage = null) {
         const existingItem = getByCategory(item.category);
-        const isNewItem = !existingItem || existingItem.id !== item.id;
+        
+        // Check if item has actually changed (compare relevant properties)
+        const hasChanged = !existingItem || 
+            existingItem.id !== item.id ||
+            existingItem.name !== item.name ||
+            existingItem.price !== item.price ||
+            existingItem.carat !== item.carat ||
+            existingItem.source !== item.source ||
+            existingItem.size !== item.size;
         
         // Remove existing item in this category (silently, no update yet)
         items = items.filter(i => i.category !== item.category);
@@ -101,9 +110,11 @@ const Cart = (function() {
         // Add the new item
         items.push(item);
         
-        // Only animate if it's a new/different item
-        if (isNewItem && onItemAddedCallback && sourceElement) {
-            onItemAddedCallback(item, sourceElement);
+        // Animate if item has changed and we have a source element
+        if (hasChanged && onItemAddedCallback && sourceElement) {
+            // Use animationImage if provided, otherwise use item's image
+            const animItem = animationImage ? { ...item, image: animationImage } : item;
+            onItemAddedCallback(animItem, sourceElement);
         }
         
         notifyUpdate();

@@ -1,5 +1,7 @@
 /* ========================================
    CART SIDEPANEL
+   Note: Cart is outside .page-scene, uses vw/vh units
+   Reference: 2100px width, 1160px height
    ======================================== */
 
 /* Overlay */
@@ -26,7 +28,8 @@
     position: fixed;
     top: 0;
     right: 0;
-    width: 430px;
+    /* 430px / 2100 * 100 = 20.48vw */
+    width: 20.48vw;
     height: 100%;
     background: #FFD2F6;
     z-index: 999;
@@ -34,7 +37,8 @@
     flex-direction: column;
     transform: translateX(100%);
     transition: transform 0.3s ease;
-    border-left: 2px solid #FF0000;
+    /* 2px / 2100 * 100 = 0.095vw */
+    border-left: 0.095vw solid #FF0000;
 }
 
 .cart-sidepanel.open {
@@ -46,14 +50,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
+    /* 20px / 2100 * 100 = 0.95vw */
+    padding: 0.95vw;
     flex-shrink: 0;
 }
 
 .cart-title {
     font-family: 'Narkiss Block TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 70px;
+    /* 70px / 2100 * 100 = 3.33vw */
+    font-size: 3.33vw;
     line-height: 100%;
     color: #FF0000;
     margin: 0;
@@ -75,7 +81,7 @@
 
 .cart-header-divider {
     width: 100%;
-    height: 2px;
+    height: 0.095vw;
     background: #FF0000;
     flex-shrink: 0;
 }
@@ -84,24 +90,30 @@
 .cart-content {
     flex: 1;
     overflow-y: auto;
-    padding: 30px;
+    /* 30px / 2100 * 100 = 1.43vw */
+    padding: 1.43vw;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 1.43vw;
 }
 
 /* Cart Item */
 .cart-item {
     display: flex;
     flex-direction: row;
-    gap: 25px;
+    /* 25px / 2100 * 100 = 1.19vw */
+    gap: 1.19vw;
 }
 
 .cart-item-image {
-    width: 125px;
-    height: 163px;
-    border: 1px solid #FF0000;
-    border-radius: 26px;
+    /* 125px / 2100 * 100 = 5.95vw */
+    width: 5.95vw;
+    /* 163px / 1160 * 100 = 14.05vh */
+    height: 14.05vh;
+    /* 1px / 2100 * 100 = 0.048vw */
+    border: 0.048vw solid #FF0000;
+    /* 26px / 2100 * 100 = 1.24vw */
+    border-radius: 1.24vw;
     overflow: visible;
     flex-shrink: 0;
     display: flex;
@@ -114,7 +126,7 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 26px;
+    border-radius: 1.24vw;
 }
 
 .cart-item[data-cart-id^="location"] .cart-item-image > img:first-child {
@@ -123,10 +135,14 @@
 
 .cart-item-premium {
     position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 32px;
-    height: 32px;
+    /* 10px / 1160 * 100 = 0.86vh */
+    top: -0.86vh;
+    /* 10px / 2100 * 100 = 0.48vw */
+    right: -0.48vw;
+    /* 32px / 2100 * 100 = 1.52vw */
+    width: 1.52vw;
+    /* 32px / 1160 * 100 = 2.76vh */
+    height: 2.76vh;
 }
 
 .cart-item-details {
@@ -134,19 +150,22 @@
     flex-direction: column;
     justify-content: space-between;
     flex: 1;
-    padding: 10px 0;
+    /* 10px / 1160 * 100 = 0.86vh */
+    padding: 0.86vh 0;
 }
 
 .cart-item-info {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    /* 4px / 1160 * 100 = 0.34vh */
+    gap: 0.34vh;
 }
 
 .cart-item-name {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 20px;
+    /* 20px / 2100 * 100 = 0.95vw */
+    font-size: 0.95vw;
     line-height: 120%;
     color: #FF0000;
 }
@@ -154,7 +173,8 @@
 .cart-item-subtitle {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 18px;
+    /* 18px / 2100 * 100 = 0.86vw */
+    font-size: 0.86vw;
     line-height: 100%;
     color: #FF0000;
     opacity: 0.8;
@@ -163,7 +183,7 @@
 .cart-item-price {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 0.95vw;
     line-height: 100%;
     color: #FF0000;
 }
@@ -171,7 +191,7 @@
 .cart-item-delete {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 0.95vw;
     line-height: 100%;
     color: #FF0000;
     background: none;
@@ -181,8 +201,8 @@
     text-decoration: none;
     transition: opacity 0.2s ease;
     align-self: flex-start;
-    border-bottom: 1px solid #FF0000;
-    padding-bottom: 1px;
+    border-bottom: 0.048vw solid #FF0000;
+    padding-bottom: 0.048vw;
 }
 
 .cart-item-delete:hover {
@@ -194,7 +214,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
+    padding: 0.95vw;
     flex-shrink: 0;
     background: #FFD2F6;
 }
@@ -202,7 +222,8 @@
 .cart-total-label {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 32px;
+    /* 32px / 2100 * 100 = 1.52vw */
+    font-size: 1.52vw;
     line-height: 100%;
     color: #FF0000;
 }
@@ -210,7 +231,7 @@
 .cart-total-price {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 700;
-    font-size: 32px;
+    font-size: 1.52vw;
     line-height: 100%;
     color: #FF0000;
 }
@@ -221,8 +242,9 @@
 
 .cart-flying-item {
     position: fixed;
-    width: 120px;
-    height: 120px;
+    /* 160px / 2100 * 100 = 7.62vw */
+    width: 7.62vw;
+    height: 7.62vw;
     z-index: 10000;
     pointer-events: none;
     opacity: 1;
@@ -246,10 +268,11 @@
     display: block;
     text-align: center;
     font-family: 'Narkiss Yair TRIAL', sans-serif;
-    font-size: 20px;
+    font-size: 0.95vw;
     color: #FF0000;
     opacity: 0.6;
-    padding: 40px 0;
+    /* 40px / 1160 * 100 = 3.45vh */
+    padding: 3.45vh 0;
 }
 
 /* ========================================
@@ -259,16 +282,20 @@
 .cart-checkout-btn {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 18px;
+    /* 18px / 2100 * 100 = 0.86vw */
+    font-size: 0.86vw;
     color: #FFD2F6;
     background: #FF0000;
     border: none;
-    border-radius: 20px;
-    padding: 8px 20px;
+    /* 20px / 2100 * 100 = 0.95vw */
+    border-radius: 0.95vw;
+    /* 8px 20px / 2100 = 0.38vw 0.95vw */
+    padding: 0.69vh 0.95vw;
     cursor: pointer;
     transition: opacity 0.2s ease, transform 0.2s ease;
     margin-left: auto;
-    margin-right: 15px;
+    /* 15px / 2100 * 100 = 0.71vw */
+    margin-right: 0.71vw;
 }
 
 .cart-checkout-btn:hover {
@@ -303,10 +330,11 @@
 
 .checkout-modal {
     background: #FFD2F6;
-    border: 2px solid #FF0000;
-    border-radius: 20px;
-    padding: 30px;
-    width: 400px;
+    border: 0.095vw solid #FF0000;
+    border-radius: 0.95vw;
+    padding: 1.43vw;
+    /* 400px / 2100 * 100 = 19.05vw */
+    width: 19.05vw;
     max-width: 90vw;
     position: relative;
     transform: scale(0.9);
@@ -319,8 +347,10 @@
 
 .checkout-modal-close {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    /* 15px / 1160 * 100 = 1.29vh */
+    top: 1.29vh;
+    /* 15px / 2100 * 100 = 0.71vw */
+    right: 0.71vw;
     background: none;
     border: none;
     cursor: pointer;
@@ -332,44 +362,50 @@
 }
 
 .checkout-modal-close img {
-    width: 24px;
-    height: 24px;
+    /* 24px / 2100 * 100 = 1.14vw */
+    width: 1.14vw;
+    height: 1.14vw;
 }
 
 .checkout-modal-title {
     font-family: 'Narkiss Block TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 32px;
+    font-size: 1.52vw;
     color: #FF0000;
-    margin: 0 0 20px 0;
+    margin: 0 0 0.95vw 0;
 }
 
 .checkout-modal-link-box {
     display: flex;
-    gap: 10px;
+    /* 10px / 2100 * 100 = 0.48vw */
+    gap: 0.48vw;
 }
 
 .checkout-modal-link {
     flex: 1;
     font-family: 'Narkiss Yair TRIAL', sans-serif;
-    font-size: 14px;
+    /* 14px / 2100 * 100 = 0.67vw */
+    font-size: 0.67vw;
     color: #FF0000;
     background: white;
-    border: 1px solid #FF0000;
-    border-radius: 10px;
-    padding: 12px 15px;
+    border: 0.048vw solid #FF0000;
+    border-radius: 0.48vw;
+    /* 12px 15px / 2100 = 0.57vw 0.71vw */
+    padding: 1.03vh 0.71vw;
     outline: none;
 }
 
 .checkout-modal-copy {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 16px;
+    /* 16px / 2100 * 100 = 0.76vw */
+    font-size: 0.76vw;
     color: #FFD2F6;
     background: #FF0000;
     border: none;
-    border-radius: 10px;
-    padding: 12px 20px;
+    border-radius: 0.48vw;
+    /* 12px 20px / 2100 = 0.57vw 0.95vw */
+    padding: 1.03vh 0.95vw;
     cursor: pointer;
     transition: opacity 0.2s ease;
 }

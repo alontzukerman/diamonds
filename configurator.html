@@ -11,26 +11,28 @@
     <link rel="stylesheet" href="configurator.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="navbar-left">
-            <a href="index.html" class="navbar-logo-container">
-                <img src="assets/ui/navbar-logo.svg" alt="Diamonds are Forever" class="navbar-logo">
-            </a>
-        </div>
-        
-        <div class="navbar-right">
-            <a href="gallery.html" class="navbar-link">Index</a>
-            <a href="#" class="navbar-link" id="about-trigger">About</a>
-            <a href="#" class="navbar-link navbar-cart"><img src="assets/icons/cart.svg" alt="Cart"></a>
-        </div>
-    </nav>
-
     <!-- Configurator Page -->
     <main>
         <div class="page-background"></div>
         
-        <div class="configurator-layout">
+        <!-- Fixed aspect ratio scene container (2100:1160) -->
+        <div class="page-scene">
+            <!-- Navbar -->
+            <nav class="navbar">
+                <div class="navbar-left">
+                    <a href="index.html" class="navbar-logo-container">
+                        <img src="assets/ui/navbar-logo.svg" alt="Diamonds are Forever" class="navbar-logo">
+                    </a>
+                </div>
+                
+                <div class="navbar-right">
+                    <a href="gallery.html" class="navbar-link">Index</a>
+                    <a href="#" class="navbar-link" id="about-trigger">About</a>
+                    <a href="#" class="navbar-link navbar-cart"><img src="assets/icons/cart.svg" alt="Cart"></a>
+                </div>
+            </nav>
+
+            <div class="configurator-layout">
             <!-- LEFT SIDE: Accordion Menu with Progress Bar -->
             <div class="configurator-menu-wrapper">
                 <!-- Progress Bar -->
@@ -295,6 +297,7 @@
                 </div>
             </aside>
         </div>
+        </div> <!-- close .page-scene -->
     </main>
 
     <!-- Checkout Share Modal -->

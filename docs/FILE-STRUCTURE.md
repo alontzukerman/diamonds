@@ -9,6 +9,7 @@ shahar-diamond/
 ├── configurator.html       # Configurator page
 ├── configurator.css        # Configurator page styles (imports from css/)
 ├── configurator.js         # Main configurator orchestrator
+├── checkout.html           # Checkout/receipt page
 ├── common.css              # Shared styles (fonts, navbar, banner, custom cursor)
 ├── cursor.js               # Custom cursor follower script
 │
@@ -30,7 +31,8 @@ shahar-diamond/
 │   ├── menu.css            # Accordion menu styles
 │   ├── display.css         # Display area (ring, stone, flowers, etc.)
 │   ├── selectors.css       # Selection container (carousel, buttons, slider, etc.)
-│   └── cart.css            # Cart sidepanel styles
+│   ├── cart.css            # Cart sidepanel and checkout button styles
+│   └── checkout.css        # Checkout/receipt page styles
 │
 ├── js/                     # JavaScript modules
 │   ├── config.js           # Configuration constants, asset paths, and data
@@ -42,6 +44,8 @@ shahar-diamond/
 │   ├── display.js          # Display area updates
 │   ├── cart-helpers.js     # Cart helper functions (ring, stone items)
 │   ├── cart-ui.js          # Cart UI rendering and animations
+│   ├── checkout.js         # Checkout modal and share link generation
+│   ├── checkout-page.js    # Checkout page: receipt rendering and payment modal
 │   ├── renderers.js        # Selector renderers (carousel, buttons, slider, etc.)
 │   └── gallery.js          # Gallery page: static examples and card generation
 │
@@ -80,7 +84,8 @@ shahar-diamond/
     │   ├── logo.png            # "By" logo on landing page
     │   ├── navbar-logo.svg     # Main navbar logo
     │   ├── cursor.png          # Custom cursor image (hand pointer)
-    │   └── cursor-mini.png     # Small cursor variant
+    │   ├── cursor-mini.png     # Small cursor variant
+    │   └── barcode.png         # Barcode image for checkout receipt
     │
     ├── rings/              # Ring and material images
     │   ├── gold.png            # Gold material option thumbnail

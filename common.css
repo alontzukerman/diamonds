@@ -110,16 +110,44 @@ body {
 }
 
 /* ========================================
+   FIXED ASPECT RATIO SCENE CONTAINER
+   Maintains 2100:1160 ratio regardless of viewport
+   All child elements use container query units (cqw, cqh)
+   ======================================== */
+
+.page-scene {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    aspect-ratio: 2100 / 1160;
+    
+    /* Fill viewport while maintaining aspect ratio */
+    width: 100vw;
+    height: calc(100vw * (1160 / 2100));
+    max-height: 100vh;
+    max-width: calc(100vh * (2100 / 1160));
+    
+    z-index: 2;
+    
+    /* Enable container queries for child elements */
+    container-type: size;
+    container-name: page;
+}
+
+/* ========================================
    NAVBAR
+   Reference: 2100px width, 1160px height
    ======================================== */
 
 .navbar {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 100;
-    padding: 30px 50px 30px 40px;
+    /* 30px 50px 30px 40px -> 2.59cqh 2.38cqw 2.59cqh 1.9cqw */
+    padding: 2.59cqh 2.38cqw 2.59cqh 1.9cqw;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -134,7 +162,8 @@ body {
 .navbar-right {
     display: flex;
     align-items: center;
-    gap: 50px;
+    /* 50px / 2100 * 100 = 2.38cqw */
+    gap: 2.38cqw;
 }
 
 .navbar-link,
@@ -160,7 +189,8 @@ body {
 .navbar-link {
     font-family: 'Narkiss Block TRIAL', sans-serif;
     font-weight: 600;
-    font-size: 25px;
+    /* 25px / 2100 * 100 = 1.19cqw */
+    font-size: 1.19cqw;
     color: #282323;
     text-decoration: none;
     line-height: 100%;
@@ -182,13 +212,15 @@ body {
 }
 
 .navbar-cart img {
-    width: 46px;
-    height: 39px;
+    /* 46px / 2100 * 100 = 2.19cqw */
+    width: 2.19cqw;
+    /* 39px / 1160 * 100 = 3.36cqh */
+    height: 3.36cqh;
 }
 
 @keyframes navbar-bounce {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
+    50% { transform: translateY(-0.43cqh); }
 }
 
 .navbar-logo-container {
@@ -202,6 +234,9 @@ body {
 
 .navbar-logo {
     display: block;
+    /* Scale logo proportionally - assuming ~200px original width */
+    width: 9.52cqw;
+    height: auto;
 }
 
 
@@ -210,13 +245,14 @@ body {
    ======================================== */
 
 .banner {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     overflow: hidden;
     z-index: 20;
-    padding: 10px 0;
+    /* 10px / 1160 * 100 = 0.86cqh */
+    padding: 0.86cqh 0;
 }
 
 .banner-content {
@@ -228,12 +264,14 @@ body {
 
 .banner-text {
     display: inline-block;
-    padding-right: 10px;
+    /* 10px / 2100 * 100 = 0.48cqw */
+    padding-right: 0.48cqw;
     flex-shrink: 0;
     color: #e9df76;
     font-family: 'Narkiss Block Condensed TRIAL', sans-serif;
-    font-size: 32px;
-    line-height: 32px;
+    /* 32px / 2100 * 100 = 1.52cqw */
+    font-size: 1.52cqw;
+    line-height: 1;
 }
 
 @keyframes scroll-banner {
@@ -291,8 +329,9 @@ body {
 
 .about-close-btn {
     position: absolute;
-    top: 30px;
-    right: 40px;
+    /* 30px / 1160 * 100 = 2.59vh, 40px / 2100 * 100 = 1.9vw */
+    top: 2.59vh;
+    right: 1.9vw;
     background: none;
     border: none;
     z-index: 1001;
@@ -305,7 +344,8 @@ body {
 
 .about-content {
     flex: 1;
-    padding: 65px;
+    /* 65px / 2100 * 100 = 3.1vw */
+    padding: 3.1vw;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -314,7 +354,8 @@ body {
 .about-text {
     font-family: 'Narkiss Block TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 80px;
+    /* 80px / 2100 * 100 = 3.81vw */
+    font-size: 3.81vw;
     line-height: 115%;
     color: #FF0000;
     margin-bottom: 0;
@@ -324,16 +365,19 @@ body {
     font-family: 'sloop-script-three', cursive;
     font-weight: 700;
     font-style: normal;
-    font-size: 105px;
+    /* 105px / 2100 * 100 = 5vw */
+    font-size: 5vw;
     line-height: 50%;
-    margin: 0 5px 0 -5px;
+    margin: 0 0.24vw 0 -0.24vw;
 }
 
 /* About Footer */
 .about-footer {
-    padding: 0 65px 65px;
+    /* 65px / 2100 * 100 = 3.1vw */
+    padding: 0 3.1vw 3.1vw;
     display: flex;
-    gap: 130px;
+    /* 130px / 2100 * 100 = 6.19vw */
+    gap: 6.19vw;
 }
 
 .about-footer-column {
@@ -344,16 +388,19 @@ body {
 .about-footer-title {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 700;
-    font-size: 24px;
+    /* 24px / 2100 * 100 = 1.14vw */
+    font-size: 1.14vw;
     line-height: 160%;
     color: #FF0000;
-    margin-bottom: 10px;
+    /* 10px / 1160 * 100 = 0.86vh */
+    margin-bottom: 0.86vh;
 }
 
 .about-footer-link {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 24px;
+    /* 24px / 2100 * 100 = 1.14vw */
+    font-size: 1.14vw;
     line-height: 117%;
     color: #FF0000;
     text-decoration: underline;
@@ -367,18 +414,21 @@ body {
 .about-footer-email {
     display: flex;
     align-items: center;
-    gap: 5px;
+    /* 5px / 2100 * 100 = 0.24vw */
+    gap: 0.24vw;
 }
 
 .about-footer-arrow {
-    width: 24px;
-    height: 24px;
+    /* 24px / 2100 * 100 = 1.14vw */
+    width: 1.14vw;
+    height: 1.14vw;
 }
 
 .about-footer-copyright {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 700;
-    font-size: 24px;
+    /* 24px / 2100 * 100 = 1.14vw */
+    font-size: 1.14vw;
     line-height: 160%;
     color: #FF0000;
     text-decoration: underline;

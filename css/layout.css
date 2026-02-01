@@ -1,22 +1,28 @@
 /* ========================================
    CONFIGURATOR LAYOUT
    Three-column layout: Menu | Center | Love Meter
+   Reference: 2100px width, 1160px height
    ======================================== */
 
 :root {
-    --step-header-height: 60px;
+    /* 60px / 1160 * 100 = 5.17cqh */
+    --step-header-height: 5.17cqh;
 }
 
 .configurator-layout {
-    position: fixed;
-    top: 130px; /* Space for navbar */
-    left: 40px; /* Margin from left */
-    right: 40px;
-    bottom: 40px; /* Margin from bottom */
+    position: absolute;
+    /* 130px / 1160 * 100 = 11.21cqh (Space for navbar) */
+    top: 11.21cqh;
+    /* 40px / 2100 * 100 = 1.9cqw */
+    left: 1.9cqw;
+    right: 1.9cqw;
+    /* 40px / 1160 * 100 = 3.45cqh */
+    bottom: 3.45cqh;
     z-index: 2;
     display: flex;
     justify-content: space-between;
-    gap: 20px;
+    /* 20px / 2100 * 100 = 0.95cqw */
+    gap: 0.95cqw;
 }
 
 /* ========================================
@@ -49,7 +55,8 @@
    ======================================== */
 
 .love-meter {
-    width: 120px;
+    /* 120px / 2100 * 100 = 5.71cqw */
+    width: 5.71cqw;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -71,28 +78,34 @@
 .love-meter-arrow {
     height: 100%;
     position: absolute;
-    left: -10px;
+    /* 10px / 2100 * 100 = 0.48cqw */
+    left: -0.48cqw;
 }
 
 .love-meter-heart {
     position: absolute;
-    bottom: 140px;
-    left: 21px;
+    /* 140px / 1160 * 100 = 12.07cqh */
+    bottom: 12.07cqh;
+    /* 21px / 2100 * 100 = 1cqw */
+    left: 1cqw;
     transform: translateX(-50%);
     transition: bottom 0.5s ease;
     display: flex;
     align-items: center;
-    gap: 8px;
+    /* 8px / 2100 * 100 = 0.38cqw */
+    gap: 0.38cqw;
     overflow: visible;
 }
 
 .love-meter-price {
     position: absolute;
-    right: calc(100% + 12px);
+    /* 12px / 2100 * 100 = 0.57cqw */
+    right: calc(100% + 0.57cqw);
     top: 50%;
     transform: translateY(-50%);
     font-family: 'Narkiss Yair TRIAL', monospace;
-    font-size: 25px;
+    /* 25px / 2100 * 100 = 1.19cqw */
+    font-size: 1.19cqw;
     font-weight: 400;
     color: #282323;
     white-space: nowrap;
@@ -101,7 +114,8 @@
 }
 
 .love-meter-heart-icon {
-    width: 54px;
+    /* 54px / 2100 * 100 = 2.57cqw */
+    width: 2.57cqw;
     height: auto;
     transition: transform 0.5s ease;
     transform-origin: center center;
@@ -113,7 +127,8 @@
 
 .love-meter-popover {
     position: absolute;
-    top: 370px;  /* Same as display-ring-container */
+    /* 370px / 1160 * 100 = 31.9cqh (Same as display-ring-container) */
+    top: 31.9cqh;
     left: 50%;
     transform: translateX(-50%) scale(0.3);
     z-index: 9999;
@@ -123,8 +138,8 @@
 }
 
 .love-meter-popover-image {
-    max-width: 80vw;
-    max-height: 50vh;
+    max-width: 80cqw;
+    max-height: 50cqh;
     height: auto;
 }
 

@@ -1,5 +1,7 @@
 /* ========================================
    GALLERY PAGE STYLES
+   Note: Gallery is scrollable, uses vw units for scaling
+   Reference: 2100px width
    ======================================== */
 
 .gallery-main {
@@ -18,8 +20,10 @@
 /* Close button (like About overlay) */
 .gallery-close-btn {
     position: fixed;
-    top: 10px;
-    right: 40px;
+    /* 10px / 1160 * 100 = 0.86vh */
+    top: 0.86vh;
+    /* 40px / 2100 * 100 = 1.9vw */
+    right: 1.9vw;
     background: none;
     border: none;
     z-index: 100;
@@ -41,37 +45,48 @@
     max-width: none;
 }
 
-/* Individual Gallery Card */
+/* Individual Gallery Card - uses container queries for internal scaling */
 .gallery-card {
-    height: 250px;
+    /* 250px / 1160 * 100 = 21.55vh */
+    height: 21.55vw;
     aspect-ratio: 2100 / 1160;
     position: relative;
     background-size: cover;
     background-position: center;
+    container-type: size;
+    container-name: card;
 }
 
 /* Music card component on gallery card (matches carousel music-card) */
 .gallery-music-card {
-    width: 305px;
-    height: 65px;
+    /* 305px / 2100 * 100 = 14.52vw */
+    width: 14.52vw;
+    /* 65px / 1160 * 100 = 5.6vh */
+    height: 5.6vh;
     position: absolute;
-    bottom: -20px;
+    /* 20px / 1160 * 100 = 1.72vh */
+    bottom: -1.72vh;
     left: 50%;
     transform: translateX(-50%);
     z-index: 20;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    /* 10px / 2100 * 100 = 0.48vw */
+    gap: 0.48vw;
     background: #282323;
-    border-radius: 8px;
-    padding: 4px;
+    /* 8px / 2100 * 100 = 0.38vw */
+    border-radius: 0.38vw;
+    /* 4px / 2100 * 100 = 0.19vw */
+    padding: 0.19vw;
 }
 
 .gallery-music-card-image {
-    width: 57px;
-    height: 57px;
-    border-radius: 6px;
+    /* 57px / 2100 * 100 = 2.71vw */
+    width: 2.71vw;
+    height: 2.71vw;
+    /* 6px / 2100 * 100 = 0.29vw */
+    border-radius: 0.29vw;
     overflow: hidden;
     background: rgba(242, 231, 114, 0.3);
     display: flex;
@@ -91,7 +106,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 4px;
+    /* 4px / 1160 * 100 = 0.34vh */
+    gap: 0.34vh;
     background: transparent;
     padding: 0;
     text-align: left;
@@ -100,7 +116,8 @@
 .gallery-music-card-song {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 700;
-    font-size: 20px;
+    /* 20px / 2100 * 100 = 0.95vw */
+    font-size: 0.95vw;
     line-height: 100%;
     color: #F2E772;
     white-space: nowrap;
@@ -109,7 +126,7 @@
 .gallery-music-card-artist {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 0.95vw;
     line-height: 100%;
     color: #F2E772;
     white-space: nowrap;
@@ -135,7 +152,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: scale(0.25) translateY(65px);
+    /* Scale relative to card size */
+    transform: scale(0.25) translateY(5.6cqh);
     transform-origin: center center;
 }
 
@@ -148,9 +166,10 @@
     z-index: 10;
 }
 
-/* Ring image */
+/* Ring image - uses container queries relative to card */
 .gallery-ring {
-    height: 500px;
+    /* 500px / 1160 * 100 = 43.1cqh */
+    height: 43.1cqh;
     object-fit: contain;
     position: absolute;
     z-index: 1;
@@ -159,11 +178,15 @@
 /* Stone on ring */
 .gallery-stone {
     position: absolute;
-    top: 39px;
-    left: -10px;
+    /* 39px / 1160 * 100 = 3.36cqh */
+    top: 3.36cqh;
+    /* 10px / 2100 * 100 = 0.48cqw */
+    left: -0.48cqw;
     transform: translate(-50%, -50%);
-    width: 150px;
-    height: 150px;
+    /* 150px / 2100 * 100 = 7.14cqw */
+    width: 7.14cqw;
+    /* 150px / 1160 * 100 = 12.93cqh */
+    height: 12.93cqh;
     object-fit: contain;
     z-index: 2;
 }
@@ -173,44 +196,45 @@
     position: absolute;
     object-fit: contain;
     z-index: 0;
-    height: 640px;
+    /* 640px / 1160 * 100 = 55.17cqh */
+    height: 55.17cqh;
     transform: translateX(-50%);
 }
 
 /* Packaging position variants (match display.css) */
 .gallery-packaging-1 {
-    left: -10px;
-    bottom: -220px;
+    left: -0.48cqw;
+    bottom: -18.97cqh;
 }
 
 .gallery-packaging-2 {
-    left: -15px;
-    bottom: -185px;
+    left: -0.71cqw;
+    bottom: -15.95cqh;
 }
 
 .gallery-packaging-3 {
-    bottom: -255px;
-    left: -10px;
+    bottom: -21.98cqh;
+    left: -0.48cqw;
 }
 
 .gallery-packaging-4 {
-    bottom: -240px;
-    left: -5px;
+    bottom: -20.69cqh;
+    left: -0.24cqw;
 }
 
 .gallery-packaging-5 {
-    bottom: -235px;
-    left: -8px;
+    bottom: -20.26cqh;
+    left: -0.38cqw;
 }
 
 .gallery-packaging-6 {
-    bottom: -240px;
-    left: -10px;
+    bottom: -20.69cqh;
+    left: -0.48cqw;
 }
 
 .gallery-packaging-7 {
-    bottom: -260px;
-    left: -7px;
+    bottom: -22.41cqh;
+    left: -0.33cqw;
 }
 
 /* Sign behind packaging */
@@ -218,40 +242,41 @@
     position: absolute;
     object-fit: contain;
     z-index: 0;
-    height: 850px;
+    /* 850px / 1160 * 100 = 73.28cqh */
+    height: 73.28cqh;
     transform: translateX(-50%);
 }
 
 /* Sign position variants (match display.css) */
 .gallery-sign-1 {
     left: 50%;
-    bottom: -360px;
+    bottom: -31.03cqh;
 }
 
 .gallery-sign-2 {
-    left: -20px;
-    bottom: -335px;
+    left: -0.95cqw;
+    bottom: -28.88cqh;
 }
 
 .gallery-sign-3 {
     left: 50%;
-    bottom: -315px;
+    bottom: -27.16cqh;
 }
 
 .gallery-sign-4 {
-    height: 1100px;
-    left: -60px;
-    bottom: -430px;
+    height: 94.83cqh;
+    left: -2.86cqw;
+    bottom: -37.07cqh;
 }
 
 .gallery-sign-5 {
     left: 50%;
-    bottom: -345px;
+    bottom: -29.74cqh;
 }
 
 .gallery-sign-6 {
     left: 50%;
-    bottom: -330px;
+    bottom: -28.45cqh;
 }
 
 /* Flowers container */
@@ -271,52 +296,52 @@
 
 /* Flower position variants (match display.css) */
 .gallery-flower-1 {
-    left: -400px;
-    bottom: 250px;
-    height: 200px;
+    left: -19.05cqw;
+    bottom: 21.55cqh;
+    height: 17.24cqh;
 }
 
 .gallery-flower-2 {
-    left: 150px;
-    bottom: 280px;
-    height: 150px;
+    left: 7.14cqw;
+    bottom: 24.14cqh;
+    height: 12.93cqh;
 }
 
 .gallery-flower-3 {
-    left: 260px;
-    bottom: 50px;
-    height: 180px;
+    left: 12.38cqw;
+    bottom: 4.31cqh;
+    height: 15.52cqh;
 }
 
 .gallery-flower-4 {
-    left: 220px;
-    bottom: -110px;
-    height: 150px;
+    left: 10.48cqw;
+    bottom: -9.48cqh;
+    height: 12.93cqh;
 }
 
 .gallery-flower-5 {
-    left: -110px;
-    bottom: 320px;
-    height: 190px;
+    left: -5.24cqw;
+    bottom: 27.59cqh;
+    height: 16.38cqh;
 }
 
 .gallery-flower-6 {
     rotate: 330deg;
-    left: 50px;
-    top: 150px;
-    height: 180px;
+    left: 2.38cqw;
+    top: 12.93cqh;
+    height: 15.52cqh;
 }
 
 .gallery-flower-7 {
-    left: -80px;
-    top: 150px;
-    height: 170px;
+    left: -3.81cqw;
+    top: 12.93cqh;
+    height: 14.66cqh;
 }
 
 .gallery-flower-8 {
-    right: 280px;
-    bottom: 90px;
-    height: 170px;
+    right: 13.33cqw;
+    bottom: 7.76cqh;
+    height: 14.66cqh;
 }
 
 /* Balloons container */
@@ -324,8 +349,8 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    left: -580px;
-    top: -50px;
+    left: -27.62cqw;
+    top: -4.31cqh;
     z-index: 2;
     rotate: -20deg;
     pointer-events: none;
@@ -339,29 +364,29 @@
 
 /* Balloon position variants (match display.css) */
 .gallery-balloon-1 {
-    height: 440px;
+    height: 37.93cqh;
 }
 
 .gallery-balloon-2 {
 }
 
 .gallery-balloon-3 {
-    left: -165px;
+    left: -7.86cqw;
 }
 
 .gallery-balloon-4 {
-    left: -130px;
+    left: -6.19cqw;
     rotate: 20deg;
 }
 
 .gallery-balloon-5 {
-    left: -50px;
-    height: 500px;
+    left: -2.38cqw;
+    height: 43.1cqh;
 }
 
 .gallery-balloon-6 {
-    left: -50px;
-    top: -20px;
+    left: -2.38cqw;
+    top: -1.72cqh;
 }
 
 /* Extras container */
@@ -381,56 +406,56 @@
 
 /* Extra position variants (match display.css) */
 .gallery-extra-1 {
-    right: 310px;
-    bottom: 110px;
-    height: 450px;
+    right: 14.76cqw;
+    bottom: 9.48cqh;
+    height: 38.79cqh;
 }
 
 .gallery-extra-2 {
-    left: 330px;
-    bottom: 130px;
-    height: 400px;
+    left: 15.71cqw;
+    bottom: 11.21cqh;
+    height: 34.48cqh;
 }
 
 .gallery-extra-3 {
-    right: 400px;
-    bottom: 20px;
-    height: 250px;
+    right: 19.05cqw;
+    bottom: 1.72cqh;
+    height: 21.55cqh;
     rotate: 340deg;
 }
 
 .gallery-extra-4 {
-    left: 120px;
-    bottom: 50px;
-    height: 270px;
+    left: 5.71cqw;
+    bottom: 4.31cqh;
+    height: 23.28cqh;
     rotate: 15deg;
 }
 
 .gallery-extra-5 {
-    left: 160px;
-    top: 30px;
-    height: 200px;
+    left: 7.62cqw;
+    top: 2.59cqh;
+    height: 17.24cqh;
     rotate: 25deg;
     z-index: 11;
 }
 
 .gallery-extra-6 {
-    right: 100px;
-    top: 60px;
-    height: 200px;
+    right: 4.76cqw;
+    top: 5.17cqh;
+    height: 17.24cqh;
     z-index: 11;
 }
 
 .gallery-extra-7 {
-    left: 350px;
-    bottom: -90px;
-    height: 300px;
+    left: 16.67cqw;
+    bottom: -7.76cqh;
+    height: 25.86cqh;
 }
 
 .gallery-extra-8 {
-    right: -270px;
-    top: -20px;
-    height: 400px;
+    right: -12.86cqw;
+    top: -1.72cqh;
+    height: 34.48cqh;
     z-index: -1;
 }
 
@@ -438,10 +463,13 @@
 .gallery-item {
     display: flex;
     flex-direction: row;
-    gap: 40px;
+    /* 40px / 2100 * 100 = 1.9vw */
+    gap: 1.9vw;
     width: 100%;
-    padding: 40px 75px 40px 40px;
-    border-bottom: 2px solid rgba(255, 0, 0, 0.3);
+    /* 40px 75px 40px 40px / 2100 = 1.9vw 3.57vw 1.9vw 1.9vw */
+    padding: 3.45vh 3.57vw 3.45vh 1.9vw;
+    /* 2px / 2100 * 100 = 0.095vw */
+    border-bottom: 0.095vw solid rgba(255, 0, 0, 0.3);
 }
 
 /* Card takes left side */
@@ -464,7 +492,8 @@
 .gallery-card-title-the {
     font-family: 'Narkiss Block TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 120px;
+    /* 120px / 2100 * 100 = 5.71vw */
+    font-size: 5.71vw;
     line-height: 1;
     color: #FF0000;
 }
@@ -472,15 +501,19 @@
 .gallery-card-title-name {
     font-family: 'sloop-script-three', cursive;
     font-weight: 700;
-    font-size: 130px;
+    /* 130px / 2100 * 100 = 6.19vw */
+    font-size: 6.19vw;
     line-height: 1;
     color: #FF0000;
-    margin-left: -10px;
+    /* 10px / 2100 * 100 = 0.48vw */
+    margin-left: -0.48vw;
 }
 
 .gallery-card-premium-icon {
-    margin-left: 70px;
-    transform: translateY(-3px);
+    /* 70px / 2100 * 100 = 3.33vw */
+    margin-left: 3.33vw;
+    /* 3px / 1160 * 100 = 0.26vh */
+    transform: translateY(-0.26vh);
 }
 
 /* Bottom row with description and price */
@@ -493,7 +526,8 @@
 .gallery-card-description {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 400;
-    font-size: 20px;
+    /* 20px / 2100 * 100 = 0.95vw */
+    font-size: 0.95vw;
     color: #FF0000;
     line-height: 115%;
     max-width: 65%;
@@ -502,7 +536,8 @@
 .gallery-card-price {
     font-family: 'Narkiss Yair TRIAL', sans-serif;
     font-weight: 700;
-    font-size: 32px;
+    /* 32px / 2100 * 100 = 1.52vw */
+    font-size: 1.52vw;
     color: #FF0000;
     white-space: nowrap;
     line-height: 100%;
