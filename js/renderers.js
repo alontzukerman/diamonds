@@ -362,23 +362,28 @@ function createFlexCarouselItem(item, sectionName, config, SELECTORS_CONFIG) {
         
         itemEl.appendChild(info);
     } else {
-        // Regular image
+        // Regular image with container for premium label positioning
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'flex-carousel-image-container';
+        
         const img = document.createElement('img');
         img.src = item.image;
         img.alt = item.label;
         img.className = `flex-carousel-image flex-carousel-image-${sectionName}-${item.id}`;
-        itemEl.appendChild(img);
-    }
-    
-    // Premium label (if exists)
-    if (item.premium) {
-        const premium = document.createElement('div');
-        premium.className = 'flex-carousel-premium';
-        const premiumImg = document.createElement('img');
-        premiumImg.src = ASSETS.icons.premium;
-        premiumImg.alt = 'Premium';
-        premium.appendChild(premiumImg);
-        itemEl.appendChild(premium);
+        imageContainer.appendChild(img);
+        
+        // Premium label (if exists) - inside container to scale together
+        if (item.premium) {
+            const premium = document.createElement('div');
+            premium.className = 'flex-carousel-premium';
+            const premiumImg = document.createElement('img');
+            premiumImg.src = ASSETS.icons.premium;
+            premiumImg.alt = 'Premium';
+            premium.appendChild(premiumImg);
+            imageContainer.appendChild(premium);
+        }
+        
+        itemEl.appendChild(imageContainer);
     }
     
     // Hover to show info in item info box

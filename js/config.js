@@ -68,10 +68,10 @@ const LOVE_METER_CONFIG = {
 // Location data (15 locations) - name, image filename, premium status, and price
 const LOCATIONS = [
     { name: 'At Home', image: 'l4.png', premium: false, price: 0 },
-    { name: 'Amsterdam', image: 'l7.png', premium: true, price: 4500 },
-    { name: 'Barcelona', image: 'l13.png', premium: true, price: 4300 },
+    { name: 'Amsterdam', image: 'l7.png', premium: false, price: 4500 },
+    { name: 'Barcelona', image: 'l13.png', premium: false, price: 4300 },
     { name: 'Eilat', image: 'l1.png', premium: false, price: 1800 },
-    { name: 'Hot Air Balloon', image: 'l8.png', premium: true, price: 2000 },
+    { name: 'Hot Air Balloon', image: 'l8.png', premium: false, price: 2000 },
     { name: 'Jerusalem – Western Wall', image: 'l10.png', premium: false, price: 0 },
     { name: 'Maldives', image: 'l12.png', premium: true, price: 8000 },
     { name: 'Mount Hermon', image: 'l11.png', premium: false, price: 0 },
@@ -206,7 +206,7 @@ const ASSETS = {
     icons: {
         leftArrow: 'assets/icons/left-arrow-long.svg',
         rightArrow: 'assets/icons/right-arrow-long.svg',
-        premium: 'assets/icons/red-star.svg',
+        premium: 'assets/icons/premium.svg',
         dot: 'assets/icons/dot.svg',
         lock: 'assets/icons/lock.svg',
         check: 'assets/icons/v.svg'

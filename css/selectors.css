@@ -264,6 +264,20 @@
     transform: scale(1.05);
 }
 
+/* Image container - holds image and premium label together */
+.flex-carousel-image-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+/* Selected state - scale the container (image + premium together) */
+.flex-carousel-item.selected .flex-carousel-image-container {
+    transform: scale(1.4);
+}
+
 /* Regular state - white glow on all images */
 .flex-carousel-image {
     /* 110px / 1160 * 100 = 9.48cqh */
@@ -273,12 +287,6 @@
     filter: drop-shadow(0 0 0.57cqw rgba(255, 255, 255, 0.95));
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
     border-radius: 0.38cqw;
-    transition: transform 0.3s ease;
-}
-
-/* Selected state - scaled glow */
-.flex-carousel-item.selected .flex-carousel-image {
-    transform: scale(1.4);
 }
 
 /* Info is now shown in item-info-box instead of inline */
@@ -378,16 +386,13 @@
 .flex-carousel-premium {
     position: absolute;
     /* 10px / 1160 * 100 = 0.86cqh */
-    top: 0.86cqh;
+    top: -5.14cqh;
     /* 28px / 2100 * 100 = 1.33cqw */
     right: 1.33cqw;
 }
 
 
 .flex-carousel-premium img {
-    /* 30px / 2100 * 100 = 1.43cqw */
-    width: 1.43cqw;
-    height: auto;
 }
 
 /* Material-specific flex carousel styles */
@@ -422,6 +427,22 @@
 #source-flex-carousel .flex-carousel-item[data-source="natural"] .flex-carousel-image {
     /* 165px / 1160 * 100 = 14.22cqh */
     height: 14.22cqh;
+}
+
+#source-flex-carousel .flex-carousel-premium {
+    transform: scale(0.7);
+    top: -2.8cqh;
+    right: 0.5cqw;
+}
+
+#location-flex-carousel .flex-carousel-premium {
+    transform: scale(0.8);
+    top: -3.14cqh;
+    right: 7px;
+}
+
+#signs-flex-carousel {
+    gap: 2.43cqw;
 }
 
 #flowers-flex-carousel {
@@ -660,7 +681,7 @@
 
 .carat-premium-tag {
     position: absolute;
-    bottom: 120%;
+    bottom: 140%;
     left: 50%;
     transform: translateX(-50%);
 }

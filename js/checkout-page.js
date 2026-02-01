@@ -4,6 +4,11 @@
 // ========================================
 
 (function() {
+    // Preload entrance music for success screen
+    const entranceMusic = new Audio('assets/sounds/entrance.mp3');
+    entranceMusic.loop = true;
+    entranceMusic.volume = 0.5;
+    entranceMusic.preload = 'auto';
     /**
      * Format price as number (no $ symbol, added by CSS for first item)
      * @param {number} price - Price in dollars
@@ -244,6 +249,9 @@
             confirmBtn.addEventListener('click', () => {
                 modalOverlay.classList.remove('open');
                 successScreen.classList.add('open');
+                // Play entrance music on success screen
+                entranceMusic.currentTime = 0;
+                entranceMusic.play().catch(() => {});
             });
         }
 

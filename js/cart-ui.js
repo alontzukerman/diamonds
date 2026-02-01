@@ -11,6 +11,11 @@ let cartBtn = null;
 let cartContent = null;
 let cartTotalPrice = null;
 
+// Preload cart sound for instant playback
+const cartSound = new Audio('assets/sounds/kaching.mp3');
+cartSound.volume = 0.5;
+cartSound.preload = 'auto';
+
 function initCartUI() {
     cartOverlay = document.getElementById('cart-overlay');
     cartSidepanel = document.getElementById('cart-sidepanel');
@@ -152,6 +157,10 @@ function renderCartItems(items, total) {
 // Flying animation to cart
 function animateToCart(item, sourceElement) {
     if (!sourceElement || !cartBtn) return;
+    
+    // Play add-to-cart sound (reset to start if already playing)
+    cartSound.currentTime = 0;
+    cartSound.play().catch(() => {});
     
     // Get positions
     const sourceRect = sourceElement.getBoundingClientRect();

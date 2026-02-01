@@ -513,6 +513,63 @@ function initGallery() {
         const card = createGalleryCard(pkg);
         grid.appendChild(card);
     });
+    
+    // Set up close button to return to the previous page
+    setupCloseButton();
+}
+
+// Set up close button to navigate back to the referring page
+function setupCloseButton() {
+    const closeBtn = document.querySelector('.gallery-close-btn');
+    if (!closeBtn) return;
+    
+    // Check if we have a stored referrer from sessionStorage
+    const storedReferrer = sessionStorage.getItem('galleryReferrer');
+    
+    // Also check document.referrer as fallback
+    const docReferrer = document.referrer;
+    
+    // Determine the return URL
+    let returnUrl = 'index.html'; // Default fallback
+    
+    if (storedReferrer) {
+        // Use stored referrer (set when clicking gallery link)
+        returnUrl = storedReferrer;
+    } else if (docReferrer) {
+        // Parse the document referrer to get just the page
+        try {
+            const url = new URL(docReferrer);
+            const pathname = url.pathname;
+            
+            // Check if it's from our site (configurator or index)
+            if (pathname.includes('configurator.html')) {
+                returnUrl = 'configurator.html';
+            } else if (pathname.includes('index.html') || pathname.endsWith('/')) {
+                returnUrl = 'index.html';
+            }
+        } catch (e) {
+            // Invalid URL, use default
+        }
+    }
+    
+    // Update the close button href
+    closeBtn.href = returnUrl;
+    
+    // Add click handler to use history.back() for better state preservation
+    closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Clear the stored referrer
+        sessionStorage.removeItem('galleryReferrer');
+        
+        // Use history.back() to preserve the previous page's state
+        if (window.history.length > 1 && docReferrer) {
+            window.history.back();
+        } else {
+            // Fallback to direct navigation
+            window.location.href = returnUrl;
+        }
+    });
 }
 
 // Initialize on DOM ready

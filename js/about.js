@@ -1,3 +1,17 @@
+// Gallery Link - Store referrer for returning to current page
+(function() {
+    // Find all gallery links
+    const galleryLinks = document.querySelectorAll('a[href="gallery.html"]');
+    
+    galleryLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            // Store the current page path so gallery can return to it
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            sessionStorage.setItem('galleryReferrer', currentPage);
+        });
+    });
+})();
+
 // About Overlay functionality
 (function() {
     const aboutTrigger = document.getElementById('about-trigger');
