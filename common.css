@@ -203,6 +203,23 @@ body {
     animation: navbar-bounce 0.5s ease;
 }
 
+/* Styled navbar links (Index & About) */
+.navbar-link-styled {
+    font-family: 'sloop-script-two', cursive;
+    font-weight: 700;
+    font-style: normal;
+    /* 30px / 2100 * 100 = 1.43cqw */
+    font-size: 1.43cqw;
+    line-height: 0.6;
+    color: #F2E772;
+    /* 4px / 2100 * 100 = 0.19cqw */
+    border: 0.19cqw solid #F2E772;
+    /* 30px / 2100 * 100 = 1.43cqw */
+    border-radius: 1.43cqw;
+    /* 8px 20px 6px 12px -> 0.69cqh 0.95cqw 0.52cqh 0.57cqw */
+    padding: 0.69cqh 0.95cqw 0.52cqh 0.57cqw;
+}
+
 /* Cart icon */
 .navbar-cart {
     display: flex;
@@ -236,8 +253,8 @@ body {
 
 .navbar-logo {
     display: block;
-    /* Scale logo proportionally - assuming ~200px original width */
-    width: 9.52cqw;
+    /* Scale logo proportionally - assuming ~230px original width */
+    width: 10.95cqw;
     height: auto;
 }
 

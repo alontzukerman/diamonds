@@ -140,17 +140,20 @@
 .love-meter-price {
     position: absolute;
     /* 12px / 2100 * 100 = 0.57cqw */
-    right: calc(100% + 0.57cqw);
+    right: calc(100% + 0.8cqw);
     top: 50%;
     transform: translateY(-50%);
-    font-family: 'Narkiss Yair TRIAL', monospace;
-    /* 25px / 2100 * 100 = 1.19cqw */
-    font-size: 1.19cqw;
-    font-weight: 400;
-    color: #282323;
+    font-family: 'sloop-script-two', monospace;
+    /* 30px / 2100 * 100 = 1.43cqw */
+    font-size: 1.43cqw;
+    font-weight: 700;
+    color: #FF0000;
     white-space: nowrap;
-    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.95));
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 70%);
+    background: #ffffff;
+    box-shadow: white 0 0 12px 10px;
+    /* 0px 8px padding */
+    padding: 0cqh 0.38cqw;
+    line-height: 0.5;
 }
 
 .love-meter-heart-icon {

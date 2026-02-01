@@ -133,7 +133,7 @@ function showCheckpointPopover(imagePath) {
         setTimeout(() => {
             popover.remove();
         }, 250);
-    }, 1000);
+    }, 1500);
 }
 
 /**
@@ -143,7 +143,7 @@ function updateLoveMeterPrice() {
     const priceElement = document.getElementById('love-meter-price');
     if (priceElement && typeof Cart !== 'undefined' && Cart.getTotal) {
         const totalPrice = Cart.getTotal();
-        priceElement.textContent = `[${Cart.formatPrice(totalPrice)}]`;
+        priceElement.textContent = `${Cart.formatPrice(totalPrice)}`;
     }
 }
 
@@ -156,7 +156,7 @@ function initLoveMeterPrice() {
         const priceElement = document.createElement('span');
         priceElement.id = 'love-meter-price';
         priceElement.className = 'love-meter-price';
-        priceElement.textContent = '[$0]';
+        priceElement.textContent = '$0';
         heartContainer.insertBefore(priceElement, heartContainer.firstChild);
     }
 }
