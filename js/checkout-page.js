@@ -46,7 +46,8 @@
         }
         
         try {
-            const decoded = atob(cartParam);
+            // Decode UTF-8 safe base64 encoding
+            const decoded = decodeURIComponent(escape(atob(cartParam)));
             return JSON.parse(decoded);
         } catch (e) {
             console.error('Failed to parse cart data:', e);

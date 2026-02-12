@@ -15,23 +15,23 @@
     <main>
         <div class="page-background"></div>
         
+        <!-- Navbar (outside page-scene to stick to viewport top) -->
+        <nav class="navbar">
+            <div class="navbar-left">
+                <a href="index.html" class="navbar-logo-container">
+                    <img src="assets/ui/navbar-logo.svg" alt="Diamonds are Forever" class="navbar-logo">
+                </a>
+            </div>
+            
+            <div class="navbar-right">
+                <a href="#" class="navbar-link navbar-link-styled" id="gallery-trigger">Packages</a>
+                <a href="#" class="navbar-link navbar-link-styled" id="about-trigger">About</a>
+                <a href="#" class="navbar-link navbar-cart"><img src="assets/icons/cart.png" alt="Cart"></a>
+            </div>
+        </nav>
+
         <!-- Fixed aspect ratio scene container (2100:1160) -->
         <div class="page-scene">
-            <!-- Navbar -->
-            <nav class="navbar">
-                <div class="navbar-left">
-                    <a href="index.html" class="navbar-logo-container">
-                        <img src="assets/ui/navbar-logo.svg" alt="Diamonds are Forever" class="navbar-logo">
-                    </a>
-                </div>
-                
-                <div class="navbar-right">
-                    <a href="#" class="navbar-link navbar-link-styled" id="gallery-trigger">Packages</a>
-                    <a href="#" class="navbar-link navbar-link-styled" id="about-trigger">About</a>
-                    <a href="#" class="navbar-link navbar-cart"><img src="assets/icons/cart.png" alt="Cart"></a>
-                </div>
-            </nav>
-
             <!-- Landing Content -->
             <div class="landing-content-wrapper">
                 <!-- GIF Assets -->
@@ -61,13 +61,14 @@
                 </div>
             </div>
 
-            <!-- Banner -->
-            <div class="banner">
-                <div class="banner-content">
-                    <span class="banner-text">He loves you, he just doesn't know what to do • Take control and design the proposal yourself • Trust the love • If he loves you, he will let you choose •</span>
-                    <span class="banner-text">He loves you, he just doesn't know what to do • Take control and design the proposal yourself • Trust the love • If he loves you, he will let you choose •</span>
-                    <span class="banner-text">He loves you, he just doesn't know what to do • Take control and design the proposal yourself • Trust the love • If he loves you, he will let you choose •</span>
-                </div>
+        </div>
+
+        <!-- Banner (outside page-scene to stick to viewport bottom) -->
+        <div class="banner">
+            <div class="banner-content">
+                <span class="banner-text">He loves you, he just doesn't know what to do • Take control and design the proposal yourself • Trust the love • If he loves you, he will let you choose •</span>
+                <span class="banner-text">He loves you, he just doesn't know what to do • Take control and design the proposal yourself • Trust the love • If he loves you, he will let you choose •</span>
+                <span class="banner-text">He loves you, he just doesn't know what to do • Take control and design the proposal yourself • Trust the love • If he loves you, he will let you choose •</span>
             </div>
         </div>
     </main>
@@ -145,6 +146,7 @@
     <script src="js/about.js"></script>
     <script src="js/config.js"></script>
     <script src="js/cart.js"></script>
+    <script src="js/checkout.js"></script>
     <script src="js/deadline.js"></script>
     <script src="js/gallery.js"></script>
 </body>
