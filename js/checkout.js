@@ -26,8 +26,9 @@
             ...(item.premium && { premium: item.premium })
         }));
 
-        // Encode cart data as base64
-        const encodedCart = btoa(JSON.stringify(cartData));
+        // Encode cart data as base64 (UTF-8 safe)
+        const jsonStr = JSON.stringify(cartData);
+        const encodedCart = btoa(unescape(encodeURIComponent(jsonStr)));
         
         // Get deadline from Deadline module if available
         let deadlineParam = '';
@@ -39,9 +40,11 @@
             }
         }
         
-        // Build checkout URL
-        const baseUrl = window.location.origin + window.location.pathname.replace(/[^/]*$/, '');
-        return `${baseUrl}checkout.html?cart=${encodedCart}${deadlineParam}`;
+        // Build checkout URL using the current page's directory as base
+        // Works for local file://, localhost dev servers, and GitHub Pages sub-paths
+        const href = window.location.href.split('?')[0]; // Remove any existing query params
+        const baseDir = href.substring(0, href.lastIndexOf('/') + 1);
+        return `${baseDir}checkout.html?cart=${encodedCart}${deadlineParam}`;
     }
 
     // Expose for external use

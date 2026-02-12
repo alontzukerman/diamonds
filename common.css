@@ -148,12 +148,16 @@ body {
    ======================================== */
 
 .navbar {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     z-index: 100;
-    padding: 3.5cqh 2.8cqw 2.59cqh 1.9cqw;
+    /* Convert from cqw/cqh to vw/vh for viewport-anchored positioning
+       Reference: 2100px width, 1160px height
+       cqh → vh mapping: value * (1160/height_ratio) ≈ same numeric value in vh
+       cqw → vw mapping: same numeric value in vw */
+    padding: 1.9vh 2.8vw 1.4vh 1.9vw;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -168,8 +172,8 @@ body {
 .navbar-right {
     display: flex;
     align-items: center;
-    /* 50px / 2100 * 100 = 2.38cqw */
-    gap: 2.38cqw;
+    /* 50px / 2100 * 100 = 2.38vw */
+    gap: 2.38vw;
 }
 
 .navbar-link,
@@ -195,8 +199,8 @@ body {
 .navbar-link {
     font-family: 'Narkiss Block TRIAL', sans-serif;
     font-weight: 600;
-    /* 25px / 2100 * 100 = 1.19cqw */
-    font-size: 1.19cqw;
+    /* 25px / 2100 * 100 = 1.19vw */
+    font-size: 1.19vw;
     color: #282323;
     text-decoration: none;
     line-height: 100%;
@@ -212,16 +216,16 @@ body {
     font-family: 'sloop-script-two', cursive;
     font-weight: 700;
     font-style: normal;
-    /* 30px / 2100 * 100 = 1.43cqw */
-    font-size: 1.43cqw;
+    /* 30px / 2100 * 100 = 1.43vw */
+    font-size: 1.43vw;
     line-height: 0.6;
     color: #F2E772;
-    /* 4px / 2100 * 100 = 0.19cqw */
-    border: 0.19cqw solid #F2E772;
-    /* 30px / 2100 * 100 = 1.43cqw */
-    border-radius: 1.43cqw;
-    /* 8px 20px 6px 12px -> 0.69cqh 0.95cqw 0.52cqh 0.57cqw */
-    padding: 0.69cqh 0.95cqw 0.52cqh 0.57cqw;
+    /* 4px / 2100 * 100 = 0.19vw */
+    border: 0.19vw solid #F2E772;
+    /* 30px / 2100 * 100 = 1.43vw */
+    border-radius: 1.43vw;
+    /* 8px 20px 6px 12px -> 0.69vh 0.95vw 0.52vh 0.57vw */
+    padding: 0.69vh 0.95vw 0.52vh 0.57vw;
 }
 
 /* Cart icon */
@@ -235,15 +239,15 @@ body {
 }
 
 .navbar-cart img {
-    /* 46px / 2100 * 100 = 2.19cqw */
-    width: 2.19cqw;
-    /* 39px / 1160 * 100 = 3.36cqh */
-    height: 3.36cqh;
+    /* 46px / 2100 * 100 = 2.19vw */
+    width: 2.19vw;
+    /* 39px / 1160 * 100 = 3.36vh */
+    height: 3.36vh;
 }
 
 @keyframes navbar-bounce {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-0.43cqh); }
+    50% { transform: translateY(-0.43vh); }
 }
 
 .navbar-logo-container {
@@ -258,7 +262,7 @@ body {
 .navbar-logo {
     display: block;
     /* Scale logo proportionally - assuming ~230px original width */
-    width: 10.95cqw;
+    width: 10.95vw;
     height: auto;
 }
 
@@ -268,14 +272,14 @@ body {
    ======================================== */
 
 .banner {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     overflow: hidden;
     z-index: 20;
-    /* 10px / 1160 * 100 = 0.86cqh */
-    padding: 0.86cqh 0;
+    /* 10px / 1160 * 100 = 0.86vh */
+    padding: 0.86vh 0;
 }
 
 .banner-content {
@@ -287,13 +291,13 @@ body {
 
 .banner-text {
     display: inline-block;
-    /* 10px / 2100 * 100 = 0.48cqw */
-    padding-right: 0.48cqw;
+    /* 10px / 2100 * 100 = 0.48vw */
+    padding-right: 0.48vw;
     flex-shrink: 0;
     color: #e9df76;
     font-family: 'Narkiss Block Condensed TRIAL', sans-serif;
-    /* 32px / 2100 * 100 = 1.52cqw */
-    font-size: 1.52cqw;
+    /* 32px / 2100 * 100 = 1.52vw */
+    font-size: 1.52vw;
     line-height: 1;
 }
 
@@ -838,8 +842,11 @@ body {
 }
 
 .gallery-card-premium-icon {
-    width: 6.67cqw;
-    height: 5.0cqh;
+    /* 100px / 2100 * 100 = 4.76vw (gallery cards use vw units) */
+    width: 4.76vw;
+    /* 100px / 1160 * 100 = 8.62vh */
+    height: 8.62vh;
+    object-fit: contain;
     margin-left: 3.33vw;
     transform: translateY(-0.26vh);
 }
@@ -886,12 +893,13 @@ body {
     padding: 0.3vw 0.8vw 0.15vw 0.8vw;
     cursor: pointer;
     transition: all 0.2s ease;
-    transform: translateX(10px);
+    /* 10px / 2100 * 100 = 0.48vw */
+    transform: translateX(0.48vw);
 }
 
 @keyframes gallery-share-bounce {
-    0%, 100% { transform: translateY(0) translateX(10px); }
-    50% { transform: translateY(-0.3vw) translateX(10px); }
+    0%, 100% { transform: translateY(0) translateX(0.48vw); }
+    50% { transform: translateY(-0.3vw) translateX(0.48vw); }
 }
 
 .gallery-share-btn:hover {
