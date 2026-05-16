@@ -83,11 +83,13 @@
    LEFT SIDE: MENU WRAPPER WITH PROGRESS BAR
    ======================================== */
 
+/* Keep side rails attached to viewport edges when .page-scene is narrower than the screen. */
 .configurator-menu-wrapper {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     flex-shrink: 0;
+    transform: translateX(calc((100cqw - 100vw) / 2));
 }
 
 /* ========================================
@@ -106,6 +108,7 @@
     overflow: visible;
     /* 20px / 1160 * 100 = 1.72cqh */
     gap: 3cqh;
+    transform: translateX(calc((100vw - 100cqw) / 2));
 }
 
 .love-meter-container {
